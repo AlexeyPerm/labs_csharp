@@ -1,163 +1,167 @@
 ﻿using System;
 
-
 namespace Lab9 {
-	class Money {
-		// --------------------------- Поля ---------------------------- //
+    class Money {
+        // --------------------------- Поля ---------------------------- //
 
-		private int         _rubles;
-		private int        _kopeks;
-		private static int _objectCount;    //количество созданных объектов
+        private int _rubles;
+        private int _kopeks;
+        private static int _objectCount; //количество созданных объектов
 
-		// ------------------------- Свойства -------------------------- //
+        // ------------------------- Свойства -------------------------- //
 
-		public int Rubles {
-			get => _rubles;
-			private set {
-				if (value < 0)
-					Console.WriteLine("Нельзя присвоить отрицательное значение в рублях. Будет присвоен 0");
-				else
-					_rubles = value;
-			}
-		}
+        public int Rubles {
+            get => _rubles;
+            private set {
+                if (value < 0)
+                    Console.WriteLine("Нельзя присвоить отрицательное значение в рублях. Будет присвоен 0");
+                else
+                    _rubles = value;
+            }
+        }
 
-		public int Kopeks {
-			get => _kopeks;
-			private set {
-				if (value < 0) {
-					Console.WriteLine("\nНельзя присвоить отрицательное значение в копейках. Будет присвоен 0");
-					value = 0;
-				}
-				if (value > 99) {
-					_rubles = value / 100 + _rubles;
-					_kopeks = value % 100;
-				} else
-					_kopeks = value;
+        public int Kopeks {
+            get => _kopeks;
+            private set {
+                if (value < 0) {
+                    Console.WriteLine("\nНельзя присвоить отрицательное значение в копейках. Будет присвоен 0");
+                    value = 0;
+                }
 
-			}
-		}
+                if (value > 99) {
+                    _rubles = value / 100 + _rubles;
+                    _kopeks = value % 100;
+                }
+                else
+                    _kopeks = value;
+            }
+        }
 
-		// ------------------------ Конструкторы ------------------------ //
+        // ------------------------ Конструкторы ------------------------ //
 
-		public Money() {
-			Rubles = 0;
-			Kopeks = 0;
-			_objectCount++;
-		}
+        public Money() { 
+            Rubles = 0;
+            Kopeks = 0;
+            _objectCount++;
+        }
 
-		public Money(int rubles, int kopeks) : this() {
-			Rubles = rubles;
-			Kopeks = kopeks;
-		}
+        public Money(int rubles, int kopeks) : this() {
+            Rubles = rubles;
+            Kopeks = kopeks;
+        }
 
-		// --------------------------- Методы --------------------------- //
+        // --------------------------- Методы --------------------------- //
 
-		public Money Minus(Money right) {
-			long lhsTotalKopeks = Rubles * 100 + Kopeks;
-			long rhsTotalKopeks = right.Rubles * 100 + right.Kopeks;
-			var tmp = new Money();
-			if (lhsTotalKopeks >= rhsTotalKopeks) {
-				var result = lhsTotalKopeks - rhsTotalKopeks;
-				tmp.Rubles = (int)(result / 100);
-				tmp.Kopeks = (int)(result % 100);
-				return tmp;
-			} else {
-				Console.WriteLine("Разница отрицательно число. Обнуление результата.");
-				return tmp;
-			}
-		}
+        public Money Minus(Money right) {
+            long lhsTotalKopeks = Rubles * 100 + Kopeks;
+            long rhsTotalKopeks = right.Rubles * 100 + right.Kopeks;
+            var tmp = new Money();
+            if (lhsTotalKopeks >= rhsTotalKopeks) {
+                var result = lhsTotalKopeks - rhsTotalKopeks;
+                tmp.Rubles = (int)(result / 100);
+                tmp.Kopeks = (int)(result % 100);
+                return tmp;
+            }
+            else {
+                Console.WriteLine("Разница отрицательно число. Обнуление результата.");
+                return tmp;
+            }
+        }
 
-		public void Print() {
-			Console.WriteLine($"Money = {Rubles} руб. {Kopeks} коп.");
-		}
+        public void Print() {
+            Console.WriteLine($"Money = {Rubles} руб. {Kopeks} коп.");
+        }
 
-		/// <summary>
-		/// Вычисляет разницы между двумя объектами класса Money
-		/// </summary>
-		/// <param name="left">Уменьшаемое</param>
-		/// <param name="right">Вычитаемое</param>
-		/// <returns>Разность объектов</returns>
-		public static Money Minus(Money left, Money right) {
-			long lhsTotalKopeks = left.Rubles * 100 + left.Kopeks;
-			long rhsTotalKopeks = right.Rubles * 100 + right.Kopeks;
-			var tmp = new Money();
-			if (lhsTotalKopeks >= rhsTotalKopeks) {
-				var result = lhsTotalKopeks - rhsTotalKopeks;
-				tmp.Rubles = (int)result / 100;
-				tmp.Kopeks = (int)result % 100;
-				return tmp;
-			} else {
-				Console.WriteLine("Разница отрицательно число. Обнуление результата.");
-				return tmp;
+        /// <summary>
+        /// Вычисляет разницы между двумя объектами класса Money
+        /// </summary>
+        /// <param name="left">Уменьшаемое</param>
+        /// <param name="right">Вычитаемое</param>
+        /// <returns>Разность объектов</returns>
+        public static Money Minus(Money left, Money right) {
+            long lhsTotalKopeks = left.Rubles * 100 + left.Kopeks;
+            long rhsTotalKopeks = right.Rubles * 100 + right.Kopeks;
+            var tmp = new Money();
+            if (lhsTotalKopeks >= rhsTotalKopeks) {
+                var result = lhsTotalKopeks - rhsTotalKopeks;
+                tmp.Rubles = (int)result / 100;
+                tmp.Kopeks = (int)result % 100;
+                return tmp;
+            }
+            else {
+                Console.WriteLine("Разница отрицательно число. Обнуление результата.");
+                return tmp;
+            }
+        }
 
-			}
-		}
-		/// <summary>
-		/// Возвращает количество созданных объектов Money
-		/// </summary>
-		public static int CreatedObjectCount() {
-			return _objectCount;
-		}
+        /// <summary>
+        /// Возвращает количество созданных объектов Money
+        /// </summary>
+        public static int CreatedObjectCount() {
+            return _objectCount;
+        }
 
-		// ---------------------- Унарные операции ---------------------- //
+        // ---------------------- Унарные операции ---------------------- //
 
-		public static Money operator ++(Money m) {
-			m.Kopeks++;
-			return m;
-		}
+        public static Money operator ++(Money m) {
+            m.Kopeks++;
+            return m;
+        }
 
-		public static Money operator --(Money m) {
-			long tmp = m.Rubles * 100 + m.Kopeks;   //общее количество копеек
-			tmp--;
-			m.Rubles = (int)tmp / 100;
-			m.Kopeks = (int)tmp % 100;
-			return m;
-		}
+        public static Money operator --(Money m) {
+            long tmp = m.Rubles * 100 + m.Kopeks; //общее количество копеек
+            tmp--;
+            m.Rubles = (int)tmp / 100;
+            m.Kopeks = (int)tmp % 100;
+            return m;
+        }
 
-		// ---------------------- Приведение типов ---------------------- //
+        // ---------------------- Приведение типов ---------------------- //
 
-		public static implicit operator int(Money m) {
-			return m.Rubles;
-		}
+        public static implicit operator int(Money m) {
+            return m.Rubles;
+        }
 
-		public static explicit operator double(Money m) {
-			return m.Kopeks * 0.01;
-		}
+        public static explicit operator double(Money m) {
+            return m.Kopeks * 0.01;
+        }
 
-		// ---------------------- Бинарные операции ---------------------- //
+        // ---------------------- Бинарные операции ---------------------- //
 
-		public static Money operator -(Money m, int kop) {
-			long totalKop = (m.Rubles * 100 + m.Kopeks) - kop;
-			var tmp = new Money ();
-			if (totalKop > 0) {
-				tmp.Rubles = (int)totalKop / 100;
-				tmp.Kopeks = (int)totalKop % 100;
-				return tmp;
-			}
-			return tmp;
-		}
+        public static Money operator -(Money m, int kop) {
+            long totalKop = (m.Rubles * 100 + m.Kopeks) - kop;
+            var tmp = new Money();
+            if (totalKop > 0) {
+                tmp.Rubles = (int)totalKop / 100;
+                tmp.Kopeks = (int)totalKop % 100;
+                return tmp;
+            }
 
-		public static Money operator -(int kop, Money m) {
-			long totalKop = kop - (m.Rubles * 100 + m.Kopeks);
-			var tmp = new Money ();
-			if (totalKop > 0) {
-				tmp.Rubles = (int)totalKop / 100;
-				tmp.Kopeks = (int)totalKop % 100;
-				return tmp;
-			}
-			return tmp;
+            return tmp;
+        }
 
-		}
+        public static Money operator -(int kop, Money m) {
+            long totalKop = kop - (m.Rubles * 100 + m.Kopeks);
+            var tmp = new Money();
+            if (totalKop > 0) {
+                tmp.Rubles = (int)totalKop / 100;
+                tmp.Kopeks = (int)totalKop % 100;
+                return tmp;
+            }
 
-		public static Money operator -(Money left, Money right) {
-			long totalKop = (left.Rubles * 100 + left.Kopeks) - (right.Rubles * 100 + right.Kopeks);
-			var tmp = new Money ();
-			if (totalKop > 0) {
-				tmp.Rubles = (int)totalKop / 100;
-				tmp.Kopeks = (int)totalKop % 100;
-				return tmp;
-			}
-			return tmp;
-		}
-	}
+            return tmp;
+        }
+
+        public static Money operator -(Money left, Money right) {
+            long totalKop = (left.Rubles * 100 + left.Kopeks) - (right.Rubles * 100 + right.Kopeks);
+            var tmp = new Money();
+            if (totalKop > 0) {
+                tmp.Rubles = (int)totalKop / 100;
+                tmp.Kopeks = (int)totalKop % 100;
+                return tmp;
+            }
+
+            return tmp;
+        }
+    }
 }
