@@ -39,7 +39,7 @@ namespace Lab9 {
 
 		// ------------------------ Конструкторы ------------------------ //
 
-		private Money() {
+		public Money() {
 			Rubles = 0;
 			Kopeks = 0;
 			_objectCount++;
@@ -107,7 +107,7 @@ namespace Lab9 {
 		}
 
 		public static Money operator --(Money m) {
-			long tmp = m.Rubles * 100 + m.Kopeks;	//общее количество копеек
+			long tmp = m.Rubles * 100 + m.Kopeks;   //общее количество копеек
 			tmp--;
 			m.Rubles = (int)tmp / 100;
 			m.Kopeks = (int)tmp % 100;
@@ -115,6 +115,7 @@ namespace Lab9 {
 		}
 
 		// ---------------------- Приведение типов ---------------------- //
+
 		public static implicit operator int(Money m) {
 			return m.Rubles;
 		}
@@ -125,6 +126,38 @@ namespace Lab9 {
 
 		// ---------------------- Бинарные операции ---------------------- //
 
+		public static Money operator -(Money m, int kop) {
+			long totalKop = (m.Rubles * 100 + m.Kopeks) - kop;
+			var tmp = new Money ();
+			if (totalKop > 0) {
+				tmp.Rubles = (int)totalKop / 100;
+				tmp.Kopeks = (int)totalKop % 100;
+				return tmp;
+			}
+			return tmp;
+		}
 
+		public static Money operator -(int kop, Money m) {
+			long totalKop = kop - (m.Rubles * 100 + m.Kopeks);
+			var tmp = new Money ();
+			if (totalKop > 0) {
+				tmp.Rubles = (int)totalKop / 100;
+				tmp.Kopeks = (int)totalKop % 100;
+				return tmp;
+			}
+			return tmp;
+
+		}
+
+		public static Money operator -(Money left, Money right) {
+			long totalKop = (left.Rubles * 100 + left.Kopeks) - (right.Rubles * 100 + right.Kopeks);
+			var tmp = new Money ();
+			if (totalKop > 0) {
+				tmp.Rubles = (int)totalKop / 100;
+				tmp.Kopeks = (int)totalKop % 100;
+				return tmp;
+			}
+			return tmp;
+		}
 	}
 }
