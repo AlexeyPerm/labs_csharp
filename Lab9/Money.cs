@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Lab9 {
-    class Money {
+    public class Money {
         // --------------------------- Поля ---------------------------- //
 
         private int _rubles;
@@ -12,7 +12,7 @@ namespace Lab9 {
 
         public int Rubles {
             get => _rubles;
-            private set {
+            set {
                 if (value < 0)
                     Console.WriteLine("Нельзя присвоить отрицательное значение в рублях. Будет присвоен 0");
                 else
@@ -22,14 +22,14 @@ namespace Lab9 {
 
         public int Kopeks {
             get => _kopeks;
-            private set {
+            set {
                 if (value < 0) {
                     Console.WriteLine("\nНельзя присвоить отрицательное значение в копейках. Будет присвоен 0");
                     value = 0;
                 }
 
                 if (value > 99) {
-                    _rubles = value / 100 + _rubles;
+                    _rubles += value / 100;
                     _kopeks = value % 100;
                 }
                 else
@@ -156,12 +156,24 @@ namespace Lab9 {
             return tmp;
         }
 
-        public static bool operator <(Money left, Money right) {
-            return left.Rubles < right.Rubles || (left.Rubles == right.Rubles && left.Kopeks < right.Kopeks);
+		public static bool operator <(Money left, Money right) => 
+            left.Rubles < right.Rubles || (left.Rubles == right.Rubles && left.Kopeks < right.Kopeks);
+
+		public static bool operator >(Money left, Money right) => 
+            left.Rubles > right.Rubles || (left.Rubles == right.Rubles && left.Kopeks > right.Kopeks);
+
+		public override bool Equals(object obj) {
+            if (obj is Money) {
+                var m = (Money)obj;
+                return Rubles == m.Rubles && Kopeks == m.Kopeks;
+            }
+
+            return false;
         }
 
-        public static bool operator >(Money left, Money right) {
-            return left.Rubles > right.Rubles || (left.Rubles == right.Rubles && left.Kopeks > right.Kopeks);
-        }
-    }
-}
+
+
+
+
+    } //end of class Money;
+} //end of namespase Lab9
