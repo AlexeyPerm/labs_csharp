@@ -39,7 +39,7 @@ namespace Lab9 {
 
         // ------------------------ Конструкторы ------------------------ //
 
-        public Money() { 
+        public Money() {
             Rubles = 0;
             Kopeks = 0;
             _objectCount++;
@@ -62,10 +62,9 @@ namespace Lab9 {
                 tmp.Kopeks = (int)(result % 100);
                 return tmp;
             }
-            else {
-                Console.WriteLine("Разница отрицательно число. Обнуление результата.");
-                return tmp;
-            }
+
+            Console.WriteLine("Разница отрицательно число. Обнуление результата.");
+            return tmp;
         }
 
         public void Print() {
@@ -73,7 +72,7 @@ namespace Lab9 {
         }
 
         /// <summary>
-        /// Вычисляет разницы между двумя объектами класса Money
+        /// Вычисляет разницу между двумя объектами класса Money
         /// </summary>
         /// <param name="left">Уменьшаемое</param>
         /// <param name="right">Вычитаемое</param>
@@ -88,10 +87,9 @@ namespace Lab9 {
                 tmp.Kopeks = (int)result % 100;
                 return tmp;
             }
-            else {
-                Console.WriteLine("Разница отрицательно число. Обнуление результата.");
-                return tmp;
-            }
+
+            Console.WriteLine("Разница отрицательно число. Обнуление результата.");
+            return tmp;
         }
 
         /// <summary>
@@ -131,37 +129,39 @@ namespace Lab9 {
         public static Money operator -(Money m, int kop) {
             long totalKop = (m.Rubles * 100 + m.Kopeks) - kop;
             var tmp = new Money();
-            if (totalKop > 0) {
-                tmp.Rubles = (int)totalKop / 100;
-                tmp.Kopeks = (int)totalKop % 100;
+            if (totalKop <= 0)
                 return tmp;
-            }
-
+            tmp.Rubles = (int)totalKop / 100;
+            tmp.Kopeks = (int)totalKop % 100;
             return tmp;
         }
 
         public static Money operator -(int kop, Money m) {
             long totalKop = kop - (m.Rubles * 100 + m.Kopeks);
             var tmp = new Money();
-            if (totalKop > 0) {
-                tmp.Rubles = (int)totalKop / 100;
-                tmp.Kopeks = (int)totalKop % 100;
+            if (totalKop <= 0)
                 return tmp;
-            }
-
+            tmp.Rubles = (int)totalKop / 100;
+            tmp.Kopeks = (int)totalKop % 100;
             return tmp;
         }
 
         public static Money operator -(Money left, Money right) {
             long totalKop = (left.Rubles * 100 + left.Kopeks) - (right.Rubles * 100 + right.Kopeks);
             var tmp = new Money();
-            if (totalKop > 0) {
-                tmp.Rubles = (int)totalKop / 100;
-                tmp.Kopeks = (int)totalKop % 100;
+            if (totalKop <= 0)
                 return tmp;
-            }
-
+            tmp.Rubles = (int)totalKop / 100;
+            tmp.Kopeks = (int)totalKop % 100;
             return tmp;
+        }
+
+        public static bool operator <(Money left, Money right) {
+            return left.Rubles < right.Rubles || (left.Rubles == right.Rubles && left.Kopeks < right.Kopeks);
+        }
+
+        public static bool operator >(Money left, Money right) {
+            return left.Rubles > right.Rubles || (left.Rubles == right.Rubles && left.Kopeks > right.Kopeks);
         }
     }
 }
