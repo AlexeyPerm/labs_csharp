@@ -167,7 +167,6 @@ namespace Lab9 {
                 var m = (Money)obj;
                 return Rubles == m.Rubles && Kopeks == m.Kopeks;
             }
-
             return false;
         }
 

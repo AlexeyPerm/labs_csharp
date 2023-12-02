@@ -73,11 +73,11 @@ namespace Lab9 {
 			//
 			// Console.WriteLine();
 			//
-			// var m8 = new Money(9655, 23);
-			// m8.Print();
-			// m8 -= 224;
-			// Console.Write("Правосторонняя операция вычитания: ");
-			// m8.Print();
+			var m8 = new Money(1, 23);
+			m8.Print();
+			m8 = 10000 - m8;
+			Console.Write("Правосторонняя операция вычитания: ");
+			m8.Print();
 			//
 			// Console.WriteLine();
 			//
@@ -95,15 +95,15 @@ namespace Lab9 {
 			// var m12 = m10 - m11;
 			// m12.Print();
 
-			var arr = new MoneyArray(8);
-			arr.Print();
+			//var arr = new MoneyArray(8);
+			//arr.Print();
 			//var arr1 = new MoneyArray(m2, m3, m11);
 			//arr1.Print();
 
-			Console.WriteLine("Max = ");
-			arr.Max().Print();
-			arr[1].Kopeks = 10;
-			arr[1].Rubles = 10;
+			//Console.WriteLine("Max = ");
+			//arr.Max().Print();
+			//arr[1].Kopeks = 10;
+			//arr[1].Rubles = 10;
 		}
 	}
 }
