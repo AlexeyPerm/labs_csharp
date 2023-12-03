@@ -95,7 +95,7 @@ namespace Lab9 {
 			// var m12 = m10 - m11;
 			// m12.Print();
 
-			//var arr = new MoneyArray(8);
+			var arr = new MoneyArray(1);
 			//arr.Print();
 			//var arr1 = new MoneyArray(m2, m3, m11);
 			//arr1.Print();
@@ -104,6 +104,8 @@ namespace Lab9 {
 			//arr.Max().Print();
 			//arr[1].Kopeks = 10;
 			//arr[1].Rubles = 10;
+			MoneyArray  arr1 = new MoneyArray();
+
 		}
 	}
 }

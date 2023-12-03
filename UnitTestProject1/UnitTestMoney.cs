@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Lab9;
 using System;
-using System.Configuration;
+
 
 namespace UnitTestProject1 {
 	[TestClass]
-	public class UnitTest1 {
+	public class UnitTestMoney {
 		[TestMethod]
 		public void ZeroMoney() {
 
@@ -121,6 +121,68 @@ namespace UnitTestProject1 {
 			int count = Money.CreatedObjectCount();
 
 			Assert.AreEqual(Money.CreatedObjectCount(), count);
+		}
+	}
+	[TestClass]
+	public class UnitTestMoneyArray {
+		[TestMethod]
+		public void TestInitArray() {
+			int count = 10;
+			MoneyArray  arr1 = new MoneyArray();
+			MoneyArray  arr = new MoneyArray(count);
+			Assert.AreEqual(arr.Length, count);
+
+		}
+
+		[TestMethod]
+		public void TestThis() {
+			var minus1 = new Money(4, 50);
+			var minus2 = new Money(0, 60);
+			var minus3 = new Money(4, 60);
+			MoneyArray  arr1 = new MoneyArray(minus1, minus2, minus3);
+			Assert.AreEqual(arr1[1], minus2);
+			try {
+				Assert.AreEqual(arr1[4], minus2);
+			} catch (System.IndexOutOfRangeException) {
+
+				Console.WriteLine("Выход за границы массива");
+			}
+
+			try {
+				Assert.AreEqual(arr1[-4], minus2);
+			} catch (System.IndexOutOfRangeException) {
+
+				Console.WriteLine("Выход за границы массива");
+			}
+			arr1[1] = minus3;
+
+			Assert.AreEqual(arr1[1], minus3);
+
+			try {
+				arr1[4] = minus3;
+			} catch (System.IndexOutOfRangeException) {
+
+				Console.WriteLine("Выход за границы массива");
+			}
+
+			try {
+				arr1[-2] = minus3;
+			} catch (System.IndexOutOfRangeException) {
+
+				Console.WriteLine("Выход за границы массива");
+			}
+		}
+
+		[TestMethod]
+		public void TestMax() {
+			var minus1 = new Money(4, 50);
+			var minus2 = new Money(0, 60);
+			var minus3 = new Money(45, 60);
+			var minus4 = new Money(123, 40);
+			var minus5 = new Money(2, 1);
+			MoneyArray  arr1 = new MoneyArray(minus1, minus2, minus3, minus4, minus5);
+			var maxElen = arr1.Max();
+			Assert.AreEqual(maxElen, minus4);
 		}
 	}
 }

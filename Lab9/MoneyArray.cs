@@ -58,7 +58,7 @@ namespace Lab9 {
 				if (index >= 0 && index < _arr.Length)
 					_arr[index] = value;
 				else
-					Console.WriteLine("Выход за границы массива");
+					throw new IndexOutOfRangeException();
 			}
 		}
 
