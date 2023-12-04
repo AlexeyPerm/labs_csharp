@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Lab9.Money">
-    <Position X="9.5" Y="2.5" Width="2.5" />
+    <Position X="9.5" Y="2.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>IAABAAAAAAAAAAEAgAGAIgABBhAAAAIAAABAEAAEAAA=</HashCode>
       <FileName>Money.cs</FileName>
@@ -12,10 +12,17 @@
     <TypeIdentifier />
   </Class>
   <Class Name="Lab9.MoneyArray">
-    <Position X="3.25" Y="2.25" Width="3" />
+    <Position X="4" Y="2.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAABAAAAAACAAAAABAEBAAAAAAAAAAAAAEBAA=</HashCode>
       <FileName>MoneyArray.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab9.Program">
+    <Position X="7.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
