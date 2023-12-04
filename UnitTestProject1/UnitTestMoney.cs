@@ -4,17 +4,17 @@ using System;
 
 
 namespace UnitTestProject1 {
+
 	[TestClass]
 	public class UnitTestMoney {
+
 		[TestMethod]
 		public void ZeroMoney() {
-
 			//Проверка на создание обнулённого экземпляра
 			var zeroMoney = new Money(0, 0);
-
 			Money[] arrZeroMoney = { new Money(),
-							new Money(-1, 0),
-							new Money(0, -1) };
+									 new Money(-1, 0),
+									 new Money(0, -1) };
 			foreach (var item in arrZeroMoney) {
 				Assert.AreEqual(item, zeroMoney);
 			}
@@ -31,17 +31,18 @@ namespace UnitTestProject1 {
 		[TestMethod]
 		public void TestMinus() {
 			//Проверка метода Minus
-			var minus1 = new Money(4, 50);
-			var minus2 = new Money(0, 60);
-			var minus3 = new Money(4, 60);
-			var result = minus1.Minus(minus2);
-			var result1 = minus1.Minus(minus3);
-			var result2 = Money.Minus(minus3, minus1);
-			var result3 = Money.Minus(minus1, minus3);
+			var money1 = new Money(4, 50);
+			var money2 = new Money(0, 60);
+			var money3 = new Money(45, 60);
+
+			var result = money1.Minus(money2);
+			var result1 = money1.Minus(money3);
+			var result2 = Money.Minus(money3, money1);
+			var result3 = Money.Minus(money1, money3);
 
 			Assert.AreEqual(result, new Money(3, 90));
 			Assert.AreEqual(result1, new Money(0, 0));
-			Assert.AreEqual(result2, new Money(0, 10));
+			Assert.AreEqual(result2, new Money(41, 10));
 			Assert.AreEqual(result3, new Money(0, 0));
 		}
 
