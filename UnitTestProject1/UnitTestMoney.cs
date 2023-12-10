@@ -181,7 +181,7 @@ namespace UnitTestProject1 {
 			var minus3 = new Money(45, 60);
 			var minus4 = new Money(123, 40);
 			var minus5 = new Money(2, 1);
-			MoneyArray  arr1 = new MoneyArray(minus1, minus2, minus3, minus4, minus5);
+			var  arr1 = new MoneyArray(minus1, minus2, minus3, minus4, minus5);
 			var maxElen = arr1.Max();
 			Assert.AreEqual(maxElen, minus4);
 		}

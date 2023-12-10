@@ -1,0 +1,30 @@
+﻿using System;
+
+namespace Lab10;
+
+public class InsuranceCompany : Organisation {
+    private uint _insuranceCases; //количество страховых случаев
+
+    public InsuranceCompany(string orgName, string director, string address, int budget, uint insuranceCases) :
+        base(orgName, director, address, budget) {
+        InsuranceCases = insuranceCases;
+    }
+
+    public InsuranceCompany() : base() { }
+
+    public uint InsuranceCases {
+        get => _insuranceCases;
+        set => _insuranceCases = value;
+    }
+
+    public override void RandomInit() {
+        base.RandomInit();
+        var rand = new Random();
+        InsuranceCases = (uint)rand.Next(9999);
+    }
+
+    public override void Show() {
+        base.Show();
+        Console.Write($"Количество страховых случаев: {InsuranceCases}");
+    }
+}
