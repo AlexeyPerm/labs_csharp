@@ -27,4 +27,12 @@ public class InsuranceCompany : Organisation {
         base.Show();
         Console.Write($"Количество страховых случаев: {InsuranceCases}");
     }
+    
+    public override bool Equals(object obj) {
+        if (obj is not InsuranceCompany)
+            return false;
+        var ins = (InsuranceCompany)obj;
+        return OrgName == ins.OrgName && Director == ins.Director && Address == ins.Address && Budget == ins.Budget &&
+               InsuranceCases == ins.InsuranceCases;
+    }
 }

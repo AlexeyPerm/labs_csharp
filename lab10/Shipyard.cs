@@ -27,4 +27,12 @@ public class Shipyard : Factory {
         base.Show();
         Console.WriteLine($"Количество построеных судн: {BuiltShips}");
     }
+
+    public override bool Equals(object obj) {
+        if (obj is not Shipyard)
+            return false;
+        var sh = (Shipyard)obj;
+        return OrgName == sh.OrgName && Director == sh.Director && Address == sh.Address && Budget == sh.Budget &&
+               BuiltShips == sh.BuiltShips;
+    }
 }

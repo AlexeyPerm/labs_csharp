@@ -27,4 +27,12 @@ public class Factory : Organisation {
         base.Show();
         Console.WriteLine($"Количество инженеров: {EngeneersCount}");
     }
+
+    public override bool Equals(object obj) {
+        if (obj is not Factory)
+            return false;
+        var f = (Factory)obj;
+        return OrgName == f.OrgName && Director == f.Director && Address == f.Address && Budget == f.Budget &&
+               EngeneersCount == f.EngeneersCount;
+    }
 }
