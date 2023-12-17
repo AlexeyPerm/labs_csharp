@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Lab10 {
+namespace lab10_withoutVirtMethods {
     public class Lab10 {
         static void Main() {
             const int variantNumber = 549 % 16 - 1; //номер варианта 8

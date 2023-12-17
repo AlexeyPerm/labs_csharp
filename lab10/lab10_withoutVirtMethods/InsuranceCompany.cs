@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab10;
+namespace lab10_withoutVirtMethods;
 
 public class InsuranceCompany : Organisation {
     private uint _insuranceCases; //количество страховых случаев
@@ -17,18 +17,18 @@ public class InsuranceCompany : Organisation {
         set => _insuranceCases = value;
     }
 
-    public override void RandomInit() {
+    public void RandomInit() {
         base.RandomInit();
         var rand = new Random();
         InsuranceCases = (uint)rand.Next(9999);
     }
 
-    public override void Show() {
+    public void Show() {
         base.Show();
         Console.WriteLine($"Количество страховых случаев: {InsuranceCases}");
     }
 
-    public override bool Equals(object obj) {
+    public bool Equals(object obj) {
         if (obj is not InsuranceCompany)
             return false;
         var ins = (InsuranceCompany)obj;

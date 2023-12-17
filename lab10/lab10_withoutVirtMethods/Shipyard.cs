@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab10;
+namespace lab10_withoutVirtMethods;
 
 public class Shipyard : Factory {
     private uint _builtShips;
@@ -17,18 +17,18 @@ public class Shipyard : Factory {
 
     public Shipyard() { }
 
-    public override void RandomInit() {
+    public void RandomInit() {
         base.RandomInit();
         var rand = new Random();
         BuiltShips = (uint)rand.Next(100, 500);
     }
 
-    public override void Show() {
+    public void Show() {
         base.Show();
         Console.WriteLine($"Количество построеных судн: {BuiltShips}");
     }
 
-    public override bool Equals(object obj) {
+    public bool Equals(object obj) {
         if (obj is not Shipyard)
             return false;
         var sh = (Shipyard)obj;

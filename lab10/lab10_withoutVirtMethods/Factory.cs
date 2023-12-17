@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab10;
+namespace lab10_withoutVirtMethods;
 
 public class Factory : Organisation {
     protected uint _engeneersCount;
@@ -17,7 +17,7 @@ public class Factory : Organisation {
         EngeneersCount = engeneersCount;
     }
 
-    public override void Init() {
+    public void Init() {
         base.Init();
         Console.Write("Введите количество инженеров в органзиции:\n> ");
         var error = false;
@@ -33,18 +33,18 @@ public class Factory : Organisation {
         }
     }
 
-    public override void RandomInit() {
+    public void RandomInit() {
         base.RandomInit();
         var rand = new Random();
         EngeneersCount = (uint)rand.Next(999);
     }
 
-    public override void Show() {
+    public void Show() {
         base.Show();
         Console.WriteLine($"Количество инженеров: {EngeneersCount}");
     }
 
-    public override bool Equals(object obj) {
+    public bool Equals(object obj) {
         if (obj is not Factory)
             return false;
         var f = (Factory)obj;
