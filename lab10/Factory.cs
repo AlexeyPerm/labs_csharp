@@ -7,10 +7,12 @@ public class Factory : Organisation {
 
     public uint EngeneersCount {
         get => _engeneersCount;
-        private set => _engeneersCount = value;
+        set => _engeneersCount = value;
     }
 
-    public Factory() { }
+    public Factory() {
+        EngeneersCount = 0;
+    }
 
     public Factory(string orgName, string director, int budget, uint engeneersCount) :
         base(orgName, director, budget) {
