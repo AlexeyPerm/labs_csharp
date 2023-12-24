@@ -2,17 +2,11 @@
 
 public class Organisation {
     protected string _orgName;
-    protected string _director;
     protected int _budget;
 
     public string OrgName {
         get => _orgName;
         set => _orgName = value;
-    }
-
-    public string Director {
-        get => _director;
-        set => _director = value;
     }
 
     public int Budget {
@@ -22,13 +16,11 @@ public class Organisation {
 
     public Organisation() {
         OrgName = "EmptyName";
-        Director = "EmptyName";
         Budget = 0;
     }
 
-    public Organisation(string orgName, string director, int budget) {
+    public Organisation(string orgName, int budget) {
         OrgName = orgName;
-        Director = director;
         Budget = budget;
     }
 
@@ -37,7 +29,6 @@ public class Organisation {
         OrgName = Console.ReadLine()!;
 
         Console.Write("Введите имя директора:\n> ");
-        Director = Console.ReadLine()!;
 
         Console.Write("Введите объём бюджета органзиции:\n> ");
         Budget = InputDigit();
@@ -62,28 +53,20 @@ public class Organisation {
         };
         var rand = new Random();
         OrgName = orgName[rand.Next(orgName.Length)];
-        Director = surname[rand.Next(surname.Length)] + " " + name[rand.Next(name.Length)];
         Budget = rand.Next(99999, int.MaxValue);
     } //end of method RandomInit
 
 
     public virtual void Show() {
         Console.WriteLine($"Название: {OrgName}\n" +
-                          $"Директор: {Director}\n" +
                           $"Бюджет: {Budget} рублей");
     } //end of method Show
 
     public override bool Equals(object? obj) {
         if (obj is not Organisation organisation)
             return false;
-        return OrgName == organisation.OrgName && Director == organisation.Director
-                                               && Budget == organisation.Budget;
+        return OrgName == organisation.OrgName && Budget == organisation.Budget;
     }
-
-    public override int GetHashCode() {
-        return HashCode.Combine(_orgName, _director, _budget);
-    }
-
 
     protected static int InputDigit() {
         int result;

@@ -5,25 +5,23 @@ namespace TestProject1 {
     public class TestOrganization {
         [TestMethod]
         public void TestZeroOrganisation() {
-            var org = new Organisation("EmptyName", "EmptyName", 0);
+            var org = new Organisation("EmptyName", 0);
             var testOrg = new Organisation();
             Assert.AreEqual(org, testOrg);
         }
 
         [TestMethod]
         public void TestPropertySet() {
-            var org = new Organisation("OrgTest", "OrgDir", 500);
-            Assert.AreEqual(org, new Organisation("OrgTest", "OrgDir", 500));
+            var org = new Organisation("OrgTest", 500);
+            Assert.AreEqual(org, new Organisation("OrgTest", 500));
         }
 
         [TestMethod]
         public void TestPropertyGet() {
-            var org = new Organisation("OrgTest", "OrgDir", 500);
+            var org = new Organisation("OrgTest", 500);
             var orgName = org.OrgName;
-            var dirName = org.Director;
             var budget = org.Budget;
             Assert.AreEqual(orgName, "OrgTest");
-            Assert.AreEqual(dirName, "OrgDir");
             Assert.AreEqual(budget, 500);
         }
 
@@ -39,7 +37,7 @@ namespace TestProject1 {
     public class TestFactory {
         [TestMethod]
         public void TestZeroFactory() {
-            var fact = new Factory("EmptyName", "EmptyName", 0, 0);
+            var fact = new Factory("EmptyName", 0, 0);
             var testFact = new Factory();
             Assert.AreEqual(fact, testFact);
         }
@@ -56,7 +54,7 @@ namespace TestProject1 {
     public class TestInsurance {
         [TestMethod]
         public void TestZeroInsurance() {
-            var insurance = new InsuranceCompany("EmptyName", "EmptyName", 0, 0);
+            var insurance = new InsuranceCompany("EmptyName", 0, 0);
             var testinsurance = new InsuranceCompany();
             Assert.AreEqual(insurance, testinsurance);
         }
@@ -73,9 +71,9 @@ namespace TestProject1 {
     public class TestLibrary {
         [TestMethod]
         public void TestZeroLibrary() {
-            var Library = new Library("EmptyName", "EmptyName", 0, 0);
+            var library = new Library("EmptyName", 0, 0);
             var testLibrary = new Library();
-            Assert.AreEqual(Library, testLibrary);
+            Assert.AreEqual(library, testLibrary);
         }
 
         [TestMethod]
@@ -90,9 +88,9 @@ namespace TestProject1 {
     public class TestShip {
         [TestMethod]
         public void TestZeroShip() {
-            var Ship = new Shipyard("EmptyName", "EmptyName", 0, 0, 0);
+            var ship = new Shipyard("EmptyName", 0, 0, 0);
             var testShip = new Shipyard();
-            Assert.AreEqual(Ship, testShip);
+            Assert.AreEqual(ship, testShip);
         }
 
         [TestMethod]

@@ -12,8 +12,8 @@ public class Factory : Organisation {
         EngeneersCount = 0;
     }
 
-    public Factory(string orgName, string director, int budget, uint engeneersCount) :
-        base(orgName, director, budget) {
+    public Factory(string orgName, int budget, uint engeneersCount) :
+        base(orgName, budget) {
         EngeneersCount = engeneersCount;
     }
 
@@ -48,11 +48,7 @@ public class Factory : Organisation {
         if (obj is not Factory)
             return false;
         var f = (Factory)obj;
-        return OrgName == f.OrgName && Director == f.Director && Budget == f.Budget &&
+        return OrgName == f.OrgName && Budget == f.Budget &&
                EngeneersCount == f.EngeneersCount;
-    }
-
-    public override int GetHashCode() {
-        return HashCode.Combine(base.GetHashCode(), _engeneersCount);
     }
 }

@@ -4,7 +4,7 @@ using LibraryLab10;
 
 class Program {
     static void Main() {
-        const int variantNumber = 549 % 16 - 1; //номер варианта 8
+        const int variantNumber = 549 % 16 - 1; //номер варианта 4
         Console.WriteLine($"Номер варианта = {variantNumber}\n");
 
         var org = new Organisation();

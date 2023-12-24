@@ -8,8 +8,8 @@ public class Shipyard : Factory {
         private set => _builtShips = value;
     }
 
-    public Shipyard(string orgName, string director, int budget, uint engeneersCount, uint builtShips) :
-        base(orgName, director, budget, engeneersCount) {
+    public Shipyard(string orgName, int budget, uint engeneersCount, uint builtShips) :
+        base(orgName, budget, engeneersCount) {
         BuiltShips = builtShips;
     }
 
@@ -21,7 +21,7 @@ public class Shipyard : Factory {
         BuiltShips = (uint)rand.Next(100, 500);
     }
 
-    public override void Show() {
+    public override void Show() {   
         base.Show();
         Console.WriteLine($"Количество построеных судн: {BuiltShips}");
     }
@@ -29,11 +29,7 @@ public class Shipyard : Factory {
     public override bool Equals(object? obj) {
         if (obj is not Shipyard sh)
             return false;
-        return OrgName == sh.OrgName && Director == sh.Director && Budget == sh.Budget &&
+        return OrgName == sh.OrgName && Budget == sh.Budget &&
                BuiltShips == sh.BuiltShips;
-    }
-
-    public override int GetHashCode() {
-        return HashCode.Combine(base.GetHashCode(), _builtShips);
     }
 }

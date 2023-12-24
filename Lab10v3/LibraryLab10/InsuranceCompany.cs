@@ -3,8 +3,8 @@
 public class InsuranceCompany : Organisation {
     private uint _insuranceCases; //количество страховых случаев
 
-    public InsuranceCompany(string orgName, string director, int budget, uint insuranceCases) :
-        base(orgName, director, budget) {
+    public InsuranceCompany(string orgName, int budget, uint insuranceCases) :
+        base(orgName, budget) {
         InsuranceCases = insuranceCases;
     }
 
@@ -29,11 +29,7 @@ public class InsuranceCompany : Organisation {
     public override bool Equals(object? obj) {
         if (obj is not InsuranceCompany ins)
             return false;
-        return OrgName == ins.OrgName && Director == ins.Director && Budget == ins.Budget &&
+        return OrgName == ins.OrgName && Budget == ins.Budget &&
                InsuranceCases == ins.InsuranceCases;
-    }
-
-    public override int GetHashCode() {
-        return HashCode.Combine(base.GetHashCode(), _insuranceCases);
     }
 }

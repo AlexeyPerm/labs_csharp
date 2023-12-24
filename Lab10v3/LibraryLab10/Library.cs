@@ -10,7 +10,7 @@ public class Library : Organisation {
 
     public Library() { }
 
-    public Library(string orgName, string director, int budget, uint booksTotalNum) : base(orgName, director, budget) {
+    public Library(string orgName, int budget, uint booksTotalNum) : base(orgName, budget) {
         BooksTotalNum = booksTotalNum;
     }
 
@@ -39,13 +39,8 @@ public class Library : Organisation {
     public override bool Equals(object? obj) {
         if (obj is not Library library)
             return false;
-        return OrgName == library.OrgName && Director == library.Director && Budget == library.Budget &&
+        return OrgName == library.OrgName && Budget == library.Budget &&
                BooksTotalNum == library.BooksTotalNum;
-    }
-
-
-    public override int GetHashCode() {
-        return HashCode.Combine(base.GetHashCode(), _booksTotalNum);
     }
 
     public override void Show() {
