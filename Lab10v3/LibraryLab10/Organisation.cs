@@ -3,6 +3,7 @@
 public class Organisation {
     protected string _orgName;
     protected int _budget;
+    private static int orgCoint = 0;
 
     public string OrgName {
         get => _orgName;
@@ -45,7 +46,7 @@ public class Organisation {
         };
         var rand = new Random();
         OrgName = orgName[rand.Next(orgName.Length)];
-        Budget = rand.Next(99999, int.MaxValue);
+        Budget = rand.Next(500, 10000);
     } //end of method RandomInit
 
 
@@ -68,4 +69,5 @@ public class Organisation {
 
         return result;
     }
+    
 }

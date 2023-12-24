@@ -5,9 +5,9 @@ public class Library : Organisation {
 
     public uint BooksTotalNum {
         get => _booksTotalNum;
-        private set => _booksTotalNum = value;
+        set => _booksTotalNum = value;
     }
-
+    
     public Library() { }
 
     public Library(string orgName, int budget, uint booksTotalNum) : base(orgName, budget) {
@@ -16,6 +16,7 @@ public class Library : Organisation {
 
     public override void Init() {
         base.Init();
+        Console.Write("Введите город:\n> ");
         Console.Write("Введите количество книг в библиотеке:\n> ");
         var error = false;
         while (!error) {
@@ -33,7 +34,7 @@ public class Library : Organisation {
     public override void RandomInit() {
         base.RandomInit();
         var rand = new Random();
-        BooksTotalNum = (uint)rand.Next(int.MaxValue);
+        BooksTotalNum = (uint)rand.Next(100000);
     }
 
     public override bool Equals(object? obj) {
