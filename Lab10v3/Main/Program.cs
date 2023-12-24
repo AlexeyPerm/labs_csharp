@@ -39,28 +39,14 @@ class Program {
         Organisation[] arr = new Organisation[arrLength];
         for (int i = 0; i < arrLength; i++) {
             var randSeed = rand.Next(100) % 5;
-
-            switch (randSeed) {
-                case 0:
-                    arr[i] = new Organisation();
-                    break;
-                case 1:
-                    arr[i] = new Factory();
-                    break;
-                case 2:
-                    arr[i] = new Shipyard();
-                    break;
-                case 3:
-                    arr[i] = new Library();
-                    break;
-                case 4:
-                    arr[i] = new InsuranceCompany();
-                    break;
-                default:
-                    arr[i] = new Organisation();
-                    break;
-            }
-
+            arr[i] = randSeed switch {
+                0 => new Organisation(),
+                1 => new Factory(),
+                2 => new Shipyard(),
+                3 => new Library(),
+                4 => new InsuranceCompany(),
+                _ => new Organisation()
+            };
             arr[i].RandomInit();
         }
 
