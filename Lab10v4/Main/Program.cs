@@ -1,19 +1,25 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using ClassLibraryLab10;
 
-namespace Main {
-    class Program {
-        static void Main() {
+namespace Main
+{
+    class Program
+    {
+        static void Main()
+        {
             const int variantNumber = 549 % 16 - 1; //номер варианта 4
             Console.WriteLine($"Номер варианта = {variantNumber}\n");
-
-            Task1();
-            Task2();
+            //Task1();
+            //Task2();
+            Task3();
+            Console.ReadLine();
         }
 
 
-        private static void Task1() {
+        private static void Task1()
+        {
             Console.WriteLine("             Задание номер 1             \n" +
                               "Написать демонстрационную программу, в которой создаются объекты различных\n" +
                               "классов и помещаются в массив, после чего массив просматривается.\n");
@@ -29,8 +35,10 @@ namespace Main {
             var lib1 = new Library();
 
             Organisation[] arr = { org, org1, fact, fact1, ship, ship1, insur, insur1, lib, lib1 };
-            for (int i = 0; i < arr.Length; i++) {
-                if (i % 2 == 0) {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
                     Console.WriteLine("=====================================\n");
                 }
 
@@ -47,16 +55,19 @@ namespace Main {
             PrintArrayNotOverride(arr);
         }
 
-        private static void Task2() {
+        private static void Task2()
+        {
             Console.WriteLine("=====================================\n");
             Console.WriteLine("             Задание номер 2             \n" +
                               "Реализовать не менее трех запросов, соответствующих иерархии классов");
             var lengthRandom = 15; //размер массива, хранящий объекты класса
             Organisation[] arr = new Organisation[lengthRandom];
             Random rand = new Random();
-            for (int i = 0; i < arr.Length; i++) {
+            for (int i = 0; i < arr.Length; i++)
+            {
                 var randSeed = rand.Next(100) % 5;
-                arr[i] = randSeed switch {
+                arr[i] = randSeed switch
+                {
                     0 => new Organisation(),
                     1 => new Factory(),
                     2 => new Shipyard(),
@@ -77,26 +88,64 @@ namespace Main {
             Console.WriteLine("=====================================");
         }
 
-        private static void PrintArray(Organisation[] arr) {
-            foreach (var item in arr) {
+        private static void Task3()
+        {
+            Console.WriteLine("             Задание номер 3             ");
+            var lengthRandom = 10; //размер массива, хранящий объекты класса
+            Organisation[] arr = new Organisation[lengthRandom];
+            Random rand = new Random();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                var randSeed = rand.Next(100) % 5;
+                arr[i] = randSeed switch
+                {
+                    0 => new Organisation(),
+                    1 => new Factory(),
+                    2 => new Shipyard(),
+                    3 => new Library(),
+                    4 => new InsuranceCompany(),
+                    _ => new Organisation()
+                };
+                arr[i].RandomInit();
+            }
+
+            Array.Sort(arr);
+            Console.WriteLine("Отсортированный по имени массив: ");
+            //PrintArray(arr);
+            Console.WriteLine();
+            Console.WriteLine("=====================================");
+            Console.WriteLine("Отсортированный величине бюджета массив: ");
+            Array.Sort(arr, new SortByBudget());
+            PrintArray(arr);
+        }
+
+        private static void PrintArray(Organisation[] arr)
+        {
+            foreach (var item in arr)
+            {
                 Console.WriteLine($"Класс: {item.GetType().Name}");
                 item.Show();
                 Console.WriteLine();
             }
         }
 
-        private static void PrintArrayNotOverride(Organisation[] arr) {
-            foreach (var item in arr) {
+        private static void PrintArrayNotOverride(Organisation[] arr)
+        {
+            foreach (var item in arr)
+            {
                 Console.WriteLine($"Класс: {item.GetType().Name}");
                 item.ShowNotOverride();
                 Console.WriteLine();
             }
         }
 
-        private static IInit[] ManualInit(int arrLength) {
+        private static IInit[] ManualInit(int arrLength)
+        {
             IInit[] arr = new IInit[arrLength];
-            for (int i = 0; i < arr.Length; i++) {
-                arr[i] = arrLength switch {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = arrLength switch
+                {
                     0 => new Organisation(),
                     1 => new Factory(),
                     2 => new Shipyard(),
@@ -109,12 +158,15 @@ namespace Main {
             return arr;
         }
 
-        private static IInit[] RandomInit(int arrLength) {
+        private static IInit[] RandomInit(int arrLength)
+        {
             IInit[] arr = new IInit[arrLength];
             Random rand = new Random();
-            for (int i = 0; i < arrLength; i++) {
+            for (int i = 0; i < arrLength; i++)
+            {
                 var randSeed = rand.Next(100) % 5;
-                arr[i] = randSeed switch {
+                arr[i] = randSeed switch
+                {
                     0 => new Organisation(),
                     1 => new Factory(),
                     2 => new Shipyard(),
@@ -129,37 +181,41 @@ namespace Main {
             return arr;
         } // end of RandomObjectArray
 
-        static ulong ShowBooksSum(Organisation[] arr) {
+        static ulong ShowBooksSum(Organisation[] arr)
+        {
             ulong booksSum = 0;
-            foreach (Organisation item in arr) {
-                if (item is Library p) {
+            foreach (Organisation item in arr)
+            {
+                if (item is Library p)
                     booksSum += p.BooksTotalNum;
-                }
             }
 
             return booksSum;
         }
 
-        static uint EgineersNornikel(Organisation[] arr) {
+        static uint EgineersNornikel(Organisation[] arr)
+        {
             uint engNum = 0;
             string factory = "НорНикель";
-            foreach (Organisation item in arr) {
-                if (item is not Factory p) {
+            foreach (Organisation item in arr)
+            {
+                if (item is not Factory p)
                     continue;
-                }
-
-                if (string.CompareOrdinal(p.OrgName, factory) == 0) {
+                if (string.CompareOrdinal(p.OrgName, factory) == 0)
                     engNum += p.EngeneersCount;
-                }
             }
 
             return engNum;
         } //end of EgineersNornikel
 
-        static void ShowOrgBudget(Organisation[] arr) {
-            foreach (Organisation item in arr) {
-                if (item is Shipyard p) {
-                    if (p.Budget < 3000) {
+        static void ShowOrgBudget(Organisation[] arr)
+        {
+            foreach (Organisation item in arr)
+            {
+                if (item is Shipyard p)
+                {
+                    if (p.Budget < 3000)
+                    {
                         Console.WriteLine($"Название: {p.OrgName}\n" +
                                           $"Бюджет: {p.Budget} рублей\n");
                         Console.WriteLine();

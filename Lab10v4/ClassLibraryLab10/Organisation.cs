@@ -2,46 +2,55 @@
 
 namespace ClassLibraryLab10;
 
-public class Organisation : IInit {
+public class Organisation : IInit, IComparable
+{
     protected static Random rand = new Random();
     protected string _orgName;
     protected int _budget;
     private static int orgCoint = 0;
 
-    public string OrgName {
+    public string OrgName
+    {
         get => _orgName;
         set => _orgName = value;
     }
 
-    public int Budget {
+    public int Budget
+    {
         get => _budget;
         set => _budget = value;
     }
 
-    public Organisation() {
+    public Organisation()
+    {
         OrgName = "EmptyName";
         Budget = 0;
     }
 
-    public Organisation(string orgName, int budget) {
+    public Organisation(string orgName, int budget)
+    {
         OrgName = orgName;
         Budget = budget;
     }
 
-    public virtual void Init() {
+    public virtual void Init()
+    {
         Console.Write("Введите название организации:\n> ");
         OrgName = Console.ReadLine();
 
         Console.Write("Введите объём бюджета органзиции:\n> ");
         Budget = InputDigit();
-        while (Budget < 0) {
+        while (Budget < 0)
+        {
             Console.Write("Бюджет должен быть больше 0\n> ");
             Budget = InputDigit();
         }
     } //end of method Init
 
-    public virtual void RandomInit() {
-        string[] orgName = {
+    public virtual void RandomInit()
+    {
+        string[] orgName =
+        {
             "Хмели-Сунели", "Шестёрочка", "Apple", "HP", "ASUS", "РосАтом",
             "Эр-Телеком", "ГРЧЦ", "РЖД", "Нефтехимпром", "Лукойл", "МСБ", "Лента", "Русал", "НорНикель", "КГБ"
         };
@@ -50,30 +59,46 @@ public class Organisation : IInit {
     } //end of method RandomInit
 
 
-    public virtual void Show() {
-        Console.WriteLine($"Название: {OrgName}\n" +
-                          $"Бюджет: {Budget} рублей");
-    } //end of method Show
-    
-    public void ShowNotOverride() {
+    public virtual void Show()
+    {
         Console.WriteLine($"Название: {OrgName}\n" +
                           $"Бюджет: {Budget} рублей");
     } //end of method Show
 
-    public override string ToString() {
+    public void ShowNotOverride()
+    {
+        Console.WriteLine($"Название: {OrgName}\n" +
+                          $"Бюджет: {Budget} рублей");
+    } //end of method Show
+
+    public override string ToString()
+    {
         return $"Название: {OrgName}\n" +
                $"Бюджет: {Budget} рублей\n";
     }
 
-    public override bool Equals(object obj) {
+    public override bool Equals(object obj)
+    {
         if (obj is not Organisation organisation)
             return false;
         return OrgName == organisation.OrgName && Budget == organisation.Budget;
     }
 
-    protected static int InputDigit() {
+    public int CompareTo(object obj)
+    {
+        if (obj is Organisation org)
+        {
+            return string.Compare(OrgName, org.OrgName);
+        }
+
+        throw new ArgumentException("Некорректное значение параметра");
+    }
+
+    protected static int InputDigit()
+    {
         int result;
-        while (!int.TryParse(Console.ReadLine(), out result)) {
+        while (!int.TryParse(Console.ReadLine(), out result))
+        {
             Console.Write("Ошибка! Должен быть тип int\nПовторите ввод\n> ");
         }
 

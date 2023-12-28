@@ -5,13 +5,14 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{319B90FF-6CCA-4F18-8567-9DC8181855DF}</ProjectGuid>
-        <OutputType>Library</OutputType>
+        <ProjectGuid>{3EC258A7-90B9-45EC-93A7-1D33F70E4993}</ProjectGuid>
+        <OutputType>Exe</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>ClassLibraryLab10</RootNamespace>
-        <AssemblyName>ClassLibraryLab10</AssemblyName>
+        <RootNamespace>Lab1</RootNamespace>
+        <AssemblyName>Task1</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <LangVersion>12</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -40,14 +41,8 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Factory.cs" />
-        <Compile Include="IInit.cs" />
-        <Compile Include="InsuranceCompany.cs" />
-        <Compile Include="Library.cs" />
-        <Compile Include="Organisation.cs" />
+        <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="Shipyard.cs" />
-        <Compile Include="SortByBudget.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

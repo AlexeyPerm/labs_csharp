@@ -1,6 +1,8 @@
-﻿using System.Globalization; //используется для указания формата разделителя чисел с плавающей точкой
+﻿using System;
+using System.Globalization; //используется для указания формата разделителя чисел с плавающей точкой
 
-namespace Lab1_task1
+
+namespace Lab1
 {
     static class Program
     {
@@ -28,12 +30,7 @@ namespace Lab1_task1
 
         static double ParseDouble(string str) //проверка корректности ввода и конвертация строки в число double
         {
-            NumberFormatInfo numFormatInfo = new() //указываем формат разделителя
-            {
-                NumberDecimalSeparator = ".",
-            };
-
-            bool isConversion = double.TryParse(str, numFormatInfo, out double result);
+            bool isConversion = double.TryParse(str, out double result);
             while (!isConversion)
             {
                 Console.Write("Ошибка! Должен быть тип double\nПовторите ввод> ");
