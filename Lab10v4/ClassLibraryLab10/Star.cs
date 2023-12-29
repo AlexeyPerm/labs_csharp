@@ -24,7 +24,7 @@ public class Star : IInit
     {
         return $"Название звезды: {Name}\n" +
                $"Видимая звёздная величина: {VisualBrightness}\n" +
-               $"Масса: {Mass}";
+               $"Масса: {Mass}\n";
     }
 
     public void Show()
@@ -37,8 +37,7 @@ public class Star : IInit
     public virtual void RandomInit()
     {
         var rand = new Random();
-        string[] name = new[]
-            { "Альзирр", "Киссин", "Солнце", "Альдебаран", "Сириус", "Бетельгейзе", "Андромеда", "Регул " };
+        string[] name = ["Альзирр", "Киссин", "Солнце", "Альдебаран", "Сириус", "Бетельгейзе", "Андромеда", "Регул "];
         Name = name[rand.Next(name.Length)];
         VisualBrightness = rand.Next(1, 20);
         Mass = rand.Next(10, 1000);

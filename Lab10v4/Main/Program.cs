@@ -13,9 +13,11 @@ namespace Main
             //Task1();
             //Task2();
             //Task3();
-            var a = new Star();
-            a.RandomInit();
-            Console.WriteLine(a);
+            var a = RandomInit(10);
+            foreach (var item in a)
+            {
+                Console.WriteLine(item);   
+            }
         }
 
 
@@ -179,7 +181,7 @@ namespace Main
             }
         }
 
-        private static void PrintArray(Organisation[] arr)
+        static void PrintArray(Organisation[] arr)
         {
             foreach (var item in arr)
             {
@@ -189,7 +191,7 @@ namespace Main
             }
         }
 
-        private static void PrintArrayNotOverride(Organisation[] arr)
+        static void PrintArrayNotOverride(Organisation[] arr)
         {
             foreach (var item in arr)
             {
@@ -199,7 +201,7 @@ namespace Main
             }
         }
 
-        private static IInit[] ManualInit(int arrLength)
+        static IInit[] ManualInit(int arrLength)
         {
             IInit[] arr = new IInit[arrLength];
             for (int i = 0; i < arr.Length; i++)
@@ -211,6 +213,7 @@ namespace Main
                     2 => new Shipyard(),
                     3 => new Library(),
                     4 => new InsuranceCompany(),
+                    5 => new Star(),
                     _ => new Organisation()
                 };
             }
@@ -218,13 +221,13 @@ namespace Main
             return arr;
         }
 
-        private static IInit[] RandomInit(int arrLength)
+        static IInit[] RandomInit(int arrLength)
         {
             IInit[] arr = new IInit[arrLength];
             Random rand = new Random();
             for (int i = 0; i < arrLength; i++)
             {
-                var randSeed = rand.Next(100) % 5;
+                var randSeed = rand.Next(100) % 6;
                 arr[i] = randSeed switch
                 {
                     0 => new Organisation(),
@@ -232,6 +235,7 @@ namespace Main
                     2 => new Shipyard(),
                     3 => new Library(),
                     4 => new InsuranceCompany(),
+                    5 => new Star(),
                     _ => new Organisation()
                 };
                 arr[i].RandomInit();
