@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Reflection.Emit;
 
 namespace ClassLibraryLab10;
 
 public class InsuranceCompany : Organisation {
-    private uint _insuranceCases; //количество страховых случаев
-
     public InsuranceCompany(string orgName, int budget, uint insuranceCases) :
         base(orgName, budget) {
         InsuranceCases = insuranceCases;
@@ -13,10 +10,7 @@ public class InsuranceCompany : Organisation {
 
     public InsuranceCompany() { }
 
-    public uint InsuranceCases {
-        get => _insuranceCases;
-        set => _insuranceCases = value;
-    }
+    public uint InsuranceCases { get; set; }
 
     public override void Init() {
         base.Init();
