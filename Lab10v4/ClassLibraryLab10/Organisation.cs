@@ -7,7 +7,6 @@ public class Organisation : IInit, IComparable
     protected static Random rand = new Random();
     protected string _orgName;
     protected int _budget;
-    private static int orgCoint = 0;
 
     public string OrgName
     {

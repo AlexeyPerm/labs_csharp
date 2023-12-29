@@ -1,11 +1,11 @@
-﻿using System.Threading.Channels;
-
-namespace Main;
+﻿namespace Main;
 
 using LibraryLab10;
 
-class Program {
-    static void Main() {
+class Program
+{
+    static void Main()
+    {
         const int variantNumber = 549 % 16 - 1; //номер варианта 4
         Console.WriteLine($"Номер варианта = {variantNumber}\n");
 
@@ -23,19 +23,24 @@ class Program {
         ShowOrgBudget(arr);
     } // end of Main
 
-    private static void PrintArray(Organisation[] arr) {
-        foreach (var item in arr) {
+    private static void PrintArray(Organisation[] arr)
+    {
+        foreach (var item in arr)
+        {
             Console.WriteLine($"Класс: {item.GetType().Name}");
             item.Show();
             Console.WriteLine();
         }
     }
 
-    private static void RandomObjectArray(int arrLength, Organisation[] arr) {
+    private static void RandomObjectArray(int arrLength, Organisation[] arr)
+    {
         Random rand = new Random();
-        for (int i = 0; i < arrLength; i++) {
+        for (int i = 0; i < arrLength; i++)
+        {
             var randSeed = rand.Next(100) % 5;
-            arr[i] = randSeed switch {
+            arr[i] = randSeed switch
+            {
                 0 => new Organisation(),
                 1 => new Factory(),
                 2 => new Shipyard(),
@@ -47,10 +52,13 @@ class Program {
         }
     } // end of RandomObjectArray
 
-    static ulong ShowBooksSum(Organisation[] arr) {
+    static ulong ShowBooksSum(Organisation[] arr)
+    {
         ulong booksSum = 0;
-        foreach (Organisation item in arr) {
-            if (item is Library p) {
+        foreach (Organisation item in arr)
+        {
+            if (item is Library p)
+            {
                 booksSum += p.BooksTotalNum;
             }
         }
@@ -58,15 +66,19 @@ class Program {
         return booksSum;
     }
 
-    static uint EgineersNornikel(Organisation[] arr) {
+    static uint EgineersNornikel(Organisation[] arr)
+    {
         uint engNum = 0;
         string factory = "НорНикель";
-        foreach (Organisation item in arr) {
-            if (item is not Factory p) {
+        foreach (Organisation item in arr)
+        {
+            if (item is not Factory p)
+            {
                 continue;
             }
 
-            if (string.CompareOrdinal(p.OrgName, factory) == 0) {
+            if (string.CompareOrdinal(p.OrgName, factory) == 0)
+            {
                 engNum += p.EngeneersCount;
             }
         }
@@ -74,10 +86,14 @@ class Program {
         return engNum;
     } //end of EgineersNornikel
 
-    static void ShowOrgBudget(Organisation[] arr) {
-        foreach (Organisation item in arr) {
-            if (item is Shipyard p) {
-                if (p.Budget < 2000) {
+    static void ShowOrgBudget(Organisation[] arr)
+    {
+        foreach (Organisation item in arr)
+        {
+            if (item is Shipyard p)
+            {
+                if (p.Budget < 2000)
+                {
                     p.Show();
                     Console.WriteLine();
                 }

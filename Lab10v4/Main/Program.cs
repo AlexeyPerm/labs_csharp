@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Threading;
 using ClassLibraryLab10;
 
@@ -13,8 +14,10 @@ namespace Main
             Console.WriteLine($"Номер варианта = {variantNumber}\n");
             //Task1();
             //Task2();
-            Task3();
-            Console.ReadLine();
+            //Task3();
+            var a = new Star();
+            a.RandomInit();
+            Console.WriteLine(a);
         }
 
 
@@ -94,10 +97,9 @@ namespace Main
             var lengthRandom = 10; //размер массива, хранящий объекты класса
             Organisation[] arr = new Organisation[lengthRandom];
             Random rand = new Random();
-            for (int i = 0; i < arr.Length; i++)
+            for (var i = 0; i < arr.Length; i++)
             {
-                var randSeed = rand.Next(100) % 5;
-                arr[i] = randSeed switch
+                arr[i] = (rand.Next(100) % 5) switch
                 {
                     0 => new Organisation(),
                     1 => new Factory(),
@@ -109,14 +111,74 @@ namespace Main
                 arr[i].RandomInit();
             }
 
+            Console.WriteLine("Часть 2: Реализовать сортировку элементов массива, используя " +
+                              "стандартный интерфейс IComparable  и метод Sort класса Array.");
             Array.Sort(arr);
             Console.WriteLine("Отсортированный по имени массив: ");
             //PrintArray(arr);
             Console.WriteLine();
             Console.WriteLine("=====================================");
+            Console.WriteLine("Часть 3. Реализовать сортировку и поиск элемента в массиве, используя стандартный " +
+                              "интерфейс ICompare  и метод Sort класса Array.");
             Console.WriteLine("Отсортированный величине бюджета массив: ");
             Array.Sort(arr, new SortByBudget());
             PrintArray(arr);
+            Console.WriteLine();
+            Console.WriteLine("=====================================");
+            Console.Write("Часть 4.\nВведите элемент, с указанным бюджетом:\n> ");
+            var value = InputDigit();
+
+            var index = BinarySearch(arr, 0, arr.Length - 1, value);
+            if (index == -1)
+            {
+                Console.WriteLine("Элемент не найден");
+            }
+            else
+            {
+                Console.WriteLine("Искомый элемент:\n");
+                Console.WriteLine($"Класс: {arr[index].GetType().Name}");
+                Console.WriteLine(arr[index]);
+            }
+        } //end of Task3
+
+
+        static int InputDigit()
+        {
+            int result;
+            while (!int.TryParse(Console.ReadLine(), out result))
+            {
+                Console.Write("Ошибка! Должен быть тип int\nПовторите ввод\n> ");
+            }
+
+            return result;
+        }
+
+        static int BinarySearch(Organisation[] array, int start, int end, int value)
+        {
+            while (true)
+            {
+                if (start > end)
+                {
+                    return -1;
+                }
+
+                var middle = (start + end) / 2; //средний индекс массива
+                if (array[middle].Budget == value) //сравниваем значение элемента в середине массива с искомым
+                {
+                    return middle;
+                }
+
+                /* если значение в середине массива больше искомого, значит работаем с левой частью подмассива.
+                 В противном случае работаем с правой частью.
+                 */
+                if (array[middle].Budget > value)
+                {
+                    end = middle - 1;
+                    continue;
+                }
+
+                start = middle + 1;
+            }
         }
 
         private static void PrintArray(Organisation[] arr)
@@ -223,5 +285,5 @@ namespace Main
                 }
             }
         } //end of ShowOrgBudget
-    }
+    } //end of class Program
 }
