@@ -10,10 +10,10 @@ public class Star : IInit
 
     public int Mass { get; set; }
 
-    public Star()
+    Star()
     { }
 
-    public Star(string name, int visualBrightness, int mass)
+    Star(string name, int visualBrightness, int mass)
     {
         Name = name;
         VisualBrightness = visualBrightness;
@@ -56,7 +56,7 @@ public class Star : IInit
         Mass = InputDigit();
     }
 
-    protected static int InputDigit()
+    private static int InputDigit()
     {
         int result;
         while (!int.TryParse(Console.ReadLine(), out result))
@@ -66,4 +66,7 @@ public class Star : IInit
 
         return result;
     }
+
+    public object Clone() => new Star(Name, VisualBrightness, Mass);
+    public object ShallowCopy() => (Star)MemberwiseClone();
 }

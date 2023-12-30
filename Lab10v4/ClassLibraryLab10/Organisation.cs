@@ -2,7 +2,7 @@
 
 namespace ClassLibraryLab10;
 
-public class Organisation : IInit, IComparable
+public class Organisation : IInit, IComparable, ICloneable
 {
     protected static Random rand = new Random();
     protected string _orgName;
@@ -82,6 +82,10 @@ public class Organisation : IInit, IComparable
             return false;
         return OrgName == organisation.OrgName && Budget == organisation.Budget;
     }
+
+    public virtual object Clone() => new Organisation(OrgName, Budget);
+    public virtual object ShallowCopy() => ShallowCopy();
+
 
     public int CompareTo(object obj)
     {
