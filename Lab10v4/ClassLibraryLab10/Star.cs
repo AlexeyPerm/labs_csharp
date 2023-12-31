@@ -5,13 +5,10 @@ namespace ClassLibraryLab10;
 public class Star : IInit
 {
     public string Name { get; set; }
-
     public int VisualBrightness { get; set; }
-
     public int Mass { get; set; }
 
-    Star()
-    { }
+    Star() { }
 
     Star(string name, int visualBrightness, int mass)
     {

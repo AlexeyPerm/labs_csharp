@@ -1,6 +1,9 @@
-﻿using System.Globalization; //используется для указания формата разделителя чисел с плавающей точкой
+﻿using System;
+using System.Globalization;
 
-namespace Lab1_task1
+//используется для указания формата разделителя чисел с плавающей точкой
+
+namespace Task1
 {
     static class Program
     {
@@ -33,7 +36,7 @@ namespace Lab1_task1
                 NumberDecimalSeparator = ".",
             };
 
-            bool isConversion = double.TryParse(str, numFormatInfo, out double result);
+            bool isConversion = double.TryParse(str, out double result);
             while (!isConversion)
             {
                 Console.Write("Ошибка! Должен быть тип double\nПовторите ввод> ");
@@ -50,39 +53,35 @@ namespace Lab1_task1
             Console.WriteLine("Задание 1");
             Console.Write("Введите m> ");
 
-            /*
-             * "!" — это оператор, допускающий значение NULL. Подавляем предупреждение CS8604
-             * https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-forgiving
-             */
-            int m1 = ParseInt(Console.ReadLine()!);
+            int m1 = ParseInt(Console.ReadLine());
             Console.Write("Введите n> ");
-            int n1 = ParseInt(Console.ReadLine()!);
+            int n1 = ParseInt(Console.ReadLine());
             int result1 = --m1 - n1++;
             Console.WriteLine($"m={m1} n={n1}  --m-n++ = {result1}\n");
 
             //Второе задание
             Console.Write("Введите m> ");
-            int m2 = ParseInt(Console.ReadLine()!);
+            int m2 = ParseInt(Console.ReadLine());
             Console.Write("Введите n> ");
-            int n2 = ParseInt(Console.ReadLine()!);
+            int n2 = ParseInt(Console.ReadLine());
             bool result2 = m2 * m2 < n2++;
             Console.WriteLine($"m={m2} n={n2}  m*m < n++ = {result2}\n");
 
             //Третье задание
             Console.Write("Введите m> ");
-            int m3 = ParseInt(Console.ReadLine()!);
+            int m3 = ParseInt(Console.ReadLine());
             Console.Write("Введите n> ");
-            int n3 = ParseInt(Console.ReadLine()!);
+            int n3 = ParseInt(Console.ReadLine());
             bool result3 = n3-- > ++m3;
             Console.WriteLine($"m={m3} n={n3}  n-->++m = {result3}\n");
 
             //Четвёртое задание
             Console.Write("Для решения уравнения 1 + (1/x) + (1/(x*x)) введите значение x (x != 0):\n>");
-            double x = ParseDouble(Console.ReadLine()!);
+            double x = ParseDouble(Console.ReadLine());
             while (x == 0)
             {
                 Console.Write("Ошибка! x не должен равняться нулю. Повторите ввод\n>");
-                x = ParseDouble(Console.ReadLine()!);
+                x = ParseDouble(Console.ReadLine());
             }
 
             double y = 1 + (1 / x) + (1 / (x * x));

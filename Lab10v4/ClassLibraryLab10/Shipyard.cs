@@ -71,6 +71,12 @@ public class Shipyard : Factory
         return OrgName == sh.OrgName && Budget == sh.Budget &&
                BuiltShips == sh.BuiltShips;
     }
+    
+
+    public override int GetHashCode()
+    {
+        return (int)_builtShips;
+    }
 
     public override object Clone() => (base.Clone(), BuiltShips);
     public override object ShallowCopy() => (Shipyard)MemberwiseClone();

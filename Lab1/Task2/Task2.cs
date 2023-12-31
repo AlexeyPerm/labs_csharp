@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+﻿using System;
 
-namespace Lab1_task2
+namespace Task2
 {
     class Program
     {

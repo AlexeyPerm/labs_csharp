@@ -62,8 +62,15 @@ public class InsuranceCompany : Organisation
     {
         if (obj is not InsuranceCompany ins)
             return false;
+
         return OrgName == ins.OrgName && Budget == ins.Budget &&
                InsuranceCases == ins.InsuranceCases;
+    }
+
+
+    public override int GetHashCode()
+    {
+        return (int)InsuranceCases;
     }
 
     public override object Clone() => (base.Clone(), InsuranceCases);
