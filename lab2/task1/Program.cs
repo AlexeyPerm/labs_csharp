@@ -29,6 +29,7 @@ namespace task1
             int digitCount = 10; //количество вводимых чисел
             int gtZero = 0;
             int ltZero = 0;
+            Console.WriteLine("Введите 10 чисел для их сравнения:");
             for (int i = 0, curDigit; i < digitCount; i++) //curDigit вводимое число, которое сравнивается с нулём
             {
                 curDigit = ParseInt(Console.ReadLine()!);
