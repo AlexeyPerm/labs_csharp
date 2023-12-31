@@ -6,19 +6,6 @@ namespace task2
 {
     internal class Program
     {
-        static int ParseInt(string str) //проверка корректности ввода и конвертация строки в число int
-        {
-            bool isConversion = int.TryParse(str, out int result);
-            while (!isConversion)
-            {
-                Console.WriteLine("Ошибка! Должен быть тип int\nПовторите ввод");
-                str = Console.ReadLine();
-                isConversion = int.TryParse(str, out result);
-            }
-
-            return result;
-        }
-
         static void Main()
         {
             Console.WriteLine("Задание 2");
@@ -37,6 +24,18 @@ namespace task2
 
             double result = (double)sum / countDigit;
             Console.WriteLine($"Среднее арифметическое = {result}");
+        }
+        static int ParseInt(string str) //проверка корректности ввода и конвертация строки в число int
+        {
+            bool isConversion = int.TryParse(str, out int result);
+            while (!isConversion)
+            {
+                Console.WriteLine("Ошибка! Должен быть тип int\nПовторите ввод");
+                str = Console.ReadLine();
+                isConversion = int.TryParse(str, out result);
+            }
+
+            return result;
         }
     }
 }
