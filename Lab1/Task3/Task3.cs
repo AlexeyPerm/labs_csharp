@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Task3
 {
     class Program
@@ -12,10 +13,13 @@ namespace Task3
             CalcDouble();
         }
 
-        static void CalcFloat() //вычисление выражение с типом данных float
+        /// <summary>
+        /// Вычисление выражение с типом данных float
+        /// </summary>
+        static void CalcFloat()
         {
-            float a = 1000f;
-            float b = 0.0001F;
+            const float a = 1000f;
+            const float b = 0.0001f;
             //Функция Math.Pow() возвращает значение типа double, поэтому используется явное преобразование типа,
             //так как автоматически преобразовать невозможно(Compiler Error CS0266)
             float numerator = (float)Math.Pow(a - b, 3) - ((float)Math.Pow(a, 3) - 3 * (float)Math.Pow(a, 2) * b);
@@ -24,10 +28,13 @@ namespace Task3
             Console.WriteLine("Результат вычисления выражение с типом данных float: " + result);
         }
 
-        static void CalcDouble() //вычисление выражение с типом данных double
+        /// <summary>
+        /// Вычисление выражение с типом данных double
+        /// </summary>
+        static void CalcDouble()
         {
-            double a = 1000;
-            double b = 0.0001;
+            const double a = 1000;
+            const double b = 0.0001;
             double numerator = Math.Pow(a - b, 3) - (Math.Pow(a, 3) - 3 * Math.Pow(a, 2) * b); // числитель
             double denominator = 3 * a * Math.Pow(b, 2) - Math.Pow(b, 3); //знаменатель
             double result = numerator / denominator;

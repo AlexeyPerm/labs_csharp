@@ -4,7 +4,7 @@ namespace Task2
 {
     class Program
     {
-        static void Main()
+        private static void Main()
         {
             Console.WriteLine("Задание 1");
             int variantNumber = 549 % 25 - 1; //номер варианта 23
@@ -17,10 +17,14 @@ namespace Task2
             Console.WriteLine((x * x + y * y <= 5 * 5) || Math.Pow((x + 5), 2) + y * y <= 5 * 5);
         }
 
-        static int ParseToInt(string str) //проверка корректности ввода и конвертация строки в число int
+        /// <summary>
+        /// Проверка корректности ввода и конвертация строки в целое число int
+        /// </summary>
+        /// <param name="str">Передаваемая строка для конвертации в число</param>
+        /// <returns>Возвращает целое число, конвертированное из строки</returns>
+        private static int ParseToInt(string str) //
         {
             bool isParse = int.TryParse(str, out int result);
-
             while (!isParse)
             {
                 Console.Write("Ошибка! Должен быть тип int\nПовторите ввод> ");
