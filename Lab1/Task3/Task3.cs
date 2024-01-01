@@ -1,9 +1,4 @@
 ﻿using System;
-
-//Для задачи 3 вычислить значение выражения, используя различные вещественные типы данных (float и double).
-//((a-b)^3 - (a^3 - 3a^2*b)) // (3ab^2 - b^3)
-
-
 namespace Task3
 {
     class Program
@@ -19,13 +14,12 @@ namespace Task3
 
         static void CalcFloat() //вычисление выражение с типом данных float
         {
-            float a = 1000;
-            float b = 0.0001f;
+            float a = 1000f;
+            float b = 0.0001F;
             //Функция Math.Pow() возвращает значение типа double, поэтому используется явное преобразование типа,
             //так как автоматически преобразовать невозможно(Compiler Error CS0266)
-            float numerator =
-                (float)Math.Pow((a - b), 3) - ((float)Math.Pow((a), 3) - 3 * (float)Math.Pow(a, 2) * b); // числитель
-            float denominator = 3 * a * (float)Math.Pow(b, 2) - (float)Math.Pow(b, 3); //знаменатель
+            float numerator = (float)Math.Pow(a - b, 3) - ((float)Math.Pow(a, 3) - 3 * (float)Math.Pow(a, 2) * b);
+            float denominator = 3 * a * (float)Math.Pow(b, 2) - (float)Math.Pow(b, 3);
             float result = numerator / denominator;
             Console.WriteLine("Результат вычисления выражение с типом данных float: " + result);
         }
@@ -33,8 +27,8 @@ namespace Task3
         static void CalcDouble() //вычисление выражение с типом данных double
         {
             double a = 1000;
-            double b = 0.0001f;
-            double numerator = Math.Pow((a - b), 3) - (Math.Pow((a), 3) - 3 * Math.Pow(a, 2) * b); // числитель
+            double b = 0.0001;
+            double numerator = Math.Pow(a - b, 3) - (Math.Pow(a, 3) - 3 * Math.Pow(a, 2) * b); // числитель
             double denominator = 3 * a * Math.Pow(b, 2) - Math.Pow(b, 3); //знаменатель
             double result = numerator / denominator;
             Console.WriteLine("Результат вычисления выражение с типом данных double: " + result);

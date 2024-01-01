@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Globalization;
-
-//используется для указания формата разделителя чисел с плавающей точкой
 
 namespace Task1
 {
@@ -15,14 +12,13 @@ namespace Task1
             Task1();
         }
 
-
         static int ParseInt(string str) //проверка корректности ввода и конвертация строки в число int
         {
             bool isConversion = int.TryParse(str, out int result);
             while (!isConversion)
             {
                 Console.Write("Ошибка! Должен быть тип int\nПовторите ввод> ");
-                str = Console.ReadLine()!;
+                str = Console.ReadLine();
                 isConversion = int.TryParse(str, out result);
             }
 
@@ -31,16 +27,11 @@ namespace Task1
 
         static double ParseDouble(string str) //проверка корректности ввода и конвертация строки в число double
         {
-            NumberFormatInfo numFormatInfo = new() //указываем формат разделителя
-            {
-                NumberDecimalSeparator = ".",
-            };
-
             bool isConversion = double.TryParse(str, out double result);
             while (!isConversion)
             {
                 Console.Write("Ошибка! Должен быть тип double\nПовторите ввод> ");
-                str = Console.ReadLine()!;
+                str = Console.ReadLine();
                 isConversion = double.TryParse(str, out result);
             }
 
@@ -85,7 +76,7 @@ namespace Task1
             }
 
             double y = 1 + (1 / x) + (1 / (x * x));
-            Console.WriteLine($"Решение уравнение = {y}");
+            Console.WriteLine($"Решение уравнения = {y}");
         }
     }
 }

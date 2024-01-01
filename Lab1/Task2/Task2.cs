@@ -24,7 +24,7 @@ namespace Task2
             while (!isParse)
             {
                 Console.Write("Ошибка! Должен быть тип int\nПовторите ввод> ");
-                str = Console.ReadLine()!;
+                str = Console.ReadLine();
                 isParse = int.TryParse(str, out result);
             }
 
