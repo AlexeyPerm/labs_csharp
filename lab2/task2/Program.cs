@@ -4,7 +4,7 @@ using System;
 
 namespace task2
 {
-    internal class Program
+    static class Program
     {
         static void Main()
         {
@@ -25,7 +25,13 @@ namespace task2
             double result = (double)sum / countDigit;
             Console.WriteLine($"Среднее арифметическое = {result}");
         }
-        static int ParseInt(string str) //проверка корректности ввода и конвертация строки в число int
+
+        /// <summary>
+        /// Проверка корректности ввода и конвертация строки в целое число int
+        /// </summary>
+        /// <param name="str">Передаваемая строка для конвертации в целое число</param>
+        /// <returns>Возвращает целое число, конвертированное из строки</returns>
+        static int ParseInt(string str)
         {
             bool isConversion = int.TryParse(str, out int result);
             while (!isConversion)

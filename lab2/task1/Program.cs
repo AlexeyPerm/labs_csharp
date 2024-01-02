@@ -2,60 +2,76 @@
 
 namespace task1
 {
-    internal class Program
+    static class Program
     {
         static void Main()
         {
             Console.WriteLine("Задание 1");
             int variantNumber = 549 % 59 - 1; //номер варианта 17
             Console.WriteLine($"Номер варианта = {variantNumber}\n");
+            Console.Write("Введите количество элементов в последовательности\n> ");
+            int digitCount = ParseInt(Console.ReadLine()); //количество вводимых чисел
 
-            int digitCount = 10; //количество вводимых чисел
-            int gtZero = 0;
-            int ltZero = 0;
-            Console.WriteLine("Введите 10 чисел для их сравнения:");
-            for (int i = 0; i < digitCount; i++) //curDigit вводимое число, которое сравнивается с нулём
+            while (digitCount <= 0)
             {
+                Console.WriteLine("Нужно ввести положительное число");
+                Console.Write("Введите количество элементов в последовательности\n> ");
+                digitCount = ParseInt(Console.ReadLine());
+            }
+
+            int positiveNumCount = 0; //счётчик положительных чисел
+            int negativNumCount = 0; //счётчик отрицательных чисел
+            Console.WriteLine("Введите числа для их сравнения:");
+            for (int i = 0; i < digitCount; i++)
+            {
+                //curDigit вводимое число, которое сравнивается с нулём
+                Console.Write("> ");
                 int curDigit = ParseInt(Console.ReadLine());
                 if (curDigit > 0)
                 {
-                    gtZero++;
+                    positiveNumCount++;
                 }
                 else if (curDigit < 0)
                 {
-                    ltZero++;
+                    negativNumCount++;
                 }
             }
 
-            if (gtZero > ltZero)
+            if (positiveNumCount > negativNumCount)
             {
                 Console.WriteLine("Положительных чисел больше, чем отрицательных");
             }
-            else if (gtZero < ltZero)
+            else if (positiveNumCount < negativNumCount)
             {
                 Console.WriteLine("Отрицательных чисел больше, чем положительных");
             }
-            else if (gtZero > 0 && gtZero == ltZero) //Проверяем, что есть числа, отличные от нуля
+            else if (positiveNumCount > 0 &&
+                     positiveNumCount == negativNumCount) //Проверяем, что есть числа, отличные от нуля
             {
                 Console.WriteLine("Одинаковое количество положительных и отрицательных чисел");
             }
             else
             {
-                Console.WriteLine("Все введёные числа равны нулю");
+                Console.WriteLine("Все числа равны нулю");
             }
+        }
 
-            static int ParseInt(string str) //проверка корректности ввода и конвертация строки в число int
+        /// <summary>
+        /// Проверка корректности ввода и конвертация строки в целое число int
+        /// </summary>
+        /// <param name="str">Передаваемая строка для конвертации в целое число</param>
+        /// <returns>Возвращает целое число, конвертированное из строки</returns>
+        static int ParseInt(string str) //проверка корректности ввода и конвертация строки в число int
+        {
+            bool isConversion = int.TryParse(str, out int result);
+            while (!isConversion)
             {
-                bool isConversion = int.TryParse(str, out int result);
-                while (!isConversion)
-                {
-                    Console.WriteLine("Ошибка! Должен быть тип int\nПовторите ввод");
-                    str = Console.ReadLine()!;
-                    isConversion = int.TryParse(str, out result);
-                }
-
-                return result;
+                Console.Write("Ошибка! Должен быть тип int\nПовторите ввод\n> ");
+                str = Console.ReadLine()!;
+                isConversion = int.TryParse(str, out result);
             }
+
+            return result;
         }
     }
 }
