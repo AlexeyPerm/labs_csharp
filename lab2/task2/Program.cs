@@ -15,14 +15,16 @@ namespace task2
             int curDigit;
             int sum = 0;
             int countDigit = 0;
+            Console.WriteLine("Введите числа последовательности. Признак окончания последовательности цифра 0.");
             do
             {
-                curDigit = ParseInt(Console.ReadLine()!);
+                Console.Write("> ");
+                curDigit = ParseInt(Console.ReadLine());
                 sum += curDigit;
                 countDigit++;
             } while (curDigit != 0);
 
-            double result = (double)sum / countDigit;
+            double result = (double)sum / (countDigit - 1);
             Console.WriteLine($"Среднее арифметическое = {result}");
         }
 
