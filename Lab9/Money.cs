@@ -1,18 +1,21 @@
 ﻿using System;
 
-namespace Lab9 {
-    public class Money {
+namespace Lab9
+{
+    public class Money
+    {
         // --------------------------- Поля ---------------------------- //
 
         private int _rubles;
         private int _kopeks;
-        private static int _objectCount; //количество созданных объектов
 
         // ------------------------- Свойства -------------------------- //
 
-        public int Rubles {
+        public int Rubles
+        {
             get => _rubles;
-            set {
+            set
+            {
                 if (value < 0)
                     Console.WriteLine("Нельзя присвоить отрицательное значение в рублях. Будет присвоен 0");
                 else
@@ -20,15 +23,19 @@ namespace Lab9 {
             }
         }
 
-        public int Kopeks {
+        public int Kopeks
+        {
             get => _kopeks;
-            set {
-                if (value < 0) {
+            set
+            {
+                if (value < 0)
+                {
                     Console.WriteLine("\nНельзя присвоить отрицательное значение в копейках. Будет присвоен 0");
                     value = 0;
                 }
 
-                if (value > 99) {
+                if (value > 99)
+                {
                     _rubles += value / 100;
                     _kopeks = value % 100;
                 }
@@ -37,26 +44,43 @@ namespace Lab9 {
             }
         }
 
+        private static int ObjectCount { get; set; }
+
         // ------------------------ Конструкторы ------------------------ //
 
-        public Money() {
+        public Money()
+        {
             Rubles = 0;
             Kopeks = 0;
-            _objectCount++;
+            ObjectCount++;
         }
 
-        public Money(int rubles, int kopeks) : this() {
+        public Money(int rubles, int kopeks) : this()
+        {
             Rubles = rubles;
             Kopeks = kopeks;
         }
 
-        // --------------------------- Методы --------------------------- //
+        // ------------------------- Деструктор ------------------------- //
+        
+        public void Deconstruct()
+        {
+            --ObjectCount;
+        }
 
-        public Money Minus(Money right) {
+        // --------------------------- Методы --------------------------- //
+        /// <summary>
+        /// Вычитание переменной типа Money
+        /// </summary>
+        /// <param name="right">Вычитаемое</param>
+        /// <returns>Возвращает результат типа Money</returns>
+        public Money Minus(Money right)
+        {
             long lhsTotalKopeks = Rubles * 100 + Kopeks;
             long rhsTotalKopeks = right.Rubles * 100 + right.Kopeks;
             var tmp = new Money();
-            if (lhsTotalKopeks >= rhsTotalKopeks) {
+            if (lhsTotalKopeks >= rhsTotalKopeks)
+            {
                 var result = lhsTotalKopeks - rhsTotalKopeks;
                 tmp.Rubles = (int)(result / 100);
                 tmp.Kopeks = (int)(result % 100);
@@ -67,7 +91,8 @@ namespace Lab9 {
             return tmp;
         }
 
-        public void Print() {
+        public void Print()
+        {
             Console.WriteLine($"Money = {Rubles} руб. {Kopeks} коп.");
         }
 
@@ -77,11 +102,13 @@ namespace Lab9 {
         /// <param name="left">Уменьшаемое</param>
         /// <param name="right">Вычитаемое</param>
         /// <returns>Разность объектов</returns>
-        public static Money Minus(Money left, Money right) {
+        public static Money Minus(Money left, Money right)
+        {
             long lhsTotalKopeks = left.Rubles * 100 + left.Kopeks;
             long rhsTotalKopeks = right.Rubles * 100 + right.Kopeks;
             var tmp = new Money();
-            if (lhsTotalKopeks >= rhsTotalKopeks) {
+            if (lhsTotalKopeks >= rhsTotalKopeks)
+            {
                 var result = lhsTotalKopeks - rhsTotalKopeks;
                 tmp.Rubles = (int)result / 100;
                 tmp.Kopeks = (int)result % 100;
@@ -95,18 +122,21 @@ namespace Lab9 {
         /// <summary>
         /// Возвращает количество созданных объектов Money
         /// </summary>
-        public static int CreatedObjectCount() {
-            return _objectCount;
+        public static int CreatedObjectCount()
+        {
+            return ObjectCount;
         }
 
         // ---------------------- Унарные операции ---------------------- //
 
-        public static Money operator ++(Money m) {
+        public static Money operator ++(Money m)
+        {
             m.Kopeks++;
             return m;
         }
 
-        public static Money operator --(Money m) {
+        public static Money operator --(Money m)
+        {
             long tmp = m.Rubles * 100 + m.Kopeks; //общее количество копеек
             tmp--;
             m.Rubles = (int)tmp / 100;
@@ -116,17 +146,20 @@ namespace Lab9 {
 
         // ---------------------- Приведение типов ---------------------- //
 
-        public static implicit operator int(Money m) {
+        public static implicit operator int(Money m)
+        {
             return m.Rubles;
         }
 
-        public static explicit operator double(Money m) {
+        public static explicit operator double(Money m)
+        {
             return m.Kopeks * 0.01;
         }
 
         // ---------------------- Бинарные операции ---------------------- //
 
-        public static Money operator -(Money m, int kop) {
+        public static Money operator -(Money m, int kop)
+        {
             long totalKop = (m.Rubles * 100 + m.Kopeks) - kop;
             var tmp = new Money();
             if (totalKop <= 0)
@@ -136,7 +169,8 @@ namespace Lab9 {
             return tmp;
         }
 
-        public static Money operator -(int kop, Money m) {
+        public static Money operator -(int kop, Money m)
+        {
             long totalKop = kop - (m.Rubles * 100 + m.Kopeks);
             var tmp = new Money();
             if (totalKop <= 0)
@@ -146,7 +180,8 @@ namespace Lab9 {
             return tmp;
         }
 
-        public static Money operator -(Money left, Money right) {
+        public static Money operator -(Money left, Money right)
+        {
             long totalKop = (left.Rubles * 100 + left.Kopeks) - (right.Rubles * 100 + right.Kopeks);
             var tmp = new Money();
             if (totalKop <= 0)
@@ -156,23 +191,21 @@ namespace Lab9 {
             return tmp;
         }
 
-		public static bool operator <(Money left, Money right) => 
+        public static bool operator <(Money left, Money right) =>
             left.Rubles < right.Rubles || (left.Rubles == right.Rubles && left.Kopeks < right.Kopeks);
 
-		public static bool operator >(Money left, Money right) => 
+        public static bool operator >(Money left, Money right) =>
             left.Rubles > right.Rubles || (left.Rubles == right.Rubles && left.Kopeks > right.Kopeks);
 
-		public override bool Equals(object obj) {
-            if (obj is Money) {
+        public override bool Equals(object obj)
+        {
+            if (obj is Money)
+            {
                 var m = (Money)obj;
                 return Rubles == m.Rubles && Kopeks == m.Kopeks;
             }
+
             return false;
         }
-
-
-
-
-
     } //end of class Money;
 } //end of namespase Lab9

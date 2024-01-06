@@ -17,7 +17,7 @@ namespace Task3
             int fibComputed = 0; //вычисленное число Фибоначчи fib1 + fib2
 
             Console.Write("Введите число k\n> ");
-            int k = ParseInt(Console.ReadLine()!); //Число k из условия задачи.
+            int k = ParseInt(Console.ReadLine()); //Число k из условия задачи.
 
             //Выполняем цикл до тех пор, пока вычесленное число не будет меньше или равно введённому
             while (fibComputed <= k)
@@ -48,7 +48,7 @@ namespace Task3
             while (!isConversion)
             {
                 Console.Write("Ошибка! Должен быть тип int\nПовторите ввод\n> ");
-                str = Console.ReadLine()!;
+                str = Console.ReadLine();
                 isConversion = int.TryParse(str, out result);
             }
 

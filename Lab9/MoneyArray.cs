@@ -52,13 +52,13 @@ namespace Lab9 {
 			get {
 				if (index >= 0 && index < _arr.Length)
 					return _arr[index];
-				throw new IndexOutOfRangeException();
+				throw new ArgumentException();
 			}
 			set {
 				if (index >= 0 && index < _arr.Length)
 					_arr[index] = value;
 				else
-					throw new IndexOutOfRangeException();
+					throw new ArgumentException();
 			}
 		}
 
