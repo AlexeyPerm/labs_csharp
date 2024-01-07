@@ -8,9 +8,9 @@ public class Star : IInit
     public int VisualBrightness { get; set; }
     public int Mass { get; set; }
 
-    Star() { }
+    public Star() { }
 
-    Star(string name, int visualBrightness, int mass)
+    public Star(string name, int visualBrightness, int mass)
     {
         Name = name;
         VisualBrightness = visualBrightness;
@@ -64,6 +64,13 @@ public class Star : IInit
         return result;
     }
 
+    public override bool Equals(object obj)
+    {
+        if (obj is not Star star)
+            return false;
+        return Name == star.Name && VisualBrightness == star.VisualBrightness && Mass == star.Mass;
+    }
+    
     public object Clone() => new Star(Name, VisualBrightness, Mass);
     public object ShallowCopy() => (Star)MemberwiseClone();
 }

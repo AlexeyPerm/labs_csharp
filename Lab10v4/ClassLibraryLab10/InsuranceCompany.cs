@@ -73,6 +73,6 @@ public class InsuranceCompany : Organisation
         return (int)InsuranceCases;
     }
 
-    public override object Clone() => (base.Clone(), InsuranceCases);
+    public override object Clone() => new InsuranceCompany(OrgName, Budget, InsuranceCases);
     public override object ShallowCopy() => (InsuranceCompany)MemberwiseClone();
 }

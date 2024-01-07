@@ -10,14 +10,19 @@ namespace Main
         {
             const int variantNumber = 549 % 16 - 1; //номер варианта 4
             Console.WriteLine($"Номер варианта = {variantNumber}\n");
+            Organisation org = new Organisation("test", 10000);
+            var test = (Organisation)org.ShallowCopy();
+            test.Show();
+
+
             //Task1();
             //Task2();
             //Task3();
-            var a = RandomInit(10);
-            foreach (var item in a)
-            {
-                Console.WriteLine(item);   
-            }
+            // var a = RandomInit(10);
+            // foreach (var item in a)
+            // {
+            //     Console.WriteLine(item);   
+            // }
         }
 
 
@@ -140,8 +145,7 @@ namespace Main
                 Console.WriteLine(arr[index]);
             }
         } //end of Task3
-
-
+        
         static int InputDigit()
         {
             int result;

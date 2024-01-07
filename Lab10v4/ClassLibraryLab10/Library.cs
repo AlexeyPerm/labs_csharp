@@ -71,6 +71,6 @@ public class Library : Organisation
                BooksTotalNum == library.BooksTotalNum;
     }
 
-    public override object Clone() => (base.Clone(), BooksTotalNum);
+    public override object Clone() => new Library(OrgName, Budget, BooksTotalNum);
     public override object ShallowCopy() => (Library)MemberwiseClone();
 }

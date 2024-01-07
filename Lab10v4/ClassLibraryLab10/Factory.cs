@@ -75,6 +75,6 @@ public class Factory : Organisation
                EngeneersCount == f.EngeneersCount;
     }
 
-    public override object Clone() => (base.Clone(), EngeneersCount);
+    public override object Clone() => new Factory(OrgName, Budget, EngeneersCount);
     public override object ShallowCopy() => (Factory)MemberwiseClone();
 }

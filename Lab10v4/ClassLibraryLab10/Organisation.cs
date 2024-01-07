@@ -84,7 +84,8 @@ public class Organisation : IInit, IComparable, ICloneable
     }
 
     public virtual object Clone() => new Organisation(OrgName, Budget);
-    public virtual object ShallowCopy() => ShallowCopy();
+
+    public virtual object ShallowCopy() => (Organisation)MemberwiseClone();
 
 
     public int CompareTo(object obj)
