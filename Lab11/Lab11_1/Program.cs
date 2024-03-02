@@ -158,7 +158,7 @@ static class Lab111
         {
             Console.WriteLine($"Исключение: {ex}");
         }
-    }
+    } //end of RemoveItem
 
     /// <summary>
     /// Выводит на экран элемента определённого вида (объекта класса)
@@ -239,9 +239,9 @@ static class Lab111
                 default:
                     Console.WriteLine("Введены некорректные данные");
                     break;
-            }
-        }
-    }
+            } //end of switch
+        } //end of while
+    } // end of PrintSpecificClass
 
     /// <summary>
     /// Выводит на экран количество элементов определённого вида (объекта класса)
@@ -299,9 +299,9 @@ static class Lab111
                 default:
                     Console.WriteLine("Введены некорректные данные");
                     break;
-            }
-        }
-    }
+            } // end of switch
+        } //end of while
+    } //end of CountSpecificCLass
 
     /// <summary>
     /// Подсчитывает и выводит на экран бюджет всех организаций, содержашихся в хэш-таблицу

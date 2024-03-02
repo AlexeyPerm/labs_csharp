@@ -1,55 +1,93 @@
-﻿namespace LibraryLab10 {
-	public class Library : Organisation {
-		private uint _booksTotalNum;
+﻿using System;
 
-		public uint BooksTotalNum {
-			get => _booksTotalNum;
-			private set => _booksTotalNum = value;
-		}
+namespace ClassLibraryLab10;
 
-		public Library() { }
+public class Library : Organisation
+{
+    private uint _booksTotalNum; //Количество книг в библиотеке.
 
-		public Library(string orgName, string director, int budget, uint booksTotalNum) : base(orgName, director, budget) {
-			BooksTotalNum = booksTotalNum;
-		}
+    public uint BooksTotalNum
+    {
+        get => _booksTotalNum;
+        set => _booksTotalNum = value;
+    }
 
-		public override void Init() {
-			base.Init();
-			Console.Write("Введите количество книг в библиотеке:\n> ");
-			var error = false;
-			while (!error) {
-				try {
-					BooksTotalNum = checked((uint)InputDigit());
-					error = true;
-				} catch (OverflowException) {
-					Console.WriteLine("Количество книг должно быть не меньше 0");
-					Console.Write("Введите количество книг в библиотеке:\n> ");
-				}
-			}
-		}
+    public Library()
+    { }
 
-		public override void RandomInit() {
-			base.RandomInit();
-			var rand = new Random();
-			BooksTotalNum = (uint)rand.Next(int.MaxValue);
-		}
+    public Library(string orgName, int budget, uint booksTotalNum) : base(orgName, budget)
+    {
+        BooksTotalNum = booksTotalNum;
+    }
 
-		public override bool Equals(object? obj) {
-			if (obj is not Library)
-				return false;
-			var f = (Library)obj;
-			return OrgName == f.OrgName && Director == f.Director && Budget == f.Budget &&
-				   BooksTotalNum == f.BooksTotalNum;
-		}
+    /// <summary>
+    /// Ручной ввод информации об объекту. Вызывает конструктор базового класса.
+    /// </summary>
+    public override void Init()
+    {
+        base.Init();
+        Console.Write("Введите количество книг в библиотеке:\n> ");
+        var error = false;
+        while (!error)
+        {
+            try
+            {
+                BooksTotalNum = checked((uint)InputDigit());
+                error = true;
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Количество книг должно быть не меньше 0");
+                Console.Write("Введите количество книг в библиотеке:\n> ");
+            }
+        }
+    }
 
-		public override void Show() {
-			base.Show();
-			Console.WriteLine($"Количество книг: {BooksTotalNum}");
-		}
-		
-		public override int GetHashCode()
-		{
-			return HashCode.Combine(base.GetHashCode(), _booksTotalNum);
-		}
-	}
+    /// <summary>
+    /// Формирование объекта с помощью ДСЧ. Вызывает конструктор базового класса.
+    /// </summary>
+    public override void RandomInit()
+    {
+        base.RandomInit();
+        BooksTotalNum = (uint)rand.Next(100000);
+    }
+
+    /// <summary>
+    /// Вывод на экран информации об объекте
+    /// </summary>
+    public override void Show()
+    {
+        base.Show();
+        Console.WriteLine($"Количество книг: {BooksTotalNum}");
+    }
+
+    /// <summary>
+    /// Не виртуальный метод Show()
+    /// </summary>
+    public void ShowNotOverride()
+    {
+        base.Show();
+        Console.WriteLine($"Количество книг: {BooksTotalNum}");
+    }
+
+    public override string ToString()
+    {
+        return base.ToString() + $"Количество книг: {BooksTotalNum}\n";
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is not Library library)
+            return false;
+        return OrgName == library.OrgName && Budget == library.Budget &&
+               BooksTotalNum == library.BooksTotalNum;
+    }
+    
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(base.GetHashCode(), _booksTotalNum);
+    }
+
+    public override object Clone() => new Library(OrgName, Budget, BooksTotalNum);
+    public override object ShallowCopy() => (Library)MemberwiseClone();
 }

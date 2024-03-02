@@ -1,101 +1,129 @@
-﻿namespace LibraryLab10 {
-	public class Organisation {
-		protected string _orgName  = "Empty Name";
-		protected string _director = "Empty Name";
-		protected int _budget = 0;
+﻿namespace ClassLibraryLab10;
 
-		public string OrgName {
-			get => _orgName;
-			set => _orgName = value;
-		}
+public class Organisation : IInit, IComparable, ICloneable
+{
+    protected static Random rand = new Random(); //поле для работы метода Init().
+    protected string _orgName; // Название организации
+    protected int _budget; // Бюджет организации
 
-		public string Director {
-			get => _director;
-			set => _director = value;
-		}
+    public string OrgName
+    {
+        get => _orgName;
+        set => _orgName = value;
+    }
 
-		public int Budget {
-			get => _budget;
-			set => _budget = value;
-		}
+    public int Budget
+    {
+        get => _budget;
+        set => _budget = value;
+    }
 
-		public Organisation() {
-			OrgName = "Empty Name";
-			Director = "Empty Name";
-			Budget = 0;
-		}
+    public Organisation()
+    {
+        OrgName = "EmptyName";
+        Budget = 0;
+    }
 
-		public Organisation(string orgName, string director, int budget) {
-			OrgName = orgName;
-			Director = director;
-			Budget = budget;
-		}
+    public Organisation(string orgName, int budget)
+    {
+        OrgName = orgName;
+        Budget = budget;
+    }
 
-		public virtual void Init() {
-			Console.Write("Введите название организации:\n> ");
-			OrgName = Console.ReadLine()!;
+    /// <summary>
+    /// Ручной ввод информации об объекту
+    /// </summary>
+    public virtual void Init()
+    {
+        Console.Write("Введите название организации:\n> ");
+        OrgName = Console.ReadLine()!;
 
-			Console.Write("Введите имя директора:\n> ");
-			Director = Console.ReadLine()!;
+        Console.Write("Введите объём бюджета органзиции:\n> ");
+        Budget = InputDigit();
+        while (Budget < 0)
+        {
+            Console.Write("Бюджет должен быть больше 0\n> ");
+            Budget = InputDigit();
+        }
+    } //end of method Init
 
-			Console.Write("Введите объём бюджета органзиции:\n> ");
-			Budget = InputDigit();
-			while (Budget < 0) {
-				Console.Write("Бюджет должен быть больше 0\n> ");
-				Budget = InputDigit();
-			}
-		} //end of method Init
+    /// <summary>
+    /// Формирование объекта с помощью ДСЧ
+    /// </summary>
+    public virtual void RandomInit()
+    {
+        string[] orgName =
+        {
+            "Хмели-Сунели", "Шестёрочка", "Apple", "HP", "ASUS", "РосАтом",
+            "Эр-Телеком", "ГРЧЦ", "РЖД", "Нефтехимпром", "Лукойл", "МСБ", "Лента", "Русал", "НорНикель", "КГБ"
+        };
+        OrgName = orgName[rand.Next(orgName.Length)];
+        Budget = rand.Next(500, 10000);
+    } //end of method RandomInit
 
-		public virtual void RandomInit() {
-			string[] name = {
-			"Михаил", "Максим", "Макар", "Мартын", "Матвей", "Марк",
-			"Назар", "Никита", "Олег", "Петр", "Павел", "Роман"
-		};
-			string[] surname = {
-			"Анисимов", "Анненков", "Басурин", "Будницкий", "Варламов", "Гагарин",
-			"Евменьев", "Екатеринчев", "Золотухин", "Карабанов", "Котов", "Далматов",
-		};
-			string[] orgName = {
-			"Хмели-Сунели", "Шестёрочка", "Apple", "HP", "ASUS", "РосАтом",
-			"Эр-Телеком", "ГРЧЦ", "РЖД", "Нефтехимпром", "Лукойл"
-		};
-			var rand = new Random();
-			OrgName = orgName[rand.Next(orgName.Length)];
-			Director = surname[rand.Next(surname.Length)] + " " + name[rand.Next(name.Length)];
-			Budget = rand.Next(99999, int.MaxValue);
-		} //end of method RandomInit
+    /// <summary>
+    /// Вывод на экран информации об объекте
+    /// </summary>
+    public virtual void Show()
+    {
+        Console.WriteLine($"Название: {OrgName}\n" +
+                          $"Бюджет: {Budget} рублей");
+    } //end of method Show
+
+    /// <summary>
+    /// Не виртуальный метод Show()
+    /// </summary>
+    public void ShowNotOverride()
+    {
+        Console.WriteLine($"Название: {OrgName}\n" +
+                          $"Бюджет: {Budget} рублей");
+    } //end of method Show
+
+    public override string ToString()
+    {
+        return $"Название: {OrgName}\n" +
+               $"Бюджет: {Budget} рублей\n";
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is not Organisation organisation)
+            return false;
+        return OrgName == organisation.OrgName && Budget == organisation.Budget;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(_orgName, _budget);
+    }
+
+    public virtual object Clone() => new Organisation(OrgName, Budget);
+
+    public virtual object ShallowCopy() => (Organisation)MemberwiseClone();
 
 
-		public virtual void Show() {
-			Console.WriteLine($"Название: {OrgName}\n" +
-							  $"Директор: {Director}\n" +
-							  $"Бюджет: {Budget} рублей");
-		} //end of method Show
+    public int CompareTo(object obj)
+    {
+        if (obj is Organisation org)
+        {
+            return string.Compare(OrgName, org.OrgName);
+        }
 
-		public override bool Equals(object? obj) {
-			if (obj is not Organisation)
-				return false;
-			var o = (Organisation)obj;
-			return OrgName == o.OrgName && Director == o.Director && Budget == o.Budget;
-		}
-		
+        throw new ArgumentException("Некорректное значение параметра");
+    }
 
-		public override int GetHashCode()
-		{
-			return HashCode.Combine(_orgName, _director, _budget);
-		}
-		
-		
-		protected static int InputDigit() {
-			int result;
-			while (!int.TryParse(Console.ReadLine(), out result)) {
-				Console.Write("Ошибка! Должен быть тип int\nПовторите ввод\n> ");
-			}
+    /// <summary>
+    /// Проверка корректности ввода и конвертация строки в целое число int
+    /// </summary>
+    /// <returns>Возвращает целое число, конвертированное из строки</returns>
+    protected static int InputDigit()
+    {
+        int result;
+        while (!int.TryParse(Console.ReadLine(), out result))
+        {
+            Console.Write("Ошибка! Должен быть тип int\nПовторите ввод\n> ");
+        }
 
-			return result;
-		} //end of static method InputDigit
-	}
-	
-	
-	
+        return result;
+    }
 }
