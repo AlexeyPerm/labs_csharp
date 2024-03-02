@@ -1,0 +1,26 @@
+﻿
+@startuml
+'https://plantuml.com/class-diagram
+class Organisation
+{
+  .. Поля класса ..
+_orgName;
+_director
+_budget;
+
+}
+class Factory
+class Library
+class InsuranceCompany
+class Shipyard
+
+Organisation <-- Factory
+Organisation <-- Library
+Organisation <-- InsuranceCompany
+Factory <-- Shipyard
+
+
+
+
+
+@enduml
