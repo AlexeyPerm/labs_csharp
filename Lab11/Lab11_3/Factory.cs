@@ -1,4 +1,4 @@
-﻿namespace ClassLibraryLab10;
+﻿namespace Lab113;
 
 public class Factory : Organisation
 {
