@@ -2,7 +2,7 @@
 
 public class Organisation : IInit, IComparable, ICloneable
 {
-    protected static Random rand = new Random(); //поле для работы метода Init().
+    protected static Random rand = new Random();
     protected string _orgName; // Название организации
     protected int _budget; // Бюджет организации
 
@@ -58,6 +58,7 @@ public class Organisation : IInit, IComparable, ICloneable
             "Эр-Телеком", "ГРЧЦ", "РЖД", "Нефтехимпром", "Лукойл", "МСБ", "Лента", "Русал", "НорНикель", "КГБ"
         };
         OrgName = orgName[rand.Next(orgName.Length)];
+        Thread.Sleep(510);
         Budget = rand.Next(500, 10000);
     } //end of method RandomInit
 

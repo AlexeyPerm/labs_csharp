@@ -2,9 +2,9 @@ namespace Lab113;
 
 public class TestCollections
 {
-    private List<Factory> listFactory = new(); // Коллекция_1 <TValue>
-    private List<string> listString = new(); // Коллекция_1 <string>
-    private SortedDictionary<Organisation, Factory> sdOrgFact = new(); //Коллекция_2 <TKey, TValue>
+    public List<Factory> listFactory = new(); // Коллекция_1 <TValue>
+    public List<string> listString = new(); // Коллекция_1 <string>
+    public SortedDictionary<Organisation, Factory> sdOrgFact = new(); //Коллекция_2 <TKey, TValue>
     public SortedDictionary<string, Factory> sdStringFact = new(); //Коллекция_2 <string, TValue>
 
     public TestCollections(int capacity)

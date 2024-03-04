@@ -15,14 +15,12 @@ static class Lab113
 {
     private static void Main()
     {
-        TestCollections testCollection = new TestCollections(2); //размер коллекций (capacity) в объекте
+        const int capacity = 10;
+        var testCollection = new TestCollections(capacity);
+       // const int middleItem = capacity / 2;
 
+       // Factory searchElement = testCollection.listFactory.ElementAt(500);
 
-        //testCollection.ShowTestCollection();
-        testCollection.RemoveAt(1);
-        testCollection.ShowTestCollection();
-
-
-
+        //Console.WriteLine(testCollection.listFactory.Contains(searchElement));
     }
 }
