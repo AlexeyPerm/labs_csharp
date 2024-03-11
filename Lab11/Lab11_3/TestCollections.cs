@@ -1,4 +1,6 @@
-namespace Lab113;
+using Lab113;
+
+namespace Lab11_3;
 
 public class TestCollections
 {
@@ -12,6 +14,7 @@ public class TestCollections
         for (var i = 0; i < capacity; i++)
         {
             var temp = new Factory();
+            
             temp.RandomInit();
             listFactory.Add(temp);
             listString.Add(temp.BaseOrganisation.ToString());

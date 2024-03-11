@@ -9,6 +9,8 @@
 Элементы типа string получаются из элементов типа TKey с помощью метода ToString()/
 */
 
+using Lab11_3;
+
 namespace Lab113;
 
 static class Lab113
@@ -19,6 +21,7 @@ static class Lab113
         var testCollection = new TestCollections(capacity);
        // const int middleItem = capacity / 2;
 
+       testCollection.ShowTestCollection();
        // Factory searchElement = testCollection.listFactory.ElementAt(500);
 
         //Console.WriteLine(testCollection.listFactory.Contains(searchElement));

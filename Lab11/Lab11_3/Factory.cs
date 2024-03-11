@@ -1,4 +1,6 @@
-﻿namespace Lab113;
+﻿using Lab113;
+
+namespace Lab11_3;
 
 public class Factory : Organisation
 {
@@ -60,15 +62,6 @@ public class Factory : Organisation
     /// Вывод на экран информации об объекте
     /// </summary>
     public override void Show()
-    {
-        base.Show();
-        Console.WriteLine($"Количество инженеров: {EngeneersCount}");
-    }
-
-    /// <summary>
-    /// Не виртуальный метод Show()
-    /// </summary>
-    public void ShowNotOverride()
     {
         base.Show();
         Console.WriteLine($"Количество инженеров: {EngeneersCount}");
