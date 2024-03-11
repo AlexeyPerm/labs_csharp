@@ -54,8 +54,10 @@ public class Organisation : IInit, IComparable, ICloneable
     {
         var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         const int length = 15;
-        char[] arr = Enumerable.Repeat(alphabet, length)
-            .Select(s => s[rand.Next(s.Length)]).ToArray();
+        char[] arr = Enumerable
+            .Repeat(alphabet, length)
+            .Select(s => s[rand.Next(s.Length)])
+            .ToArray();
         OrgName = new string(arr);
         Budget = rand.Next(500, 10000);
     } //end of method RandomInit
