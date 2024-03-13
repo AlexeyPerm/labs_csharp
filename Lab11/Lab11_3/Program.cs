@@ -9,21 +9,22 @@
 Элементы типа string получаются из элементов типа TKey с помощью метода ToString()/
 */
 
-using Lab11_3;
+using System.Diagnostics;
 
-namespace Lab113;
+namespace Lab11_3;
 
 static class Lab113
 {
     private static void Main()
     {
-        const int capacity = 10;
+        const int capacity = 100;
+        Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start();
         var testCollection = new TestCollections(capacity);
-       // const int middleItem = capacity / 2;
-
-       testCollection.ShowTestCollection();
-       // Factory searchElement = testCollection.listFactory.ElementAt(500);
-
-        //Console.WriteLine(testCollection.listFactory.Contains(searchElement));
+        stopWatch.Stop();
+        TimeSpan timeTaken = stopWatch.Elapsed;
+        string foo = "Time taken: " + timeTaken.ToString(@"m\:ss\.fff");
+        Console.WriteLine(foo);
+        //const int middleItem = capacity / 2;
     }
 }
