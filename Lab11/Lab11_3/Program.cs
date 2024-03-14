@@ -10,6 +10,7 @@
 */
 
 using System.Diagnostics;
+using Lab113;
 
 namespace Lab11_3;
 
@@ -17,7 +18,7 @@ static class Lab113
 {
     private static void Main()
     {
-        const int capacity = 100;
+        const int capacity = 1000;
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start();
         var testCollection = new TestCollections(capacity);
@@ -25,6 +26,9 @@ static class Lab113
         TimeSpan timeTaken = stopWatch.Elapsed;
         string foo = "Time taken: " + timeTaken.ToString(@"m\:ss\.fff");
         Console.WriteLine(foo);
-        //const int middleItem = capacity / 2;
+        Organisation findedItem = new();
+        var elementAt = testCollection.listFactory.ElementAt(capacity / 2);
+        elementAt.Show();
+        
     }
 }
