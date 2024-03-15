@@ -8,7 +8,7 @@ public class TestCollections
     public List<string> listString = new(); // Коллекция_1 <string>
     public SortedDictionary<Organisation, Factory> sdOrgFact = new(); //Коллекция_2 <TKey, TValue>
     public SortedDictionary<string, Factory> sdStringFact = new(); //Коллекция_2 <string, TValue>
-
+    
     public TestCollections(int capacity)
     {
         for (var i = 0; i < capacity; i++)

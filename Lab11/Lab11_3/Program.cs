@@ -19,16 +19,25 @@ static class Lab113
     private static void Main()
     {
         const int capacity = 1000;
+        var testCollection = new TestCollections(capacity);
+        var elementAt = testCollection.listFactory.ElementAt(capacity / 2);
+        TimeList(testCollection.listFactory, elementAt);
+//        Console.WriteLine(elementAt);
+    }
+
+    public static void TimeList<T>(List<T> list, T item)
+    {
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start();
-        var testCollection = new TestCollections(capacity);
+        var found = list.Contains(item);
         stopWatch.Stop();
-        TimeSpan timeTaken = stopWatch.Elapsed;
-        string foo = "Time taken: " + timeTaken.ToString(@"m\:ss\.fff");
-        Console.WriteLine(foo);
-        Organisation findedItem = new();
-        var elementAt = testCollection.listFactory.ElementAt(capacity / 2);
-        elementAt.Show();
-        
+        if (found)
+        {
+            Console.WriteLine("Элемент найден \nВремя поиска: " + stopWatch.Elapsed.ToString(@"m\:ss\.fffff"));
+        }
+        else
+        {
+            Console.WriteLine("Элемент не найден");
+        }
     }
 }
