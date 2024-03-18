@@ -10,7 +10,6 @@
 */
 
 using System.Diagnostics;
-using Lab113;
 
 namespace Lab11_3;
 
@@ -22,18 +21,20 @@ static class Lab113
         var testCollection = new TestCollections(capacity);
         var elementAt = testCollection.listFactory.ElementAt(capacity / 2);
         TimeList(testCollection.listFactory, elementAt);
-//        Console.WriteLine(elementAt);
+        TimeList(testCollection.listString!, elementAt.BaseOrganisation.ToString());
+
     }
 
-    public static void TimeList<T>(List<T> list, T item)
+    private static void TimeList<T>(List<T> list, T item)
     {
-        Stopwatch stopWatch = new Stopwatch();
+        var stopWatch = new Stopwatch();
         stopWatch.Start();
         var found = list.Contains(item);
         stopWatch.Stop();
         if (found)
         {
-            Console.WriteLine("Элемент найден \nВремя поиска: " + stopWatch.Elapsed.ToString(@"m\:ss\.fffff"));
+            Console.WriteLine("Элемент найден.");
+            Console.WriteLine("Время поиска: " + stopWatch.Elapsed.ToString(@"m\:ss\.fffff"));
         }
         else
         {
