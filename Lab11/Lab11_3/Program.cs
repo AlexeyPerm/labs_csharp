@@ -17,7 +17,7 @@ static class Lab113
 {
     private static void Main()
     {
-        const int capacity = 1000;
+        const int capacity = 100000;
         var testCollection = new TestCollections(capacity);
         var firstElement = testCollection.listFactory.First();
         var midleElement = testCollection.listFactory.ElementAt(capacity / 2);
@@ -33,7 +33,7 @@ static class Lab113
 
         Console.WriteLine("Поиск центрального элемента в списках:");
         TimeList(testCollection.listFactory, midleElement);
-        TimeList(testCollection.listString!, midleElement.BaseOrganisation.ToString());
+        TimeList(testCollection.listString, midleElement.BaseOrganisation.ToString());
         Console.WriteLine("Поиск центрального элемента в словарях:");
         TimeSortedDictionary(testCollection.sdStringFact, midleElement.BaseOrganisation.ToString());
         TimeSortedDictionary(testCollection.sdOrgFact, midleElement);
@@ -41,7 +41,7 @@ static class Lab113
 
         Console.WriteLine("Поиск последнего элемента в списках:");
         TimeList(testCollection.listFactory, lastElement);
-        TimeList(testCollection.listString!, lastElement.BaseOrganisation.ToString());
+        TimeList(testCollection.listString, lastElement.BaseOrganisation.ToString());
         Console.WriteLine("Поиск последнего элемента в словарях:");
         TimeSortedDictionary(testCollection.sdStringFact, lastElement.BaseOrganisation.ToString());
         TimeSortedDictionary(testCollection.sdOrgFact, lastElement);
@@ -50,7 +50,7 @@ static class Lab113
         Console.WriteLine("Поиск несуществующего элемента в списках:");
         Factory temp = new("test", 10, 10);
         TimeList(testCollection.listFactory, temp);
-        TimeList(testCollection.listString!, temp.BaseOrganisation.ToString());
+        TimeList(testCollection.listString, temp.BaseOrganisation.ToString());
         Console.WriteLine("Поиск несуществующего элемента в словарях:");
         TimeSortedDictionary(testCollection.sdStringFact, temp.BaseOrganisation.ToString());
         TimeSortedDictionary(testCollection.sdOrgFact, temp);
