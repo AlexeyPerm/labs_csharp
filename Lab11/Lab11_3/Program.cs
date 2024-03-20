@@ -19,10 +19,16 @@ static class Lab113
     {
         const int capacity = 100000;
         var testCollection = new TestCollections(capacity);
-        var firstElement = testCollection.listFactory.First();
-        var midleElement = testCollection.listFactory.ElementAt(capacity / 2);
-        var lastElement = testCollection.listFactory.Last();
 
+        SearchFirstElement(testCollection);
+        SearchMiddleElement(testCollection);
+        SearchLastElement(testCollection);
+        SearchNonExistElement(testCollection);
+    }
+
+    private static void SearchFirstElement(TestCollections testCollection)
+    {
+        var firstElement = testCollection.listFactory.First();
         Console.WriteLine("Поиск первого элемента в списках:");
         TimeList(testCollection.listFactory, firstElement);
         TimeList(testCollection.listString, firstElement.BaseOrganisation.ToString());
@@ -30,15 +36,23 @@ static class Lab113
         TimeSortedDictionary(testCollection.sdStringFact, firstElement.BaseOrganisation.ToString());
         TimeSortedDictionary(testCollection.sdOrgFact, firstElement);
         Console.WriteLine();
+    }
 
+    private static void SearchMiddleElement(TestCollections testCollection)
+    {
+        var middleElement = testCollection.listFactory.ElementAt(testCollection.listFactory.Count / 2);
         Console.WriteLine("Поиск центрального элемента в списках:");
-        TimeList(testCollection.listFactory, midleElement);
-        TimeList(testCollection.listString, midleElement.BaseOrganisation.ToString());
+        TimeList(testCollection.listFactory, middleElement);
+        TimeList(testCollection.listString, middleElement.BaseOrganisation.ToString());
         Console.WriteLine("Поиск центрального элемента в словарях:");
-        TimeSortedDictionary(testCollection.sdStringFact, midleElement.BaseOrganisation.ToString());
-        TimeSortedDictionary(testCollection.sdOrgFact, midleElement);
+        TimeSortedDictionary(testCollection.sdStringFact, middleElement.BaseOrganisation.ToString());
+        TimeSortedDictionary(testCollection.sdOrgFact, middleElement);
         Console.WriteLine();
+    }
 
+    private static void SearchLastElement(TestCollections testCollection)
+    {
+        var lastElement = testCollection.listFactory.Last();
         Console.WriteLine("Поиск последнего элемента в списках:");
         TimeList(testCollection.listFactory, lastElement);
         TimeList(testCollection.listString, lastElement.BaseOrganisation.ToString());
@@ -46,7 +60,10 @@ static class Lab113
         TimeSortedDictionary(testCollection.sdStringFact, lastElement.BaseOrganisation.ToString());
         TimeSortedDictionary(testCollection.sdOrgFact, lastElement);
         Console.WriteLine();
+    }
 
+    private static void SearchNonExistElement(TestCollections testCollection)
+    {
         Console.WriteLine("Поиск несуществующего элемента в списках:");
         Factory temp = new("test", 10, 10);
         TimeList(testCollection.listFactory, temp);
@@ -56,6 +73,7 @@ static class Lab113
         TimeSortedDictionary(testCollection.sdOrgFact, temp);
         Console.WriteLine();
     }
+
 
     private static void TimeList<T>(List<T> list, T item)
     {
