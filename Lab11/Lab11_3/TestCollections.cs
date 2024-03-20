@@ -8,13 +8,13 @@ public class TestCollections
     public List<string> listString = new(); // Коллекция_1 <string>
     public SortedDictionary<Organisation, Factory> sdOrgFact = new(); //Коллекция_2 <TKey, TValue>
     public SortedDictionary<string, Factory> sdStringFact = new(); //Коллекция_2 <string, TValue>
-    
+
     public TestCollections(int capacity)
     {
         for (var i = 0; i < capacity; i++)
         {
             var temp = new Factory();
-            
+
             temp.RandomInit();
             listFactory.Add(temp);
             listString.Add(temp.BaseOrganisation.ToString());
@@ -23,6 +23,10 @@ public class TestCollections
         }
     }
 
+    /// <summary>
+    /// Добавление элемента в коллекции
+    /// </summary>
+    /// <param name="item">Элемент, добавлямый в коллекции</param>
     public void Add(Factory item)
     {
         listFactory.Add(item);
@@ -30,7 +34,11 @@ public class TestCollections
         sdOrgFact.Add(item.BaseOrganisation, item);
         sdStringFact.Add(item.BaseOrganisation.ToString(), item);
     }
-    
+
+    /// <summary>
+    /// Удаление элемента из всех коллекций
+    /// </summary>
+    /// <param name="item">Удаляемый элемент</param>
     public void Remove(Factory item)
     {
         listFactory.Remove(item);
@@ -39,6 +47,10 @@ public class TestCollections
         sdStringFact.Remove(item.BaseOrganisation.ToString());
     }
 
+    /// <summary>
+    /// Удалаение элемента с узазаным индексом из всех коллекций
+    /// </summary>
+    /// <param name="index">Индекс удаляемого элемента</param>
     public void RemoveAt(int index)
     {
         listFactory.RemoveAt(index);
@@ -46,8 +58,8 @@ public class TestCollections
         sdOrgFact.Remove(sdOrgFact.ElementAt(index).Key);
         sdStringFact.Remove(sdStringFact.ElementAt(index).Key);
     }
-    
-    public void ShowTestCollection()        //На удаление. Бесполезный метод.
+
+    public void ShowTestCollection() //На удаление. Бесполезный метод.
     {
         Console.WriteLine("Вывод элементов коллекции \"Коллекция_1 <TValue>\"");
         foreach (Factory item in listFactory)

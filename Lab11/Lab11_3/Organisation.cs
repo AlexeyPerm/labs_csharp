@@ -53,7 +53,7 @@ public class Organisation : IInit, IComparable, ICloneable
     public virtual void RandomInit()
     {
         var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        const int length = 15;
+        const int length = 15;  //Длина массива (название оргазинации)
         char[] arr = Enumerable
             .Repeat(alphabet, length)
             .Select(s => s[rand.Next(s.Length)])
