@@ -2,20 +2,20 @@
 
 namespace Lab12_1;
 
-public class Point<T>
+public class Node<T>
 {
     public T _data;
-    public Point<T> _next;
-    public Point<T> _prev;
+    public Node<T> _next;
+    public Node<T> _prev;
 
-    public Point()
+    public Node()
     {
         _data = default;
         _next = null;
         _prev = null;
     }
 
-    public Point(T data)
+    public Node(T data)
     {
         _data = data;
         _next = null;
