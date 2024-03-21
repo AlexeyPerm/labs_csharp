@@ -8,6 +8,7 @@
 5.	Удалить список из памяти.
  */
 
+using System.Threading.Channels;
 using ClassLibraryLab10;
 
 namespace Lab12_1;
@@ -19,8 +20,10 @@ static class Lab121
         const int variantNumber = 549 % 25 - 1; //номер варианта 23
         Console.WriteLine($"Номер варианта = {variantNumber}\n");
 
-        List<int> a = new List<int>(-1);
-
-
+        MyList<Organisation> a = new MyList<Organisation>(5);
+        a.Print();
+        
+        
+        
     }
 }

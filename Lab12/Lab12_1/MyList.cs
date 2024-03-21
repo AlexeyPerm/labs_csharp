@@ -2,7 +2,7 @@
 
 public class MyList<T>
 {
-    private Point<T> _begin = null;
+    private Point<T> _begin;
 
     public int Length
     {
@@ -42,6 +42,22 @@ public class MyList<T>
             var temp = new Point<T>(arr[i]);
             p._next = temp;
             p = temp;
+        }
+    }
+
+    public void Print()
+    {
+        if (_begin == null)
+        {
+            Console.WriteLine("Пустой список");
+            return;
+        }
+
+        Point<T> tmp = _begin;
+        while (tmp != null)
+        {
+            Console.WriteLine(tmp.ToString());
+            tmp = tmp._next;
         }
     }
 }
