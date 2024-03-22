@@ -19,9 +19,6 @@ static class Lab121
         const int variantNumber = 549 % 25 - 1; //номер варианта 23
         Console.WriteLine($"Номер варианта = {variantNumber}\n");
 
-        MyList<int> a = new MyList<int>(5, 100, 999, -100, -23);
 
-        a.AddBack(10000);
-        a.Print();
     }
 }

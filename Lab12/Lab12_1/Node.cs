@@ -1,29 +1,13 @@
-﻿using System.Data;
-
-namespace Lab12_1;
+﻿namespace Lab12_1;
 
 public class Node<T>
 {
-    public T _data;
-    public Node<T> _next;
-    public Node<T> _prev;
-
-    public Node()
-    {
-        _data = default;
-        _next = null;
-        _prev = null;
-    }
+    private T Data { get; set; }
+    public Node<T> Next { get; set; } //указатель на следующую  ячейку данных
+    public Node<T> Prev { get; set; } //указатель на предыдущую ячейку данных
 
     public Node(T data)
     {
-        _data = data;
-        _next = null;
-        _prev = null;
-    }
-
-    public override string ToString()
-    {
-        return _data + " ";
+        Data = data;
     }
 }
