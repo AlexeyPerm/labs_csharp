@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class DoublyLinkedList<T> : IEnumerable<T>
 {
-    /* //Замена на yield 
+    /* //Замена на yield
     class MyNumerator<T> : IEnumerator<T>
     {
         private Node<T> first;
@@ -79,7 +79,7 @@ public class DoublyLinkedList<T> : IEnumerable<T>
     /// </summary>
     public void PopFront()
     {
-        if (First == null)
+        if (IsEmpty)
         {
             Console.WriteLine("Коллекция пустая");
             return;
@@ -99,7 +99,7 @@ public class DoublyLinkedList<T> : IEnumerable<T>
     /// </summary>
     public void PopBack()
     {
-        if (First == null)
+        if (IsEmpty)
         {
             Console.WriteLine("Коллекция пустая");
             return;
@@ -115,9 +115,9 @@ public class DoublyLinkedList<T> : IEnumerable<T>
     /// </summary>
     public void PrintLinkedList()
     {
-        if (First == null)
+        if (IsEmpty)
         {
-            Console.WriteLine("Пустая коллекция");
+            Console.WriteLine("Коллекция пустая");
             return;
         }
 
@@ -129,16 +129,15 @@ public class DoublyLinkedList<T> : IEnumerable<T>
         }
     }
 
-
     /// <summary>
     /// Удаление элемента по его порядковому номеру
     /// </summary>
     /// <param name="index">Порядковый номер удаляемого элемента</param>
     public void RemoveElement(int index)
     {
-        if (First == null)
+        if (IsEmpty)
         {
-            Console.WriteLine("Пустая коллекция");
+            Console.WriteLine("Коллекция пустая");
             return;
         }
 
@@ -188,12 +187,6 @@ public class DoublyLinkedList<T> : IEnumerable<T>
 
         return false;
     }
-
-
-    // public IEnumerator<T> GetEnumerator()
-    // {
-    //     return new MyNumerator<T>(this);
-    // }
 
     public IEnumerator<T> GetEnumerator()
     {
