@@ -21,22 +21,47 @@ static class Lab121
         Console.WriteLine($"Номер варианта = {variantNumber}\n");
 
         DoublyLinkedList<Organisation> a = new DoublyLinkedList<Organisation>();
-        for (var i = 0; i < 5; i++)
+        for (var i = 0; i < 4; i++)
         {
             var tmp = RandObjectOrganisation();
             tmp.RandomInit();
             a.Push_Front(tmp);
         }
 
-        foreach (Organisation item in a)
-        {
-            Console.WriteLine(item);
-        }
+        var findedItem = RandObjectOrganisation();
+        findedItem.RandomInit();
 
-        a = null;   //для выполнения задания по удалению коллекции из памяти
-        
-        
+        a.PrintLinkedList();
+
+        RemoveElementByOrgName(a, findedItem);
+
+
+        //a = null;   //для выполнения задания по удалению коллекции из памяти
+
+
         Console.WriteLine();
+    }
+
+    /// <summary>
+    /// Удалить из списка первый элемент с полем OrgName
+    /// </summary>
+    /// <param name="a">Коллекция, в которой удаляется элемент</param>
+    /// <param name="findedItem">Удаляемый элемент</param>
+    private static void RemoveElementByOrgName(DoublyLinkedList<Organisation> a, Organisation findedItem)
+    {
+        int count = 1;
+        foreach (var item in a)
+        {
+            if (item.OrgName == findedItem.OrgName)
+            {
+                Console.WriteLine($"Элемент {findedItem.OrgName} найден! Удаляем");
+                a.RemoveElement(count);
+                a.PrintLinkedList();
+                break;
+            }
+
+            count++;
+        }
     }
 
 
