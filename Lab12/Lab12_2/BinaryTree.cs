@@ -26,7 +26,7 @@ public class BinaryTree
         while (true)
         {
             parent = current;
-            if (newData._data.Budget < current._data.Budget)
+            if (newData.Data.Budget < current.Data.Budget)
             {
                 
             }

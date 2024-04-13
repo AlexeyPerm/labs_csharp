@@ -4,13 +4,13 @@ namespace Lab12_2;
 
 public class Node
 {
-    public Organisation _data;
+    public Organisation Data;
     public Node Left { get; set; }
     public Node Right { get; set; }
 
     public Node()
     {
-        _data = new Organisation();
+        Data = new Organisation();
         Left = null;
         Right = null;
     }
@@ -22,21 +22,21 @@ public class Node
     public Node(bool random)
     {
         if (!random) return;
-        _data = new Organisation();
-        _data.RandomInit();
+        Data = new Organisation();
+        Data.RandomInit();
         Left = null;
         Right = null;
     }
 
     public Node(Organisation data)
     {
-        _data = data;
+        Data = data;
         Left = null;
         Right = null;
     }
 
     public override string ToString()
     {
-        return _data.ToString();
+        return Data.ToString();
     }
 }

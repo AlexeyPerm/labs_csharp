@@ -1,22 +1,22 @@
 ﻿using ClassLibraryLab10;
-
+using ExtMethods;
 namespace Lab12_2;
 
 class Program
 {
     private static void Main()
     {
+        const int variantNumber = 549 % 25 - 1; //номер варианта 23
+        Console.WriteLine($"Номер варианта = {variantNumber}\n");
+
+        const int treeSize = 3;
         var firstElement = RandObjectOrganisation();
         firstElement.RandomInit();
-        var tree = First(firstElement);
-        for (int i = 0; i < 20; i++)
-        {
-            var temp = RandObjectOrganisation();
-            temp.RandomInit();
-            Add(tree, temp);
-        }
+        Node tree = First(firstElement);
+        var idealTree = IdealTree(treeSize, tree);
 
-        ShowTree(tree);
+
+        Print2D(idealTree);
     }
 
 
@@ -28,10 +28,8 @@ class Program
     /// <returns></returns>
     private static Node IdealTree(int size, Node root)
     {
-        ArgumentNullException.ThrowIfNull(root); //Исключение, если корень дерева равен null
         if (size == 0)
         {
-            root = null;
             return root;
         }
 
@@ -44,6 +42,48 @@ class Program
         r.Left = IdealTree(nLeft, r.Left);
         r.Right = IdealTree(nRight, r.Right);
         return r;
+    }
+
+    /// <summary>
+    /// Вывод на экран дерева
+    /// </summary>
+    /// <param name="root">Передаваемое дерево</param>
+    private static void Print2D(Node root)
+    {
+        //Передаваемое дерево и базовое значение количества пробелов в отступе слева
+        Print2DUtil(root, 0);
+    }
+
+    /// <summary>
+    /// Вывод на экран дерева
+    /// </summary>
+    /// <param name="root">Передаваемое дерево</param>
+    /// <param name="space">Количество пробелов слева, с которрых начнётся печать</param>
+    private static void Print2DUtil(Node root, int space)
+    {
+        if (root == null)
+        {
+            return;
+        }
+
+        space += 10; // Расстояние между уровнями
+        Print2DUtil(root.Right, space); // Обработка левых листьев
+        
+        root.Data.PrintInTree(space);
+
+        Print2DUtil(root.Left, space); // Обработка левых листьев
+    }
+
+    /// <summary>
+    /// Функция для обхода дерева обходом слева направо
+    /// </summary>
+    /// <param name="root">Дерево, в котором нужно выполнить обход</param>
+    private static void ShowTree(Node root)
+    {
+        if (root == null) return;
+        ShowTree(root.Left); //переход к левому поддереву
+        Console.WriteLine(root.Data); //печать узла
+        ShowTree(root.Right); //переход к правому поддереву
     }
 
 
@@ -77,24 +117,7 @@ class Program
         {
             Run(root.Left);
             Run(root.Right);
-            Console.WriteLine(root._data);
-        }
-    }
-
-    /// <summary>
-    /// Функция для обхода дерева обходом слева направо
-    /// </summary>
-    /// <param name="root">Дерево, в котором нужно выполнить обход</param>
-    /// <param name="l">Длина отсутпа в пробелах между узлами</param>
-    private static void ShowTree(Node root)
-    {
-        if (root != null)
-        {
-            ShowTree(root.Left); //переход к левому поддереву
-
-
-            Console.WriteLine(root._data); //печать узла
-            ShowTree(root.Right); //переход к правому поддереву
+            Console.WriteLine(root.Data);
         }
     }
 
@@ -105,8 +128,9 @@ class Program
     /// <param name="root">Передаваемый корень дерева</param>
     /// <param name="newData">Добавляемые данные</param>
     /// <returns></returns>
-    private static Node Add(Node root, Organisation newData)
+    private static void Add(Node root, Organisation newData)
     {
+        ArgumentNullException.ThrowIfNull(root); //Исключение, если корень дерева равен null
         //Новой переменной p назначаем адрес дерева, чтобы все манипуляции продожлать выполнять с ней, а не root
         Node currentNode = root;
         Node tempNode = null;
@@ -117,12 +141,12 @@ class Program
         {
             tempNode = currentNode;
             //элемент уже существует
-            if (Equals(newData, currentNode._data))
+            if (Equals(newData, currentNode.Data))
             {
-                return currentNode;
+                return;
             }
 
-            if (newData.Budget < tempNode._data.Budget)
+            if (newData.Budget < tempNode.Data.Budget)
             {
                 currentNode = currentNode.Left; //пойти в левое поддерево
             }
@@ -135,17 +159,15 @@ class Program
         //создаём узел
         Node NewPoint = new Node(newData); //выделили память
         // если бюджет организации newData < r, то добавляем его в левое поддерево
-        if (newData.Budget < tempNode._data.Budget)
+        if (newData.Budget < tempNode.Data.Budget)
         {
             tempNode.Left = NewPoint;
         }
-        // если newData>r.key, то добавляем его в правое поддерево
+        // если newData > r, то добавляем его в правое поддерево
         else
         {
             tempNode.Right = NewPoint;
         }
-
-        return NewPoint;
     }
 
 
@@ -158,7 +180,7 @@ class Program
     {
         if (root != null)
         {
-            Console.WriteLine(root._data);
+            Console.WriteLine(root.Data);
             Run(root.Left); //переход к левому поддереву
             Run(root.Right); //переход к правому поддереву
         }
