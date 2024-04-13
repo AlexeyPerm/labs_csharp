@@ -4,15 +4,15 @@ namespace Lab12_2;
 
 public class Node
 {
-    private Organisation _data;
-    private Organisation _left;
-    private Organisation _right;
+    public Organisation _data;
+    public Node Left { get; set; }
+    public Node Right { get; set; }
 
     public Node()
     {
         _data = new Organisation();
-        _left = null;
-        _right = null;
+        Left = null;
+        Right = null;
     }
 
     /// <summary>
@@ -24,15 +24,15 @@ public class Node
         if (!random) return;
         _data = new Organisation();
         _data.RandomInit();
-        _left = null;
-        _right = null;
+        Left = null;
+        Right = null;
     }
 
     public Node(Organisation data)
     {
         _data = data;
-        _left = null;
-        _right = null;
+        Left = null;
+        Right = null;
     }
 
     public override string ToString()
