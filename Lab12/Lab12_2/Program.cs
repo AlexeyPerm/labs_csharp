@@ -1,5 +1,7 @@
-﻿using ClassLibraryLab10;
+﻿using System.Runtime.InteropServices.JavaScript;
+using ClassLibraryLab10;
 using ExtMethods;
+
 namespace Lab12_2;
 
 class Program
@@ -9,14 +11,14 @@ class Program
         const int variantNumber = 549 % 25 - 1; //номер варианта 23
         Console.WriteLine($"Номер варианта = {variantNumber}\n");
 
-        const int treeSize = 3;
+        const int treeSize = 17;
         var firstElement = RandObjectOrganisation();
         firstElement.RandomInit();
         Node tree = First(firstElement);
         var idealTree = IdealTree(treeSize, tree);
+        var bstTree = CreateBST(idealTree);
 
-
-        Print2D(idealTree);
+        Print2D(bstTree);
     }
 
 
@@ -44,6 +46,44 @@ class Program
         return r;
     }
 
+
+    static int NodesCount(Node root)
+    {
+        if (root == null)
+        {
+            return 0;
+        }
+
+        return NodesCount(root.Left) + NodesCount(root.Right) + 1;
+    }
+
+
+    static void ArrayToBst(Organisation[] arr, Node tree)
+    {
+        int middle = arr.Length / 2;
+        tree = new Node(arr[middle]);
+
+        
+        
+    }
+    
+    static void binaryTreeToBST(Node root)
+    {
+        if (root == null)
+        {
+            return;
+        }
+
+        //Количество узлов в дереве
+        int n = NodesCount(root);
+        Organisation[] arr = new Organisation[n];
+        Array.Sort(arr);
+
+        // Copy array elements back to Binary Tree
+        ArrayToBst(arr, root);
+    }
+
+
     /// <summary>
     /// Вывод на экран дерева
     /// </summary>
@@ -68,7 +108,7 @@ class Program
 
         space += 10; // Расстояние между уровнями
         Print2DUtil(root.Right, space); // Обработка левых листьев
-        
+
         root.Data.PrintInTree(space);
 
         Print2DUtil(root.Left, space); // Обработка левых листьев
@@ -130,7 +170,6 @@ class Program
     /// <returns></returns>
     private static void Add(Node root, Organisation newData)
     {
-        ArgumentNullException.ThrowIfNull(root); //Исключение, если корень дерева равен null
         //Новой переменной p назначаем адрес дерева, чтобы все манипуляции продожлать выполнять с ней, а не root
         Node currentNode = root;
         Node tempNode = null;
@@ -141,7 +180,7 @@ class Program
         {
             tempNode = currentNode;
             //элемент уже существует
-            if (Equals(newData, currentNode.Data))
+            if (newData.OrgName == currentNode.Data.OrgName)
             {
                 return;
             }
@@ -172,7 +211,7 @@ class Program
 
 
     /// <summary>
-    /// Функция обхода дерева сверху вниз
+    /// Обход дерева сверху вниз
     /// </summary>
     /// <param name="root">Дерево, в котором нужно выполнить обход</param>
     private static void Run(Node root)
@@ -180,8 +219,8 @@ class Program
     {
         if (root != null)
         {
-            Console.WriteLine(root.Data);
             Run(root.Left); //переход к левому поддереву
+            Add(root, root.Data);
             Run(root.Right); //переход к правому поддереву
         }
     }

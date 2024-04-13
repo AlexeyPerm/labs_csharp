@@ -49,8 +49,7 @@ static class ExtentionMethods
             Factory temp = (Factory)org;
             PrintBaseOrganisation(org, space);
             AddSpaces(space);
-            Console.WriteLine($"Количество инженеров: {temp.EngeneersCount}");
-            Console.WriteLine();
+            Console.WriteLine($"Количество инженеров: {temp.EngeneersCount}\n");
         }
         else if (org.GetType() == typeof(Shipyard))
         {
@@ -61,8 +60,7 @@ static class ExtentionMethods
             AddSpaces(space);
             Console.WriteLine($"Количество инженеров: {temp.EngeneersCount}");
             AddSpaces(space);
-            Console.WriteLine($"Количество построеных судн: {temp.BuiltShips}");
-            Console.WriteLine();
+            Console.WriteLine($"Количество построеных судн: {temp.BuiltShips}\n");
         }
         else if (org.GetType() == typeof(Library))
         {
@@ -71,8 +69,7 @@ static class ExtentionMethods
             Library temp = (Library)org;
             PrintBaseOrganisation(org, space);
             AddSpaces(space);
-            Console.WriteLine($"Количество книг: {temp.BooksTotalNum}");
-            Console.WriteLine();
+            Console.WriteLine($"Количество книг: {temp.BooksTotalNum}\n");
         }
         else if (org.GetType() == typeof(InsuranceCompany))
         {
@@ -81,8 +78,7 @@ static class ExtentionMethods
             InsuranceCompany temp = (InsuranceCompany)org;
             PrintBaseOrganisation(org, space);
             AddSpaces(space);
-            Console.WriteLine($"Количество страховых случаев: {temp.InsuranceCases}");
-            Console.WriteLine();
+            Console.WriteLine($"Количество страховых случаев: {temp.InsuranceCases}\n");
         }
     }
 
