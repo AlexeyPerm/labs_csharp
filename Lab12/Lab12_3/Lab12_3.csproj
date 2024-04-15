@@ -8,10 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Reference Include="LibraryLab10">
-            <HintPath>..\LibraryLab10.dll</HintPath>
-        </Reference>
+      <Reference Include="LibraryLab10">
+        <HintPath>..\LibraryLab10.dll</HintPath>
+      </Reference>
     </ItemGroup>
-
 
 </Project>

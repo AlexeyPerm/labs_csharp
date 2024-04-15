@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using ClassLibraryLab10;
+﻿using ClassLibraryLab10;
 using ExtMethods;
 
 namespace Lab12_2;
@@ -11,23 +10,39 @@ class Program
         const int variantNumber = 549 % 25 - 1; //номер варианта 23
         Console.WriteLine($"Номер варианта = {variantNumber}\n");
 
-        const int treeSize = 17;
+        const int treeSize = 3;
         var firstElement = RandObjectOrganisation();
         firstElement.RandomInit();
         Node tree = First(firstElement);
         var idealTree = IdealTree(treeSize, tree);
-        var bstTree = CreateBST(idealTree);
+        //Print2D(idealTree);
+        // Console.WriteLine();
+        // Console.WriteLine();
+        // Console.WriteLine();
+        // Console.WriteLine("Дерево поиска");
 
-        Print2D(bstTree);
+        Node bst = ConvertToBST(idealTree);
+        //Print2D(bst);
+        DeleteTree(ref bst);
+        Print2D(bst);
     }
 
+    private static int NodesCount(Node root)
+    {
+        if (root == null)
+        {
+            return 0;
+        }
+
+        return NodesCount(root.Left) + NodesCount(root.Right) + 1;
+    }
 
     /// <summary>
     /// Построение идеально сбалансированного дерева
     /// </summary>
     /// <param name="size">Размер создаваемого дерева</param>
     /// <param name="root">Корень дерева</param>
-    /// <returns></returns>
+    /// <returns>Возвращает построенное идеально сбалансированное дерево</returns>
     private static Node IdealTree(int size, Node root)
     {
         if (size == 0)
@@ -47,40 +62,35 @@ class Program
     }
 
 
-    static int NodesCount(Node root)
+    /// <summary>
+    /// Формирование дерева поиска
+    /// </summary>
+    /// <param name="nodes">Передаваемая ссылка на дерево</param>
+    private static Node CreateBST(List<Node> nodes, int start, int end)
     {
-        if (root == null)
+        if (start > end)
         {
-            return 0;
+            return null;
         }
 
-        return NodesCount(root.Left) + NodesCount(root.Right) + 1;
+        int mid = (start + end) / 2;
+        Node root = nodes[mid];
+        root.Left = CreateBST(nodes, start, mid - 1);
+        root.Right = CreateBST(nodes, mid + 1, end);
+        return root;
     }
 
-
-    static void ArrayToBst(Organisation[] arr, Node tree)
+    /// <summary>
+    /// Конвертация бинарного дерева в дерево поиска
+    /// </summary>
+    /// <param name="root">Передаваемое дерево</param>
+    /// <returns>Возвращает ссылку на построенное дерево поиска</returns>
+    private static Node ConvertToBST(Node root)
     {
-        int middle = arr.Length / 2;
-        tree = new Node(arr[middle]);
-
-        
-        
-    }
-    
-    static void binaryTreeToBST(Node root)
-    {
-        if (root == null)
-        {
-            return;
-        }
-
-        //Количество узлов в дереве
-        int n = NodesCount(root);
-        Organisation[] arr = new Organisation[n];
-        Array.Sort(arr);
-
-        // Copy array elements back to Binary Tree
-        ArrayToBst(arr, root);
+        List<Node> nodes = new List<Node>();
+        Run(root, nodes);
+        nodes.Sort((a, b) => a.Data.Budget - b.Data.Budget);
+        return CreateBST(nodes, 0, nodes.Count - 1);
     }
 
 
@@ -148,83 +158,22 @@ class Program
     }
 
     /// <summary>
-    ///Функция для обхода дерева сниву вверх
-    /// </summary>
-    /// <param name="root">Дерево, в котором нужно выполнить обход</param>
-    private static void RunBottomToTop(Node root)
-    {
-        if (root != null)
-        {
-            Run(root.Left);
-            Run(root.Right);
-            Console.WriteLine(root.Data);
-        }
-    }
-
-
-    /// <summary>
-    /// Добавление узла в дерево
-    /// </summary>
-    /// <param name="root">Передаваемый корень дерева</param>
-    /// <param name="newData">Добавляемые данные</param>
-    /// <returns></returns>
-    private static void Add(Node root, Organisation newData)
-    {
-        //Новой переменной p назначаем адрес дерева, чтобы все манипуляции продожлать выполнять с ней, а не root
-        Node currentNode = root;
-        Node tempNode = null;
-
-        //флаг для проверки существования элемента newData в дереве
-        var exist = false;
-        while (currentNode != null && !exist)
-        {
-            tempNode = currentNode;
-            //элемент уже существует
-            if (newData.OrgName == currentNode.Data.OrgName)
-            {
-                return;
-            }
-
-            if (newData.Budget < tempNode.Data.Budget)
-            {
-                currentNode = currentNode.Left; //пойти в левое поддерево
-            }
-            else
-            {
-                currentNode = currentNode.Right; //пойти в правое поддерево
-            }
-        }
-
-        //создаём узел
-        Node NewPoint = new Node(newData); //выделили память
-        // если бюджет организации newData < r, то добавляем его в левое поддерево
-        if (newData.Budget < tempNode.Data.Budget)
-        {
-            tempNode.Left = NewPoint;
-        }
-        // если newData > r, то добавляем его в правое поддерево
-        else
-        {
-            tempNode.Right = NewPoint;
-        }
-    }
-
-
-    /// <summary>
     /// Обход дерева сверху вниз
     /// </summary>
     /// <param name="root">Дерево, в котором нужно выполнить обход</param>
-    private static void Run(Node root)
+    /// <param name="nodes">Коллекция, в которую помещаются узлы дерева</param>
+    private static void Run(Node root, List<Node> nodes)
 
     {
-        if (root != null)
+        if (root == null)
         {
-            Run(root.Left); //переход к левому поддереву
-            Add(root, root.Data);
-            Run(root.Right); //переход к правому поддереву
+            return;
         }
-    }
 
+        Run(root.Left, nodes);
+        nodes.Add(root);
+        Run(root.Right, nodes);
+    }
 
     /// <summary>
     /// Формирование первого элемента дерева.
@@ -235,5 +184,10 @@ class Program
     {
         Node p = new Node(data);
         return p;
+    }
+
+    private static void DeleteTree(ref Node root)
+    {
+        root = null;
     }
 }
