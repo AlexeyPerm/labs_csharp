@@ -4,6 +4,9 @@ namespace Lab12_3;
 
 public class Htable
 {
+    /// <summary>
+    /// Элемент хэш-таблицы, в котором хранится объект
+    /// </summary>
     private class HashPoint
     {
         public int key;
@@ -13,9 +16,10 @@ public class Htable
         public HashPoint(Organisation data)
         {
             Data = data;
-            key = data.GetHashCode();
+            key = data.GetHashCode() + 777;
             _next = null;
         }
+
 
         public override string ToString()
         {
@@ -23,8 +27,9 @@ public class Htable
         }
     }
 
-    public int Size = 512;
-    private HashPoint[] _table;
+
+    public int Size = 10; //Размер хэш-таблицы
+    private HashPoint[] _table; // Хэш-таблица
 
     /// <summary>
     /// Конструктор, создающий массив из элементов. 
@@ -43,7 +48,7 @@ public class Htable
         var point = new HashPoint(data);
         if (data == null) return;
 
-        int index = Math.Abs(point.GetHashCode()) % Size;
+        int index = Math.Abs(point.key) % Size;
         if (_table[index] == null)
         {
             _table[index] = point;
@@ -62,16 +67,78 @@ public class Htable
         }
     }
 
+    /// <summary>
+    /// Вывод на экран всех элементов хэш-таблицы.
+    /// </summary>
     public void Print()
     {
-        for (int i = 0; i < Size; i++)
+        for (var i = 0; i < Size; i++)
         {
             if (_table[i] == null) continue;
-            while (_table[i] != null)
+            //Временный элемент, с помощью которого двигаемся по таблице горизонтально. Без него произойдёт зануление
+            //всех элементов в таблице из-за использования такой конструкции _table[i] = _table[i]._next;
+            var temp = new HashPoint(_table[i].Data);
+            while (temp != null)
             {
-                _table[i].Data.Show();
-                _table[i] = _table[i]._next;
+                temp.Data.Show();
+                temp = temp._next;
+                Console.WriteLine();
             }
         }
+    }
+
+    public bool FindElement(Organisation data)
+    {
+        var searchHashPoint = new HashPoint(data);
+        int index = Math.Abs(searchHashPoint.key) % Size;
+
+        //Без _table[index] может произойти сравнение числа с null, что вызовет исключение NullReferenceException
+        if (_table[index] != null && searchHashPoint.key == _table[index].key)
+        {
+            return true;
+        }
+
+        while (_table[index] != null)
+        {
+            if (searchHashPoint.key == _table[index].key)
+            {
+                return true;
+            }
+
+            _table[index] = _table[index]._next;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Удалить элемент из хэш-таблицы.
+    /// </summary>
+    /// <param name="data">Удаляемый элемент</param>
+    public void DeleteElement(Organisation data)
+    {
+        var hashPoint = new HashPoint(data);
+        int index = Math.Abs(hashPoint.key) % Size;
+        if (_table[index] == null)
+        {
+            Console.WriteLine("Элемент не найден.");
+            return;
+        }
+
+        if (_table[index] != null && hashPoint.key == _table[index].key)
+        {
+            Console.WriteLine("Элемент найден. Произведено удаление.");
+            _table[index] = _table[index]._next;
+            return;
+        }
+
+        while (hashPoint != null && hashPoint.key == _table[index].key)
+        {
+            hashPoint = hashPoint._next;
+            Console.WriteLine("Элемент найден. Произведено удаление.");
+            hashPoint.Data = hashPoint._next.Data;
+            hashPoint._next = hashPoint._next._next;
+        }
+        Console.WriteLine("Элемент не найден.");
     }
 }
