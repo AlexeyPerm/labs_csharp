@@ -16,15 +16,14 @@ class Program
         h.Insert(i);
         h.Insert(z);
 
-        for (int j = 0; j < 555; j++)
+        for (int j = 0; j < 12; j++)
         {
             var element = RandObjectOrganisation();
             element.RandomInit();
             h.Insert(element);
                 
         }
-        h.DeleteElement(f);
-        Console.WriteLine();
+        h.Print();
     
 
     }
