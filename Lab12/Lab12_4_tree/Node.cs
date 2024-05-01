@@ -1,30 +1,34 @@
 ﻿namespace Lab12_4_tree;
 
-public class Node<T>
+public class Node<T> where T : IComparable
 {
-    private T _data;
-    public Node<T> Left { get; private set; }
-    public Node<T> Right { get; private set; }
+    public Node<T> Right { get; set; }
+    public Node<T> Left { get; set; }
+    public T Data { get; set; }
 
-    public T Data { get; }
 
-    public Node()
+    public override bool Equals(object obj)
     {
-        Data = default;
-        Left = null;
-        Right = null;
+        if (obj is Node<T> other)
+        {
+            if (ReferenceEquals(Data, other.Data)) return true;
+            return Data.Equals(other.Data);
+        }
+
+        return false;
     }
 
+    public override int GetHashCode() => Data == null ? 0 : Data.GetHashCode();
 
-    public Node(T data)
-    {
-        Data = data;
-        Left = null;
-        Right = null;
-    }
+    
+    #region Overloading comparison operators
 
-    public override string ToString()
-    {
-        return Data.ToString();
-    }
+    public static bool operator ==(Node<T> left, Node<T> right) =>
+        ReferenceEquals(left, right) || (left?.Equals(right) ?? false);
+
+    public static bool operator !=(Node<T> left, Node<T> right) => !(left == right);
+    public static bool operator <(Node<T> left, Node<T> right) => left.Data.CompareTo(right.Data) < 0;
+    public static bool operator >(Node<T> left, Node<T> right) => left.Data.CompareTo(right.Data) > 0;
+
+    #endregion
 }
