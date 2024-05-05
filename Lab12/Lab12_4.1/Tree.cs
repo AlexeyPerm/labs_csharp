@@ -62,7 +62,7 @@ public class Tree<T> where T : IComparable<T>, IComparable, IEnumerable<T>
     }
 
     /// <summary>
-    /// Префиксный обход дерева (сверху вниз). Данные -> Левое поддерево -> Правое поддерево.
+    /// Префиксный обход дерева (сверху вниз; копирование). Данные -> Левое поддерево -> Правое поддерево.
     /// Метод статический, так как не обращается к данным экземпляров класса.
     /// </summary>
     /// <param name="node">Узел дерева, из которого данные добавятся в список</param>
@@ -89,7 +89,7 @@ public class Tree<T> where T : IComparable<T>, IComparable, IEnumerable<T>
     }
 
     /// <summary>
-    /// Постфиксный обход дерева (снизу вверх)
+    /// Постфиксный обход дерева (снизу вверх; удаление)
     /// Метод статический, так как не обращается к данным экземпляров класса.
     /// </summary>
     /// <param name="node">Узел дерева, из которого данные добавятся в список</param>
@@ -116,7 +116,7 @@ public class Tree<T> where T : IComparable<T>, IComparable, IEnumerable<T>
     }
 
     /// <summary>
-    /// Инфиксный обход дерева (слева направо).
+    /// Инфиксный обход дерева (слева направо; сортировка).
     /// Метод статический, так как не обращается к данным экземпляров класса.
     /// </summary>
     /// <param name="node">Узел дерева, из которого данные добавятся в список</param>
@@ -134,20 +134,9 @@ public class Tree<T> where T : IComparable<T>, IComparable, IEnumerable<T>
 
     #endregion
 
-    class MyNumerator<T> : IEnumerator<T>
-    {
-        private Node<T> _root;
-        private Node<T> current;
-        private Node<T> Left;
-        private Node<T> Right;
-        
-        public MyNumerator(Tree<T> collection)
-        {
-            _root = collection.Root;
-            current = null;
-        }
-        
-    }
+
+    
+    
     
     
     
