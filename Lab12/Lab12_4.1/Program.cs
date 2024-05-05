@@ -6,37 +6,24 @@ internal static class Program
 {
     private static void Main()
     {
-        var tree = new Tree<int>();
-        tree.AddRange(4, 5, -10, 53, 56, 45, 2, 566);
-        tree.Find(3);
+        const int itemCount = 10;
+
+        var myCollection = new Tree<Organisation>();
 
 
+        for (var i = 0; i < itemCount; i++)
+        {
+            var temp = RandObjectOrganisation();
+            temp.RandomInit();
+            myCollection.Add(temp);
+        }
 
 
-        // foreach (var item in tree.Preorder())
-        // {
-        //     Console.Write(item + " ");
-        // }
-        //
-        // Console.WriteLine();
-        //
-        //
-        //
-        // foreach (var item in tree.Postorder())
-        // {
-        //     Console.Write(item + " ");
-        // }
-        //
-        // Console.WriteLine();
-        //
-        //
-        //
-        // foreach (var item in tree.Inorder())
-        // {
-        //     Console.Write(item + " ");
-        // }
+        foreach (var item in myCollection.Preorder())
+        {
+            Console.WriteLine(item);
+        }
     }
-
 
     /// <summary>
     /// Создание случайным образом объекта одного из классов: Organisation, Factory, Shipyard, Library, InsuranceCompany 

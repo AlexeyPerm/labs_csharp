@@ -1,9 +1,10 @@
-﻿using ClassLibraryLab10;
+﻿using System.Collections;
+using ClassLibraryLab10;
 using ExtMethods;
 
 namespace Lab12_4._1;
 
-public class Tree<T> where T : IComparable<T>, IComparable, IEnumerable<T>
+public class Tree<T> where T : Organisation, IEnumerable<T>
 {
     public Node<T> Root { get; private set; }
     public int Count { get; private set; }
@@ -14,7 +15,7 @@ public class Tree<T> where T : IComparable<T>, IComparable, IEnumerable<T>
 
     public bool Find(T item)
     {
-        if (Root == null) throw new ArgumentNullException("Дерево пустое");
+        if (Root == null) throw new ArgumentNullException(nameof(Root), "Дерево пустое");
 
         Node<T> current = Root;
         if (item.CompareTo(current) != 0) return false;
@@ -134,51 +135,35 @@ public class Tree<T> where T : IComparable<T>, IComparable, IEnumerable<T>
 
     #endregion
 
-    class MyNumerator<T> : IEnumerator<T>
+
+    class MyNumerator<T> : IEnumerator<T> where T : Organisation
     {
-        private Node<T> _root;
+        private Node<T> begin;
         private Node<T> current;
-        private Node<T> Left;
-        private Node<T> Right;
-        
-        public MyNumerator(Tree<T> collection)
+
+        public MyNumerator(Tree<T> tree)
         {
-            _root = collection.Root;
+            begin = tree.Root;
             current = null;
         }
         
-    }
-    
-    
-    
-    /* //Замена на yield
-    class MyNumerator<T> : IEnumerator<T>
-    {
-        private Node<T> first;
-        private Node<T> current;
-
-        public MyNumerator(DoublyLinkedList<T> collection)
-        {
-            first = collection.First;
-            current = null;
-        }
-
-        public void Dispose()
-        { }
-
         public bool MoveNext()
         {
-            current = current == null ? first : current.Next;
-            return current != null;
+            throw new NotImplementedException();
         }
 
         public void Reset()
         {
-            current = first;
+            throw new NotImplementedException();
         }
 
-        public T Current => current.Data;
-        object IEnumerator.Current => current;
+        T IEnumerator<T>.Current => current.Data;
+        object IEnumerator.Current => current.Data;
+        
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
-    */
 }

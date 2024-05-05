@@ -1,9 +1,8 @@
-﻿namespace Lab12_4._1;
+﻿using ClassLibraryLab10;
 
-public class Node<T> :
-    IComparable<T>, IComparable where T :
-    IComparable, IComparable<T>
+namespace Lab12_4._1;
 
+public class Node<T> : IComparable<T> where T : Organisation
 {
     public T Data { get; }
     public Node<T> Left { get; private set; }
@@ -37,14 +36,10 @@ public class Node<T> :
         }
     }
 
-
-    public int CompareTo(object obj)
+    public int CompareTo(T other)
     {
-        if (obj is Node<T> item) return Data.CompareTo(item);
-        throw new ArgumentException("Несовпадение типов.");
+        return string.CompareOrdinal(Data.OrgName, other.OrgName);
     }
-
-    public int CompareTo(T other) => Data.CompareTo(other);
 
     public override string ToString() => Data.ToString();
 }
