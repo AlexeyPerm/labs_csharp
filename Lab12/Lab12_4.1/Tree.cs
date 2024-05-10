@@ -13,6 +13,13 @@ public class Tree<T> where T : Organisation, IEnumerable<T>
     public Tree()
     { }
 
+    
+    /// <summary>
+    /// Дописать
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public bool Find(T item)
     {
         if (Root == null) throw new ArgumentNullException(nameof(Root), "Дерево пустое");
