@@ -1,12 +1,13 @@
 ﻿namespace Lab12_1;
+using ClassLibraryLab10;
 
-public class Node<T>
+public class Node
 {
-    public T Data { get; private set; }
-    public Node<T> Next { get; set; } //указатель на следующую  ячейку данных
-    public Node<T> Prev { get; set; } //указатель на предыдущую ячейку данных
+    public Organisation Data { get; private set; }
+    public Node Next { get; set; } //указатель на следующую  ячейку данных
+    public Node Prev { get; set; } //указатель на предыдущую ячейку данных
 
-    public Node(T data)
+    public Node(Organisation data)
     {
         Data = data;
     }

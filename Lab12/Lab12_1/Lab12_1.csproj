@@ -8,9 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Reference Include="ClassLibraryLab10">
-            <HintPath>..\..\Lab11\ClassLibraryLab10.dll</HintPath>
-        </Reference>
+      <Reference Include="LibraryLab10">
+        <HintPath>C:\dotnet\Tree\LibraryLab10.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>
