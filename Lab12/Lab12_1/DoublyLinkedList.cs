@@ -50,10 +50,22 @@ public class DoublyLinkedList : IEnumerable
         First = CurrentNode = Last = null;
     }
 
+    public DoublyLinkedList(params Organisation[] arr)
+    {
+        foreach (var item in arr)
+        {
+            PushBack(item);
+        }
+    }
+
     /// <summary>
     /// Удаление списка из памяти
     /// </summary>
-    public void Clear() => First = CurrentNode = Last = null;
+    public void Clear()
+    {
+        First = CurrentNode = Last = null;
+        Count = 0;
+    }
 
     /// <summary>
     /// Добавление элемента в начало списка
@@ -225,7 +237,7 @@ public class DoublyLinkedList : IEnumerable
     /// <param name="findedItem">Удаляемый элемент</param>
     private void RemoveElementByOrgName(Organisation findedItem)
     {
-        var count = 1;  //Номер удаляемого элемента в списке
+        var count = 1; //Номер удаляемого элемента в списке
         foreach (var item in this)
         {
             if (item.OrgName == findedItem.OrgName)

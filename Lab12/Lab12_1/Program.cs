@@ -31,11 +31,12 @@ internal class Lab121
             Console.WriteLine();
             Console.WriteLine("1. Создать список из 10 элементов");
             Console.WriteLine("2. Создать список из указанного кол-ва элементов");
-            Console.WriteLine("3. Вывести кол-во элементов в списке");
-            Console.WriteLine("4. Очистить список");
-            Console.WriteLine("5. Вывести список на экран");
-
-
+            Console.WriteLine("3. Добавить элемент в начало");
+            Console.WriteLine("4. Добавить элемент в конец");
+            Console.WriteLine("5. Удалить элемент с начала");
+            Console.WriteLine("6. Удалить элемент с конца");
+            Console.WriteLine("8. Вывести список на экран");
+            Console.WriteLine("9. Очистить список");
             Console.WriteLine("0. Выход");
             Console.Write("> ");
 
@@ -52,10 +53,30 @@ internal class Lab121
                 case 2:
                     var size = ListSize();
                     list = CreateList(size);
+                    Console.WriteLine("Список создан");
                     break;
+                case 3:
+                    var itemAddFront = RandObjectOrganisation();
+                    itemAddFront.RandomInit();
+                    list.PushFront(itemAddFront);
+                    break;                
+                case 4:
+                    var itemAddBack = RandObjectOrganisation();
+                    itemAddBack.RandomInit();   
+                    list.PushBack(itemAddBack);
+                    break;       
                 case 5:
+                    list.PopFront();
+                    break;
+                case 6:
+                    list.PopBack();
+                    break;
+                case 8:
                     list.PrintLinkedList();
-                    ;
+                    break;
+                case 9:
+                    list.Clear();
+                    Console.WriteLine("Список очищен");
                     break;
                 case 0:
                     exit = true;
@@ -65,7 +86,7 @@ internal class Lab121
     } //end of MainMenu()
 
 
-    private static DoublyLinkedList CreateList(int size)
+    public static DoublyLinkedList CreateList(int size)
     {
         var tempList = new DoublyLinkedList();
         for (var i = 0; i < size; i++)
@@ -77,7 +98,7 @@ internal class Lab121
         return tempList;
     }
 
-    public static int ListSize()
+    private static int ListSize()
     {
         var size = InputDigit();
         while (size <= 0)
