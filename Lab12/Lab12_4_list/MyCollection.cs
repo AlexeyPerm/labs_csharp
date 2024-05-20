@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Runtime.InteropServices.JavaScript;
 
 namespace Lab12_4_list;
 
@@ -135,6 +134,7 @@ public class MyCollection<T> : ICollection<T>
             return;
         }
 
+        //Магия указателей
         item.Previous = Head.Previous; //Head.Previous - указатель на последний элемент списка. Сцепляем его с новым
         item.Next = Head; //item.Next - указатель на головной элемент списк.
         Head.Previous.Next = item; //Head.Previous.Next - в последнем элементе списка указатель Next на новый элемент
