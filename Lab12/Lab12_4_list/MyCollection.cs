@@ -2,7 +2,7 @@
 
 namespace Lab12_4_list;
 
-public class MyCollection<T> : ICollection<T>
+public class MyCollection<T> : ICollection<T>, ICloneable
 {
     private Node<T> Head { get; set; }
     public int Count { get; private set; }
@@ -55,7 +55,6 @@ public class MyCollection<T> : ICollection<T>
 
     public void CopyTo(T[] array, int arrayIndex)
     {
-        ArgumentNullException.ThrowIfNull(array);
         ArgumentOutOfRangeException.ThrowIfNegative(arrayIndex);
         if (arrayIndex > Count)
         {
@@ -168,8 +167,8 @@ public class MyCollection<T> : ICollection<T>
         var current = Head;
         do
         {
-            if (current.data.Equals(data)) return true;
-
+            if (current.data.Equals(data))
+                return true;
             current = current.Next;
         } while (current != Head);
 
@@ -191,7 +190,18 @@ public class MyCollection<T> : ICollection<T>
         return ((IEnumerable)this).GetEnumerator();
     }
 
-    public object Clone() => MemberwiseClone();
+    public object Clone()
+    {
+        var newCollection = new MyCollection<T>();
+        foreach (var item in this)
+        {
+            newCollection.Add(item);
+        }
+
+        return newCollection;
+    }
+
+    public virtual object ShallowCopy() => (MyCollection<T>)MemberwiseClone();
 
     private T FindIndex(int index)
     {
