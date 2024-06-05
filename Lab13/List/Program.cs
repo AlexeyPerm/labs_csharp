@@ -1,6 +1,6 @@
-﻿namespace Lab12_4_list;
+﻿using ClassLibraryLab10;
 
-using ClassLibraryLab10;
+namespace List;
 
 static class Program
 {

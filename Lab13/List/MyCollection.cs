@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Lab12_4_list;
+namespace List;
 
 public class MyCollection<T> : ICollection<T>, ICloneable
 {
@@ -9,7 +9,20 @@ public class MyCollection<T> : ICollection<T>, ICloneable
     public bool IsReadOnly { get; }
 
     public bool IsEmpty => Count == 0;
-    public virtual T this[int index] => FindIndex(index);
+
+    public virtual T this[int index]
+    {
+        get => FindIndex(index).data;
+        set
+        {
+            if (index < 0 || index > Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), "Выход за границы массива");
+            }
+
+            FindIndex(index).data = value;
+        }
+    }
 
     public MyCollection()
     { }
@@ -68,12 +81,13 @@ public class MyCollection<T> : ICollection<T>, ICloneable
         }
     }
 
+
     /// <summary>
     /// Удалить данные из списка
     /// </summary>
     /// <param name="data">Удалямые данные</param>
     /// <returns>Возвращает булеву переменную</returns>
-    public bool Remove(T data)
+    public virtual bool Remove(T data)
     {
         if (Count == 0) return false;
 
@@ -119,7 +133,7 @@ public class MyCollection<T> : ICollection<T>, ICloneable
     /// Доблавление новых данных в двусвязный кольцевой список
     /// </summary>
     /// <param name="data">Добавляемые данные</param>
-    public void Add(T data)
+    public virtual void Add(T data)
     {
         var item = new Node<T>(data);
         //Если список пустой, тогда создаётся первый элемент с указателями Next и Previous, указывающими на себя же
@@ -201,9 +215,9 @@ public class MyCollection<T> : ICollection<T>, ICloneable
         return newCollection;
     }
 
-    public object ShallowCopy() => (MyCollection<T>)MemberwiseClone();
+    public virtual object ShallowCopy() => (MyCollection<T>)MemberwiseClone();
 
-    private T FindIndex(int index)
+    private Node<T> FindIndex(int index)
     {
         if (Count == 0) throw new Exception("Список пустой");
         if (index < 0 || index >= Count) throw new ArgumentOutOfRangeException(nameof(index), "Неправильный индекс");
@@ -214,6 +228,6 @@ public class MyCollection<T> : ICollection<T>, ICloneable
             current = current.Next;
         }
 
-        return current.data;
+        return current;
     }
 }
