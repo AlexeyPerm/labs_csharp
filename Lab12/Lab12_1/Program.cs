@@ -8,62 +8,136 @@
 5.	Удалить список из памяти.
  */
 
-using System.Reflection.Metadata;
 using ClassLibraryLab10;
 
 namespace Lab12_1;
 
-static class Lab121
+internal class Lab121
 {
     public static void Main()
     {
         const int variantNumber = 549 % 25 - 1; //номер варианта 23
         Console.WriteLine($"Номер варианта = {variantNumber}\n");
+        MainMenu();
+    }
 
-        DoublyLinkedList<Organisation> a = new DoublyLinkedList<Organisation>();
-        for (var i = 0; i < 4; i++)
+    //Основное меню
+    private static void MainMenu()
+    {
+        var exit = false;
+        DoublyLinkedList list = new DoublyLinkedList();
+        while (!exit)
         {
-            var tmp = RandObjectOrganisation();
-            tmp.RandomInit();
-            a.Push_Front(tmp);
+            Console.WriteLine();
+            Console.WriteLine("1. Создать список из 10 элементов");
+            Console.WriteLine("2. Создать список из указанного кол-ва элементов");
+            Console.WriteLine("3. Добавить элемент в начало");
+            Console.WriteLine("4. Добавить элемент в конец");
+            Console.WriteLine("5. Удалить элемент с начала");
+            Console.WriteLine("6. Удалить элемент с конца");
+            Console.WriteLine("8. Вывести список на экран");
+            Console.WriteLine("9. Очистить список");
+            Console.WriteLine("0. Выход");
+            Console.Write("> ");
+
+            var input = InputDigit();
+            switch (input)
+            {
+                default:
+                    Console.WriteLine("Введены некорректные данные");
+                    break;
+                case 1:
+                    list = CreateListWithTenElements();
+                    Console.WriteLine("Список создан");
+                    break;
+                case 2:
+                    var size = ListSize();
+                    list = CreateList(size);
+                    Console.WriteLine("Список создан");
+                    break;
+                case 3:
+                    var itemAddFront = RandObjectOrganisation();
+                    itemAddFront.RandomInit();
+                    list.PushFront(itemAddFront);
+                    break;                
+                case 4:
+                    var itemAddBack = RandObjectOrganisation();
+                    itemAddBack.RandomInit();   
+                    list.PushBack(itemAddBack);
+                    break;       
+                case 5:
+                    list.PopFront();
+                    break;
+                case 6:
+                    list.PopBack();
+                    break;
+                case 8:
+                    list.PrintLinkedList();
+                    break;
+                case 9:
+                    list.Clear();
+                    Console.WriteLine("Список очищен");
+                    break;
+                case 0:
+                    exit = true;
+                    break; //Назад в предыдущее меню
+            } //end of switch
+        } //end of while
+    } //end of MainMenu()
+
+
+    public static DoublyLinkedList CreateList(int size)
+    {
+        var tempList = new DoublyLinkedList();
+        for (var i = 0; i < size; i++)
+        {
+            var item = RandObjectOrganisation();
+            item.RandomInit();
+            tempList.PushFront(item);
+        }
+        return tempList;
+    }
+
+    private static int ListSize()
+    {
+        var size = InputDigit();
+        while (size <= 0)
+        {
+            Console.WriteLine("Размер списка не должен быть меньше или равен нулю");
+            size = InputDigit();
         }
 
-        var findedItem = RandObjectOrganisation();
-        findedItem.RandomInit();
+        return size;
+    }
 
-        a.PrintLinkedList();
+    private static DoublyLinkedList CreateListWithTenElements()
+    {
+        var tempList = new DoublyLinkedList();
+        const int size = 10;
+        for (var i = 0; i < size; i++)
+        {
+            var item = RandObjectOrganisation();
+            item.RandomInit();
+            tempList.PushFront(item);
+        }
 
-        RemoveElementByOrgName(a, findedItem);
-
-
-        //a = null;   //для выполнения задания по удалению коллекции из памяти
-
-
-        Console.WriteLine();
+        return tempList;
     }
 
     /// <summary>
-    /// Удалить из списка первый элемент с полем OrgName
+    /// Проверка корректности ввода и конвертация строки в целое число int
     /// </summary>
-    /// <param name="a">Коллекция, в которой удаляется элемент</param>
-    /// <param name="findedItem">Удаляемый элемент</param>
-    private static void RemoveElementByOrgName(DoublyLinkedList<Organisation> a, Organisation findedItem)
+    /// <returns>Возвращает целое число, конвертированное из строки</returns>
+    private static int InputDigit()
     {
-        int count = 1;
-        foreach (var item in a)
+        int result;
+        while (!int.TryParse(Console.ReadLine(), out result))
         {
-            if (item.OrgName == findedItem.OrgName)
-            {
-                Console.WriteLine($"Элемент {findedItem.OrgName} найден! Удаляем");
-                a.RemoveElement(count);
-                a.PrintLinkedList();
-                break;
-            }
-
-            count++;
+            Console.Write("Ошибка! Должен быть тип int\nПовторите ввод\n> ");
         }
-    }
 
+        return result;
+    }
 
     /// <summary>
     /// Создание случайным образом объекта одного из классов: Organisation, Factory, Shipyard, Library, InsuranceCompany 

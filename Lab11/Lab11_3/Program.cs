@@ -26,6 +26,7 @@ static class Lab113
         SearchNonExistElement(testCollection);
     }
 
+    
     private static void SearchFirstElement(TestCollections testCollection)
     {
         var firstElement = testCollection.listFactory.First();
@@ -79,17 +80,17 @@ static class Lab113
     {
         var stopWatch = new Stopwatch();
         stopWatch.Start();
-        var found = list.Contains(item);
+        var found = list.BinarySearch(item);
         stopWatch.Stop();
-        if (found)
+        if (found == 0)
         {
             Console.WriteLine("Элемент найден.");
-            Console.WriteLine("Время поиска: " + stopWatch.Elapsed.ToString(@"m\:ss\.ffffff"));
+            Console.WriteLine("Время поиска: " + stopWatch.ElapsedTicks);
         }
         else
         {
             Console.WriteLine("Элемент не найден");
-            Console.WriteLine("Время поиска: " + stopWatch.Elapsed.ToString(@"m\:ss\.ffffff"));
+            Console.WriteLine("Время поиска: " + stopWatch.ElapsedTicks);
         }
     }
 
@@ -102,12 +103,12 @@ static class Lab113
         if (found)
         {
             Console.WriteLine("Элемент найден.");
-            Console.WriteLine("Время поиска: " + stopWatch.Elapsed.ToString(@"m\:ss\.ffffff"));
+            Console.WriteLine("Время поиска: " + stopWatch.ElapsedTicks);
         }
         else
         {
             Console.WriteLine("Элемент не найден");
-            Console.WriteLine("Время поиска: " + stopWatch.Elapsed.ToString(@"m\:ss\.ffffff"));
+            Console.WriteLine("Время поиска: " + stopWatch.ElapsedTicks);
         }
     }
 }

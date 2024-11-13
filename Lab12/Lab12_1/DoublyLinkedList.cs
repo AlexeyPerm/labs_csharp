@@ -1,9 +1,9 @@
 ﻿namespace Lab12_1;
 
+using ClassLibraryLab10;
 using System.Collections;
-using System.Collections.Generic;
 
-public class DoublyLinkedList<T> : IEnumerable<T>
+public class DoublyLinkedList : IEnumerable
 {
     /* //Замена на yield
     class MyNumerator<T> : IEnumerator<T>
@@ -35,14 +35,14 @@ public class DoublyLinkedList<T> : IEnumerable<T>
         object IEnumerator.Current => current;
     }
     */
-    private Node<T> First { get; set; }
-    private Node<T> CurrentNode { get; set; }
-    private Node<T> Last { get; set; }
 
-    public int Count { get; private set; }
+    private Node First { get; set; } //Первый элемент списка
+    private Node CurrentNode { get; set; } //Текущие элемент списка
+    private Node Last { get; set; } //Последний элемент списка
 
-    //Метод проверки на пустоту
-    public bool IsEmpty => Count == 0;
+    public int Count { get; private set; } //Количество элементов в списке
+
+    public bool IsEmpty => Count == 0; //Метод проверки на пустоту
 
     public DoublyLinkedList()
     {
@@ -50,13 +50,30 @@ public class DoublyLinkedList<T> : IEnumerable<T>
         First = CurrentNode = Last = null;
     }
 
+    public DoublyLinkedList(params Organisation[] arr)
+    {
+        foreach (var item in arr)
+        {
+            PushBack(item);
+        }
+    }
+
     /// <summary>
-    /// Добавление элемента в начало
+    /// Удаление списка из памяти
+    /// </summary>
+    public void Clear()
+    {
+        First = CurrentNode = Last = null;
+        Count = 0;
+    }
+
+    /// <summary>
+    /// Добавление элемента в начало списка
     /// </summary>
     /// <param name="data">Добавляемых элемент</param>
-    public void Push_Front(T data)
+    public void PushFront(Organisation data)
     {
-        var node = new Node<T>(data);
+        var node = new Node(data);
         var temp = First;
         // В новом элементе указатель на следующий элемент указывает на первый элемент коллекции, тем самым
         // новый элемент сам становится первым элементом.
@@ -75,6 +92,30 @@ public class DoublyLinkedList<T> : IEnumerable<T>
     }
 
     /// <summary>
+    /// Добавление элемента в конец списка
+    /// </summary>
+    /// <param name="data">Добавляемых элемент</param>
+    public void PushBack(Organisation data)
+    {
+        var node = new Node(data);
+        var temp = Last;
+        // В новом элементе указатель на предыдущий элемент указывает на последний элемент коллекции, тем самым
+        // новый элемент сам становится последним элементом.
+        node.Prev = temp;
+        Last = node;
+        if (Count == 0)
+        {
+            First = Last;
+        }
+        else
+        {
+            temp.Next = node;
+        }
+
+        Count++;
+    }
+
+    /// <summary>
     /// Удаление первого элемента коллекции
     /// </summary>
     public void PopFront()
@@ -87,7 +128,7 @@ public class DoublyLinkedList<T> : IEnumerable<T>
 
         if (First.Next != null)
         {
-            First.Next.Prev = null;
+            First.Next.Prev = null; //Удаление указателя следующего элемента на предыдущий элемент 
         }
 
         First = First.Next;
@@ -143,8 +184,7 @@ public class DoublyLinkedList<T> : IEnumerable<T>
 
         if (index > Count || index <= 0)
         {
-            Console.WriteLine("Ошибка");
-            return;
+            throw new ArgumentOutOfRangeException(nameof(index));
         }
 
         if (index == 1)
@@ -159,7 +199,7 @@ public class DoublyLinkedList<T> : IEnumerable<T>
             return;
         }
 
-        Node<T> node = First;
+        Node node = First;
         for (var i = 1; i < index - 1; i++)
         {
             node = node.Next;
@@ -175,22 +215,45 @@ public class DoublyLinkedList<T> : IEnumerable<T>
     /// </summary>
     /// <param name="data">Искомый элемент</param>
     /// <returns>Возвращает значение, указывающее, существует ли указанный элемент в коллекции</returns>
-    public bool Contains(T data)
+    public bool Contains(Organisation data)
     {
-        Node<T> current = First;
+        Node current = First;
         while (current != null)
         {
             if (current.Data.Equals(data))
+            {
                 return true;
+            }
+
             current = current.Next;
         }
 
         return false;
     }
 
-    public IEnumerator<T> GetEnumerator()
+    /// <summary>
+    /// Удалить из списка элемент с указаным названием организации
+    /// </summary>
+    /// <param name="findedItem">Удаляемый элемент</param>
+    private void RemoveElementByOrgName(Organisation findedItem)
     {
-        Node<T> current = First;
+        var count = 1; //Номер удаляемого элемента в списке
+        foreach (var item in this)
+        {
+            if (item.OrgName == findedItem.OrgName)
+            {
+                Console.WriteLine($"Элемент {findedItem.OrgName} найден! Удаляем");
+                RemoveElement(count);
+                break;
+            }
+
+            count++;
+        }
+    }
+
+    public IEnumerator<Organisation> GetEnumerator()
+    {
+        Node current = First;
         while (current != null)
         {
             yield return current.Data;
@@ -198,9 +261,5 @@ public class DoublyLinkedList<T> : IEnumerable<T>
         }
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        //throw new NotImplementedException();
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
