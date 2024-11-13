@@ -6,14 +6,16 @@ static class Lab111
 {
     private static void Main()
     {
-        const int variantNumber = 549 % 30 - 1; //номер варианта 8
-        Console.WriteLine($"Номер варианта = {variantNumber}\n");
         MainMenu();
+        Console.Clear();
+        Console.WriteLine("\nПрограмма успешно завершена\n");
     }
 
     //Основное меню
     private static void MainMenu()
     {
+        const int variantNumber = 549 % 30 - 1; //номер варианта 8
+        Console.WriteLine($"Номер варианта = {variantNumber}\n");
         const int length = 1000; //Размер коллекции 
         var ht = CreateHashtable(length);
         var exit = false;
@@ -25,7 +27,7 @@ static class Lab111
             Console.WriteLine("3. Распечатать элементы выбранного класса.");
             Console.WriteLine("4. Количество объектов класса в коллекции.");
             Console.WriteLine("5. Суммарный бюджет всех организаций.");
-            Console.WriteLine("6. Склонировать хэш-таблицу и продемонстрировать работу.");
+            Console.WriteLine("6. Клонировать хэш-таблицу и продемонстрировать работу.");
             Console.WriteLine("7. Поиск в хэш-таблице объекта класса.");
             Console.WriteLine("8. Распечатать все элементы коллекции.");
             Console.WriteLine("0. Выход");
@@ -74,7 +76,7 @@ static class Lab111
     } //end of MainMenu()
 
     /// <summary>
-    /// Создание хэш-таблицы
+    /// Создание и заполнение хэш-таблицы заданной размерности и заполнение элементами класса Organisation
     /// </summary>
     /// <param name="length">Размер коллекции</param>
     /// <returns></returns>
@@ -94,7 +96,7 @@ static class Lab111
     /// <summary>
     /// Вывод на экран всех элементов хэш-таблицы
     /// </summary>
-    /// <param name="ht">Передаваевая в качестве аргумента хэш-таблица</param>
+    /// <param name="ht">Передаваемая в качестве аргумента хэш-таблица</param>
     private static void PrintHashtable(Hashtable ht)
     {
         var c = ht.Keys;
@@ -127,7 +129,7 @@ static class Lab111
     /// <summary>
     /// Добавляет элемент в хэш-таблицу
     /// </summary>
-    /// <param name="ht">Передаваевая в качестве аргумента хэш-таблица</param>
+    /// <param name="ht">Передаваемая в качестве аргумента хэш-таблица</param>
     private static void AddItem(Hashtable ht)
     {
         var tmp = RandObjectOrganisation();
@@ -138,7 +140,7 @@ static class Lab111
     /// <summary>
     /// Удаляет элемент из хэш-таблицы
     /// </summary>
-    /// <param name="ht">Передаваевая в качестве аргумента хэш-таблица</param>
+    /// <param name="ht">Передаваемая в качестве аргумента хэш-таблица</param>
     private static void RemoveItem(Hashtable ht)
     {
         Console.Write("Введите удаляемый ключ из таблицы:\n> ");
@@ -163,7 +165,7 @@ static class Lab111
     /// <summary>
     /// Выводит на экран элемента определённого вида (объекта класса)
     /// </summary>
-    /// <param name="ht">Передаваевая в качестве аргумента хэш-таблица</param>
+    /// <param name="ht">Передаваемая в качестве аргумента хэш-таблица</param>
     private static void PrintSpecificClass(Hashtable ht)
     {
         Console.WriteLine("Выбор класса для распечатки:");
@@ -246,7 +248,7 @@ static class Lab111
     /// <summary>
     /// Выводит на экран количество элементов определённого вида (объекта класса)
     /// </summary>
-    /// <param name="ht">Передаваевая в качестве аргумента хэш-таблица</param>
+    /// <param name="ht">Передаваемая в качестве аргумента хэш-таблица</param>
     private static void CountSpecificCLass(Hashtable ht)
     {
         Console.WriteLine("Количество объектов класса в коллекции:");
@@ -304,9 +306,9 @@ static class Lab111
     } //end of CountSpecificCLass
 
     /// <summary>
-    /// Подсчитывает и выводит на экран бюджет всех организаций, содержашихся в хэш-таблицу
+    /// Подсчитывает и выводит на экран бюджет всех организаций, содержащихся в хэш-таблице
     /// </summary>
-    /// <param name="ht">Передаваевая в качестве аргумента хэш-таблица</param>
+    /// <param name="ht">Передаваемая в качестве аргумента хэш-таблица</param>
     private static void SummaryBudget(Hashtable ht)
     {
         long result = 0;
@@ -342,10 +344,10 @@ static class Lab111
     }
 
     /// <summary>
-    /// Выполняется клонировение хэш-таблицы
+    /// Выполняется клонирование хэш-таблицы
     /// </summary>
-    /// <param name="ht">Передаваевая в качестве аргумента клонируемая хэш-таблица</param>
-    /// <returns>Возвращает склонированную хэш-таблицу</returns>
+    /// <param name="ht">Передаваемая в качестве аргумента клонируемая хэш-таблица</param>
+    /// <returns>Возвращает клонированную хэш-таблицу</returns>
     private static Hashtable CloneHashTable(Hashtable ht)
     {
         var newHashTable = new Hashtable(ht.Count);
@@ -385,10 +387,10 @@ static class Lab111
     }
 
     /// <summary>
-    /// Поиск объъекта класса в хэш-таблице.
+    /// Поиск объекта класса в хэш-таблице.
     /// </summary>
-    /// <param name="ht">Передаваевая в качестве аргумента клонируемая хэш-таблица</param>
-    /// <param name="searchElement">Передаваевый в качестве аргумента искомый объект класса</param>
+    /// <param name="ht">Передаваемая в качестве аргумента клонируемая хэш-таблица</param>
+    /// <param name="searchElement">Передаваемый в качестве аргумента искомый объект класса</param>
     private static void FindItem(Hashtable ht, Organisation searchElement)
     {
         Console.Clear();

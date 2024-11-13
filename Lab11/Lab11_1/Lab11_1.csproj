@@ -10,8 +10,9 @@
 
     <ItemGroup>
       <Reference Include="ClassLibraryLab10">
-        <HintPath>..\..\Lab10v4\ClassLibraryLab10\bin\Debug\ClassLibraryLab10.dll</HintPath>
+        <HintPath>..\ClassLibraryLab10.dll</HintPath>
       </Reference>
     </ItemGroup>
+    
 
 </Project>
