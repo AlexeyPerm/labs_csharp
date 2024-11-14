@@ -11,8 +11,8 @@ public class Node
     public Node()
     {
         Data = new Organisation();
-        Left = null;
-        Right = null;
+        Left = null!;
+        Right = null!;
     }
 
     /// <summary>
@@ -24,15 +24,15 @@ public class Node
         if (!random) return;
         Data = new Organisation();
         Data.RandomInit();
-        Left = null;
-        Right = null;
+        Left = null!;
+        Right = null!;
     }
 
     public Node(Organisation data)
     {
         Data = data;
-        Left = null;
-        Right = null;
+        Left = null!;
+        Right = null!;
     }
 
     public override string ToString()

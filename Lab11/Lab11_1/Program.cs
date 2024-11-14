@@ -2,6 +2,7 @@
 using ClassLibraryLab10;
 
 namespace Lab11_1;
+
 static class Lab111
 {
     private static void Main()

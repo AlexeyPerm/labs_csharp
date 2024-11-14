@@ -188,6 +188,6 @@ class Program
 
     private static void DeleteTree(ref Node root)
     {
-        root = null;
+        root = null!;
     }
 }

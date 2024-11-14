@@ -73,22 +73,24 @@ public class DoublyLinkedList : IEnumerable
     /// <param name="data">Добавляемых элемент</param>
     public void PushFront(Organisation data)
     {
-        var node = new Node(data);
-        var temp = First;
+        Node newNode = new Node(data);
+        Node tempFirstNode = First;
         // В новом элементе указатель на следующий элемент указывает на первый элемент коллекции, тем самым
         // новый элемент сам становится первым элементом.
-        node.Next = temp;
-        First = node;
+        newNode.Next = tempFirstNode;
+        First = newNode;
         if (Count == 0)
         {
             Last = First;
         }
         else
         {
-            temp.Prev = node;
+            tempFirstNode.Prev = newNode;
         }
 
         Count++;
+        Console.Clear();
+        Console.WriteLine("Элемент успешно добавлен в начало списка");
     }
 
     /// <summary>
@@ -97,22 +99,25 @@ public class DoublyLinkedList : IEnumerable
     /// <param name="data">Добавляемых элемент</param>
     public void PushBack(Organisation data)
     {
-        var node = new Node(data);
-        var temp = Last;
+        var newNode = new Node(data);
+        var tempLastNode = Last;
         // В новом элементе указатель на предыдущий элемент указывает на последний элемент коллекции, тем самым
         // новый элемент сам становится последним элементом.
-        node.Prev = temp;
-        Last = node;
+        newNode.Prev = tempLastNode;
+        Last = newNode;
         if (Count == 0)
         {
             First = Last;
         }
         else
         {
-            temp.Next = node;
+            tempLastNode.Next = newNode;
         }
 
         Count++;
+
+        Console.Clear();
+        Console.WriteLine("Элемент успешно добавлен в конец списка");
     }
 
     /// <summary>
@@ -122,6 +127,7 @@ public class DoublyLinkedList : IEnumerable
     {
         if (IsEmpty)
         {
+            Console.Clear();
             Console.WriteLine("Коллекция пустая");
             return;
         }
@@ -133,6 +139,9 @@ public class DoublyLinkedList : IEnumerable
 
         First = First.Next;
         Count--;
+
+        Console.Clear();
+        Console.WriteLine("Элемент успешно удалён из начала списка");
     }
 
     /// <summary>
@@ -149,6 +158,9 @@ public class DoublyLinkedList : IEnumerable
         Count--;
         Last = Last.Prev;
         Last.Next = null;
+
+        Console.Clear();
+        Console.WriteLine("Элемент успешно удалён из конца списка");
     }
 
     /// <summary>
@@ -162,6 +174,7 @@ public class DoublyLinkedList : IEnumerable
             return;
         }
 
+        Console.Clear();
         CurrentNode = First;
         while (CurrentNode != null)
         {
@@ -208,6 +221,9 @@ public class DoublyLinkedList : IEnumerable
         node.Next.Next.Prev = node;
         node.Next = node.Next.Next;
         Count--;
+
+        Console.Clear();
+        Console.WriteLine($"Элемент с номером {index} успешно удалён");
     }
 
     /// <summary>
@@ -226,13 +242,13 @@ public class DoublyLinkedList : IEnumerable
             }
 
             current = current.Next;
-        }
+        } //end of while
 
         return false;
     }
 
     /// <summary>
-    /// Удалить из списка элемент с указаным названием организации
+    /// Удалить из списка элемент с указанным названием организации
     /// </summary>
     /// <param name="findedItem">Удаляемый элемент</param>
     private void RemoveElementByOrgName(Organisation findedItem)
@@ -248,7 +264,10 @@ public class DoublyLinkedList : IEnumerable
             }
 
             count++;
-        }
+        } //end of foreach
+
+        Console.Clear();
+        Console.WriteLine($"Элемент в названием организации {findedItem.OrgName} успешно удалён");
     }
 
     public IEnumerator<Organisation> GetEnumerator()

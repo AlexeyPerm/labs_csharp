@@ -19,13 +19,16 @@ internal class Lab121
         const int variantNumber = 549 % 25 - 1; //номер варианта 23
         Console.WriteLine($"Номер варианта = {variantNumber}\n");
         MainMenu();
+        Console.Clear();
+        Console.WriteLine("Программа успешно завершена");
+        Console.ReadLine();
     }
 
     //Основное меню
     private static void MainMenu()
     {
         var exit = false;
-        DoublyLinkedList list = new DoublyLinkedList();
+        var list = new DoublyLinkedList();
         while (!exit)
         {
             Console.WriteLine();
