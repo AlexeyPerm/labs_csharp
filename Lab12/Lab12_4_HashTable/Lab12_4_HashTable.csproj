@@ -4,14 +4,15 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
+        <RootNamespace>Lab12_4_list</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <Reference Include="LibraryLab10">
-            <HintPath>..\LibraryLab10.dll</HintPath>
-        </Reference>
+      <Reference Include="LibraryLab10">
+        <HintPath>..\LibraryLab10.dll</HintPath>
+      </Reference>
     </ItemGroup>
-
+    
 
 </Project>

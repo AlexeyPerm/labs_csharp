@@ -12,7 +12,8 @@ public class MyCollection<T> : ICollection<T>, ICloneable
     public virtual T this[int index] => FindIndex(index);
 
     public MyCollection()
-    { }
+    {
+    }
 
     public MyCollection(int capacity)
     {

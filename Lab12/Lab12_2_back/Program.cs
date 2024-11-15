@@ -10,7 +10,7 @@ class Program
         const int variantNumber = 549 % 25 - 1; //номер варианта 23
         Console.WriteLine($"Номер варианта = {variantNumber}\n");
 
-        const int treeSize = 3;
+        const int treeSize = 6;
         var firstElement = RandObjectOrganisation();
         firstElement.RandomInit();
         Node tree = First(firstElement);

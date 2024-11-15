@@ -22,7 +22,7 @@ public class DoublyLinkedList : IEnumerable
 
         public bool MoveNext()
         {
-            current = current == null ? first : current.Next;
+            current = current == null ? Reset() : current.Next;
             return current != null;
         }
 

@@ -1,6 +1,7 @@
 ﻿using ClassLibraryLab10;
 
 namespace Lab12_2;
+#nullable disable
 
 public class Node
 {
@@ -16,7 +17,7 @@ public class Node
     }
 
     /// <summary>
-    /// Рандомное заполнение элемента
+    ///  Заполнение элемента случайным образом
     /// </summary>
     /// <param name="random">Рандом или не рандом?</param>
     public Node(bool random)
