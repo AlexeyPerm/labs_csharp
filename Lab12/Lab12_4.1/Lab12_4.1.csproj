@@ -7,11 +7,6 @@
         <Nullable>disable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Reference Include="LibraryLab10">
-        <HintPath>..\LibraryLab10.dll</HintPath>
-      </Reference>
-    </ItemGroup>
     
 
 </Project>
