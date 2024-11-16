@@ -15,16 +15,13 @@ class Program
         firstElement.RandomInit();
         Node tree = First(firstElement);
         var idealTree = IdealTree(treeSize, tree);
-        //Print2D(idealTree);
-        // Console.WriteLine();
-        // Console.WriteLine();
-        // Console.WriteLine();
-        // Console.WriteLine("Дерево поиска");
-
+        
         Node bst = ConvertToBST(idealTree);
         //Print2D(bst);
         DeleteTree(ref bst);
         Print2D(bst);
+        
+        
     }
 
     private static int NodesCount(Node root)

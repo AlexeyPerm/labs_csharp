@@ -39,10 +39,10 @@ public class BinarySearchTree
         else
         {
             node.Right = Insert(node.Right, data);
-        }
+        } //end of if/else
 
         return node;
-    }
+    } //end of Insert()
 
     /// <summary>
     /// Обход дерева сверху вниз
@@ -60,7 +60,7 @@ public class BinarySearchTree
         Run(root.Left, nodes);
         nodes.Add(root.Data);
         Run(root.Right, nodes);
-    }
+    } // end of Run()
 
     /// <summary>
     /// Печать иерархической структуры дерева 
@@ -90,7 +90,7 @@ public class BinarySearchTree
         root.Data.PrintInTree(space);
 
         Print2DUtil(root.Left, space); // Обработка левых листьев
-    }
+    } //end of Print2DUtil()
 
     public void DeleteTree()
     {
@@ -100,8 +100,19 @@ public class BinarySearchTree
             Console.WriteLine("Дерево не существует");
             return;
         }
+
         Root = null;
         Console.Clear();
         Console.WriteLine("Удаление дерева прошло успешно");
+    } //end of DeleteTree()
+
+    public int NodesCount(TreeNode root)
+    {
+        if (root == null)
+        {
+            return 0;
+        }
+
+        return NodesCount(root.Left) + NodesCount(root.Right) + 1;
     }
 }

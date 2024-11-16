@@ -13,10 +13,9 @@ static class Program
         var balancedTree = new BalancedBinaryTree(organisations);
         balancedTree.Print2D(balancedTree.Root);
         var bst = new BinarySearchTree(balancedTree);
-        bst.Print2D(bst.Root);
+        //bst.Print2D(bst.Root);
 
-        bst.DeleteTree();
-        bst.DeleteTree();
+        Console.WriteLine(balancedTree.NodesCount(balancedTree.Root));
         Console.ReadLine();
     }
 
