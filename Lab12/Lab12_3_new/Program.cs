@@ -24,8 +24,9 @@ class Program
             Console.WriteLine("1. Создать хэш-таблицу с 10 элементами");
             Console.WriteLine("2. Создать хэш-таблицу из указанного кол-ва элементов");
             Console.WriteLine("3. Выполнить поиск существующего элемента по имени в хэш-таблице");
-
-            Console.WriteLine("5. Вывести на экран хэш-таблицу");
+            Console.WriteLine("4. Добавление элемента в заполненную хэш-таблицу");
+            Console.WriteLine("5. Удалить элемент из хэш-таблицу и выполнить последующий его поиск");
+            Console.WriteLine("6. Вывести на экран хэш-таблицу");
             Console.WriteLine("9. Удалить хэш-таблицу");
             Console.WriteLine("0. Выход");
             Console.Write("> ");
@@ -41,11 +42,20 @@ class Program
                 case 2: //Создаём хэш-таблицу с заданным количеством элементам и заполняем её случайными элементами
                     ht = CreateHashTable();
                     break;
-                case 3:
-                    searchElement(ref ht);
+                case 3: //Поиск элемента. Для простоты искомый элемент уже "зашит" в функцию
+                    SearchElement(ht);
                     break;
-                case 5:
-                    PrintHashTable(ref ht);
+                case 4: //Добавление элемента в полную хэш-таблицу
+                    AddItem(ht);
+                    break;
+                case 5: //Удаление найденного элемента из хеш-таблицы
+                    RemoveItem(ht);
+                    break;
+                case 6: //Вывод на экран хэш-таблицы
+                    PrintHashTable(ht);
+                    break;
+                case 9:
+                    DeleteHashTable(ref ht);
                     break;
                 case 0:
                     exit = true;
@@ -56,7 +66,65 @@ class Program
         } // end of while
     }
 
-    private static void PrintHashTable(ref HTable ht)
+    private static void DeleteHashTable(ref HTable ht)
+    {
+        if (ht == null)
+        {
+            Console.WriteLine("Хэш-таблица пуста");
+        }
+        else
+        {
+            ht = null;
+            Console.WriteLine("Хэш-таблица удалена");
+        }
+    }
+
+    private static void RemoveItem(HTable ht)
+    {
+        if (ht == null)
+        {
+            throw new ArgumentNullException(nameof(ht), "Хэш-таблица пустая");
+        }
+
+        var itemNum = ht.Length - 1;
+        var item = ht[itemNum];
+        Console.WriteLine("Удаляемый элемент:");
+        item.Show();
+        
+        if (ht.Remove(item))
+        {
+            Console.WriteLine("Удаление прошло успешно");
+        }
+        else
+        {
+            Console.WriteLine("Элемент не удалён");
+        }
+        
+        var index = ht.Search(item);    //Поиск удалённого элемента
+        if (index != -1)
+        {
+            Console.WriteLine($"Элемент найден на позиции {index}");
+        }
+        else
+        {
+            Console.WriteLine($"Элемент после удаления не найден");
+        }
+    }
+
+    private static void AddItem(HTable ht)
+    {
+        var addItem = RandObjectOrganisation();
+        addItem.RandomInit();
+        Console.WriteLine("Попытка добавить элемент в полную таблицу...");
+        if (ht == null)
+        {
+            throw new ArgumentNullException(nameof(ht), "Хэш-таблица пустая");
+        }
+
+        ht.Add(addItem);
+    }
+
+    private static void PrintHashTable(HTable ht)
     {
         if (ht == null)
         {
@@ -66,7 +134,7 @@ class Program
         ht.PrintTable();
     }
 
-    private static void searchElement(ref HTable ht)
+    private static void SearchElement(HTable ht)
     {
         if (ht == null)
         {

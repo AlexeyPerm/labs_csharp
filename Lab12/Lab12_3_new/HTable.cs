@@ -5,7 +5,7 @@ using ClassLibraryLab10;
 #nullable disable
 public class HTable
 {
-    public int Length { get; } = 10;
+    public int Length { get; private set; } = 10;
 
     private Organisation[] _table;
 
@@ -62,7 +62,7 @@ public class HTable
         for (var i = 0; i < Length; i++)
         {
             var indexNum = (itemHash + i) % Length;
-            if (_table[indexNum].CompareTo(item) == 0)
+            if (_table[indexNum] != default)
             {
                 return indexNum;
             }
@@ -80,6 +80,7 @@ public class HTable
         var index = Search(item);
         if (index == -1) return false;
         _table[index] = default;
+        Length--;
         return true;
     }
 
