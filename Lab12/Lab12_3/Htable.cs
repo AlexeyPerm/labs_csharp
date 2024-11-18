@@ -25,7 +25,7 @@ public class Htable
         {
             return $"{key} + {Data}";
         }
-    }
+    } //end of class HashPoint
 
 
     public int Size = 10; //Размер хэш-таблицы
@@ -139,6 +139,7 @@ public class Htable
             hashPoint.Data = hashPoint._next.Data;
             hashPoint._next = hashPoint._next._next;
         }
+
         Console.WriteLine("Элемент не найден.");
     }
 }
