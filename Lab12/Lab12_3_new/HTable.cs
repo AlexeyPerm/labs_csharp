@@ -1,54 +1,79 @@
 ﻿namespace Lab12_3_new;
+
 using ClassLibraryLab10;
 
-public class HTable(int size)
+#nullable disable
+public class HTable
 {
-    private Organisation[] _table = new Organisation[size];
+    public int Length { get; } = 10;
+
+    private Organisation[] _table;
+
+    public HTable() //Конструктор по умолчанию создаёт таблицу с 10 элементами
+    {
+        _table = new Organisation[Length];
+    }
+
+    public HTable(int length)
+    {
+        if (length <= 0)
+        {
+            throw new ArgumentException("Размер таблицы должен быть больше 0", nameof(length));
+        }
+
+        _table = new Organisation[length];
+        Length = length;
+    }
 
     // Хеш-функция
     private int Hash(Organisation item)
     {
         var hash = 0;
         hash += item.GetHashCode() + 323;
-        return hash % size;
+        return hash % Length;
     }
-    
+
     // Метод для добавления элемента в хеш-таблицу с открытой адресацией
-    public void Add(Organisation item)
+    public bool Add(Organisation item)
     {
-        var itemHash = Hash(item);
-        for (var i = 0; i < size; i++)
+        var itemHash = int.Abs(Hash(item));
+        for (var i = 0; i < Length; i++)
         {
-            var indexNum = (itemHash + i) % size;
+            var indexNum = (itemHash + i) % Length;
             if (_table[indexNum] == default)
             {
                 _table[indexNum] = item;
-                return;
+                return true;
             }
         }
+
         Console.WriteLine("Хеш-таблица заполнена, невозможно добавить элемент.");
+        return false;
     }
-    
+
     /// <summary>
     /// Поиск элемента
     /// </summary>
     /// <param name="item">Искомый элемент</param>
     /// <returns>Возвращаем индекс элемента в хэш-таблице</returns>
-        public int Search(Organisation item)
+    public int Search(Organisation item)
+    {
+        var itemHash = int.Abs(Hash(item));
+        for (var i = 0; i < Length; i++)
         {
-            var itemHash = Hash(item);
-            for (var i = 0; i < size; i++)
+            var indexNum = (itemHash + i) % Length;
+            if (_table[indexNum].CompareTo(item) == 0)
             {
-                var indexNum = (itemHash + i) % size;
-                if (_table[indexNum].CompareTo(item) == 0)
-                {
-                    return indexNum;
-                }
-                if (_table[indexNum] == 0) break; // Если встретили пустую ячейку, значит элемента нет
+                return indexNum;
             }
-            return -1; // Элемент не найден
+
+            if (_table[indexNum] == default)
+                break; // Если встретили пустую ячейку, значит элемента нет
         }
-    
+
+        return -1; // Элемент не найден
+    }
+
     // Метод для удаления элемента из хеш-таблицы
     public bool Remove(Organisation item)
     {
@@ -62,25 +87,11 @@ public class HTable(int size)
     public void PrintTable()
     {
         Console.WriteLine("Хеш-таблица:");
-        for (var i = 0; i < size; i++)
+        for (var i = 0; i < Length; i++)
         {
             Console.WriteLine($"[{i}]: {_table[i]}");
         }
     }
-    
-    private static Organisation RandObjectOrganisation()
-    {
-        var rand = new Random();
-        var randSeed = rand.Next(100) % 5;
-        var newItem = randSeed switch
-        {
-            0 => new Organisation(),
-            1 => new Factory(),
-            2 => new Shipyard(),
-            3 => new Library(),
-            4 => new InsuranceCompany(),
-            _ => new Organisation()
-        };
-        return newItem;
-    }
+
+    public Organisation this[int index] => _table[index];
 }
