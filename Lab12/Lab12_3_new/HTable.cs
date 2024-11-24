@@ -62,7 +62,7 @@ public class HTable
         for (var i = 0; i < Length; i++)
         {
             var indexNum = (itemHash + i) % Length;
-            if (_table[indexNum] != default)
+            if (Equals(_table[indexNum], item))
             {
                 return indexNum;
             }
@@ -80,7 +80,6 @@ public class HTable
         var index = Search(item);
         if (index == -1) return false;
         _table[index] = default;
-        Length--;
         return true;
     }
 

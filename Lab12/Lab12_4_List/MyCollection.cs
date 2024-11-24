@@ -9,10 +9,37 @@ public class MyCollection<T> : ICollection<T>, ICloneable
     public bool IsReadOnly { get; }
 
     public bool IsEmpty => Count == 0;
-    public virtual T this[int index] => FindIndex(index);
 
     public MyCollection()
     {
+    }
+
+    public virtual T this[int index]
+    {
+        get => FindCurrent(index).data;
+        set => FindCurrent(index).data = value;
+    }
+
+    /// <summary>
+    /// Функция для поиска текущего элемента
+    /// </summary>
+    /// <param name="index">Индекс искомого объекта</param>
+    /// <returns>Возвращает искомый объект</returns>
+    /// <exception cref="IndexOutOfRangeException">Выход за границы коллекции</exception>
+    private Node<T> FindCurrent(int index)
+    {
+        if (index < 0 || index >= Count)
+        {
+            throw new IndexOutOfRangeException("Index out of range.");
+        }
+
+        var current = Head;
+        for (int i = 0; i < index; i++)
+        {
+            current = current.Next;
+        }
+
+        return current;
     }
 
     public MyCollection(int capacity)

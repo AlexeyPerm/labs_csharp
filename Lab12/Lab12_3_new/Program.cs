@@ -115,7 +115,6 @@ class Program
     {
         var addItem = RandObjectOrganisation();
         addItem.RandomInit();
-        Console.WriteLine("Попытка добавить элемент в полную таблицу...");
         if (ht == null)
         {
             throw new ArgumentNullException(nameof(ht), "Хэш-таблица пустая");

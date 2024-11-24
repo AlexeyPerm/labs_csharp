@@ -25,7 +25,8 @@ public class MyCollection<T> : ICollection<T>, ICloneable
     }
 
     public MyCollection()
-    { }
+    {
+    }
 
     public MyCollection(int capacity)
     {
@@ -90,7 +91,6 @@ public class MyCollection<T> : ICollection<T>, ICloneable
     public virtual bool Remove(T data)
     {
         if (Count == 0) return false;
-
         var current = Head;
         Node<T> removedItem = null;
         // Поиск удаляемого элемента
