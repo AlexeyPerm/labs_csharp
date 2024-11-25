@@ -18,11 +18,6 @@ public class MyNewCollection<T> : MyCollection<T>
         CollectionName = collectionName;
     }
 
-    public MyNewCollection(string collectionName)
-    {
-        CollectionName = collectionName;
-    }
-
     public MyNewCollection(MyCollection<T> collection) : base(collection)
     {
         CollectionName = "NoNameCollection";
