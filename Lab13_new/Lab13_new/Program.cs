@@ -1,6 +1,4 @@
-﻿using System.Threading.Channels;
-
-namespace Lab13_new;
+﻿namespace Lab13_new;
 
 using ClassLibraryLab10;
 
