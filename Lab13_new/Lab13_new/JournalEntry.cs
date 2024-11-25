@@ -10,6 +10,6 @@ public class JournalEntry(string collectionName, string changeType, string objec
     {
         return $"Коллекция: {CollectionName}\n" +
                $"Изменение: {ChangeType}\n" +
-               $"Объект: {ObjectInfo}";
+               $"Объект:\n{ObjectInfo}";
     }
 }
