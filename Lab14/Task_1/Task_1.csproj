@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Lab12_4_List">
+            <HintPath>..\..\Lab12\Lab12_4_List\bin\Debug\net8.0\Lab12_4_List.dll</HintPath>
+        </Reference>
+        <Reference Include="LibraryLab10">
+            <HintPath>..\..\Lab12\Lab12_4_List\bin\Debug\net8.0\LibraryLab10.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+
+</Project>
