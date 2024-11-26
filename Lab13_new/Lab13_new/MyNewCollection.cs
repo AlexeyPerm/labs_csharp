@@ -13,6 +13,11 @@ public class MyNewCollection<T> : MyCollection<T>
         CollectionName = "NoNameCollection";
     }
 
+    public MyNewCollection(string collectionName)
+    {
+        CollectionName = collectionName;
+    }
+
     public MyNewCollection(string collectionName, int capacity) : base(capacity)
     {
         CollectionName = collectionName;
