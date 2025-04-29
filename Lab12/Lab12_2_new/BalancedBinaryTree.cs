@@ -33,6 +33,7 @@ public class BalancedBinaryTree
     /// <returns></returns>
     private TreeNode BuildBalancedTree(Organisation[] orgArray, int start, int end)
     {
+        Array.Sort(orgArray, new SortByBudget());   //Сортируем массив по бюджету организации используется IComparable
         if (start > end) return null;
 
         var mid = (start + end) / 2;

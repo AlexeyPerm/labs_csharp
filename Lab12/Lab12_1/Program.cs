@@ -51,6 +51,7 @@ internal class Lab121
                     break;
                 case 1:
                     list = CreateListWithTenElements();
+                    Console.Clear();
                     Console.WriteLine("Список создан");
                     break;
                 case 2:
@@ -75,6 +76,7 @@ internal class Lab121
                     list.PopBack();
                     break;
                 case 8:
+                    Console.Clear();
                     list.PrintLinkedList();
                     break;
                 case 9:

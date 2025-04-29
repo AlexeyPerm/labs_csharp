@@ -6,13 +6,13 @@ static class Program
 {
     private static void Main()
     {
-        const int arrSize = 10;
+        const int arrSize = 6;
         var organisations = RandomOrganisations(arrSize);
 
         //Создаём сбалансированное дерево.
         var balancedTree = new BalancedBinaryTree(organisations);
         balancedTree.Print2D(balancedTree.Root);
-        var bst = new BinarySearchTree(balancedTree);
+        //var bst = new BinarySearchTree(balancedTree);
         //bst.Print2D(bst.Root);
 
         Console.WriteLine(balancedTree.NodesCount(balancedTree.Root));

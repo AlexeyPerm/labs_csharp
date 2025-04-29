@@ -85,13 +85,13 @@ static class Lab113
         if (found == 0)
         {
             Console.WriteLine("Элемент найден.");
-            Console.WriteLine("Время поиска: " + stopWatch.ElapsedTicks);
         }
         else
         {
             Console.WriteLine("Элемент не найден");
-            Console.WriteLine("Время поиска: " + stopWatch.ElapsedTicks);
         }
+
+        Console.WriteLine("Время поиска: " + stopWatch.ElapsedTicks);
     }
 
     private static void TimeSortedDictionary<TKey, TValue>(SortedDictionary<TKey, TValue> dict, TKey value)
@@ -103,12 +103,12 @@ static class Lab113
         if (found)
         {
             Console.WriteLine("Элемент найден.");
-            Console.WriteLine("Время поиска: " + stopWatch.ElapsedTicks);
         }
         else
         {
             Console.WriteLine("Элемент не найден");
-            Console.WriteLine("Время поиска: " + stopWatch.ElapsedTicks);
         }
+
+        Console.WriteLine("Время поиска: " + stopWatch.ElapsedTicks);
     }
 }

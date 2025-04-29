@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Lab12_2_new.BalancedBinaryTree">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMAAAQAAAAAAACAAAABIAAAAAAAAAAAAAAAAAAAEgAA=</HashCode>
+      <FileName>BalancedBinaryTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab12_2_new.BinarySearchTree">
+    <Position X="7" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMAAAUAAAAAAACAAAAAIAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>BinarySearchTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab12_2_new.Program">
+    <Position X="11.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab12_2_new.TreeNode">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACAAAAAAAA=</HashCode>
+      <FileName>TreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExtMethods.ExtentionMethods">
+    <Position X="9.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAQAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>ExtentionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
