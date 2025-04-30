@@ -38,11 +38,7 @@ class Program
         Console.WriteLine("============= First Journal ==============");
         Console.WriteLine("==========================================");
 
-        foreach (var item in firstJournal.journalEntries)
-        {
-            Console.WriteLine($"{item}");
-        }
-
+        firstJournal.PrintJournal();
 
         for (int i = 0; i < secondCollection.Count; i++)
         {
@@ -62,10 +58,7 @@ class Program
         Console.WriteLine("============= Second Journal =============");
         Console.WriteLine("==========================================");
 
-        foreach (var item in secondJournal.journalEntries)
-        {
-            Console.WriteLine($"{item}");
-        }
+        secondJournal.PrintJournal();
     }
 
 
