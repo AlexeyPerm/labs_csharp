@@ -4,7 +4,7 @@ using ClassLibraryLab10;
 
 class Program
 {
-    static void Main()
+    private static void Main()
     {
         var firstCollection = new MyNewCollection<Organisation>("Первая коллекция", 3);
         var secondCollection = new MyNewCollection<Organisation>("Вторая коллекция", 5);
@@ -20,7 +20,7 @@ class Program
         firstCollection.CollectionCountChanged += secondJournal.CollectionReferenceChanged;
         secondCollection.CollectionCountChanged += secondJournal.CollectionReferenceChanged;
 
-        for (int i = 0; i < firstCollection.Count; i++)
+        for (var i = 0; i < firstCollection.Count; i++)
         {
             var newItem = RandObjectOrganisation();
             newItem.RandomInit();
